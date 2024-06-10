@@ -1,0 +1,80 @@
+.nav {
+    width: 256px;
+    z-index: 7;
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    flex-shrink: 0;
+    width: 272px;
+    padding-top: 32px;
+    padding-left: 32px;
+    padding-bottom: 32px;
+    box-sizing: border-box;
+    .logo {
+        display: flex;
+        margin-bottom: 32px;
+        a {
+            font-family: "Poppins";
+            color: #ff2e38;
+            font-size: 30px;
+            transition: color 0.4s;
+            cursor: pointer;
+            text-decoration: none;
+        }
+    }
+    ul {
+        margin-top: 40px;
+        margin-bottom: 0;
+        padding-left: 0;
+        list-style: none;
+
+        li {
+            line-height: 1;
+            list-style: none;
+            margin-top: 24px;
+            a {
+                display: inline-flex;
+                align-items: center;
+                text-decoration: none;
+                font-size: 14px;
+                line-height: 1;
+                &:hover svg {
+                    color: #fff;
+                }
+                &:hover span {
+                    color: #fff;
+                }
+                svg {
+                    margin-right: 12px;
+                    color: #999;
+                    transition: color 0.4s;
+                    width: 24px;
+                    height: 24px;
+                }
+                span {
+                    margin-right: 12px;
+                    font-weight: 600;
+                    text-transform: uppercase;
+                    font-size: 14px;
+                    color: #999;
+                    transition: color 0.4s;
+                    font-family: "Poppins";
+                }
+            }
+        }
+        li:first-of-type {
+            margin-top: 0 !important;
+        }
+    }
+    .secondUl {
+        li {
+            margin-top: 24px;
+            span {
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 1;
+                text-transform: capitalize;
+            }
+        }
+    }
+}

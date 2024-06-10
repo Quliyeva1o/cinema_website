@@ -1,0 +1,61 @@
+{ 
+    "users": [
+        {
+            "email":"rena@gmail.com",
+            "password":"salam123",
+            "firstName":"rena",
+            "lastName":"quliyeva",
+            "mobile":"0516469996",
+            "birthDate":"27 oct 2004",
+            "postCode":"1010",
+            "gender":"female",
+            "terms":true,
+            "tickets":[
+                
+            ]
+        }
+    ],
+    "movies": [
+        {
+            "name": "bad boys",
+            "director": "Adil El Arbi, Bilall Fallah",
+            "cast": "Will Smith, Vanessa Hudgens, Martin Lawrence, Joe Pantoliano, Ioan Gruffudd, Tiffany Haddish, Alexander Ludwig, Eric Dane, Tasha Smith, Rhea Seehorn, Melanie Liburd, Paola Nunez, Jacob Scipio",
+            "genre": "Action, Adventure, Comedy",
+            "rating": "MA (Strong action violence and coarse language) ",
+            "descripion": "This year, the world's favorite Bad Boys return, blending thrilling action and their hilarious signature comedy, but this time with a twist: Miami's finest are now fugitives.",
+            "runtime": "115 min",
+            "releaseDate": "6 June 2024",
+            "trailer": "https://youtu.be/F5d_RzBIU8g",
+            "ageRes": "15",
+            "sessionTimes": [
+                {
+                    "date": "6:00 PM",
+                    "hole": "HOYTS LUX"
+                }
+            ]
+        }
+    ],
+    "Halls": [
+        {
+            "name": "Redcliffe",
+            "location": "272 Anzac Ave Kippa-Ring QLD 4020",
+            "img": "https://imgix.hoyts.com.au/experiences/page-header--recliners.png?fit=crop&auto=compress%2cformat&crop=focalpoint&fp-x=0.83&fp-y=0.36&w=1400&h=400",
+            "tel": " (07) 3339 9700",
+            "map": "https://www.google.com/maps/dir//-27.225154,153.088067",
+            "events": [
+                {
+                    "eventId": "cdbhvb3kjrk"
+                }
+            ]
+        }
+    ],
+    "events": [
+        {
+            "_id": "cdbhvb3kjrk",
+            "title": "HOYTS D-BOX Motion Recliners",
+            "video": "https://youtu.be/xTyb7OalTaM",
+            "img": "https://youtu.be/xTyb7OalTaM",
+            "desscription": "The best part is, all seats have their own control panel, so that you can take control of your experience by personalising the intensity of the motion from low, medium and high. The result is an unparalleled experience that has literally changed the way people watch movies. So don’t just watch the action, be part of it."
+        }
+    ]
+}
