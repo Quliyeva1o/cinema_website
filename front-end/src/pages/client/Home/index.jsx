@@ -1,16 +1,14 @@
 import React, { useRef, useState } from 'react';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
-// import styles from "./index.modules.scss";
-// Import Swiper styles
+import  "./index.module.scss";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination } from 'swiper/modules';
-import './index.modules.scss'
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
+import styles from './index.module.scss';
 import { getAllData } from "../../../redux/MoviesSlice.jsx";
 const Home = () => {
   const dispatch = useDispatch();
@@ -22,28 +20,37 @@ const Home = () => {
 
   return (
     <>
+    <div className={styles.hero}>
       <Swiper
         slidesPerView={'auto'}
-        spaceBetween={30}
+        spaceBetween={20}
         pagination={{
           clickable: true,
         }}
         modules={[Navigation, Pagination]}
 
-        className="mySwiper"
+        className={`mySwiper ${styles.swiper}` }
         navigation={true}
       >
-        {movies.map((movie) => (
-        <SwiperSlide key={movie.id}>
-          <div>
-            <img src={movie.img} alt={movie.title} />
-          </div>
-        </SwiperSlide>
-      ))}
-
-
-
+        {movies && movies.map((movie) => (
+          <SwiperSlide className={styles.swiperSlide} key={movie.id}>
+            <div >
+              <div className={styles.textContent}>
+                <h1>
+                  {movie.name}
+                </h1>
+                <p>
+                  {movie.description}
+                </p>
+              </div>
+              <div className="img">
+                <img src={movie.img} alt={movie.title} />
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
       </Swiper>
+      </div>
     </>
   )
 }
