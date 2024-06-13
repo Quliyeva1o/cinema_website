@@ -1,4 +1,5 @@
 import Cinemas from "../pages/client/Cinemas";
+import Detail from "../pages/client/Detail";
 import Events from "../pages/client/Events";
 import Home from "../pages/client/Home";
 import Movies from "../pages/client/Movies";
@@ -14,6 +15,10 @@ export const ROOT = [
             {
                 path: "movies",
                 element: <Movies />,
+            },
+            {
+                path:"movies/:id",
+                element:<Detail/>
             },
             {
                 path: "session-times",

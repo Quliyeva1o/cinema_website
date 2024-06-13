@@ -27,6 +27,9 @@
             "releaseDate": "6 June 2024",
             "trailer": "https://youtu.be/F5d_RzBIU8g",
             "ageRes": "15",
+            "halls":[
+                
+            ],
             "sessionTimes": [
                 {
                     "date": "6:00 PM",
@@ -40,13 +43,15 @@
             "name": "Redcliffe",
             "location": "272 Anzac Ave Kippa-Ring QLD 4020",
             "img": "https://imgix.hoyts.com.au/experiences/page-header--recliners.png?fit=crop&auto=compress%2cformat&crop=focalpoint&fp-x=0.83&fp-y=0.36&w=1400&h=400",
+            "city":"QLD",
             "tel": " (07) 3339 9700",
             "map": "https://www.google.com/maps/dir//-27.225154,153.088067",
             "events": [
                 {
                     "eventId": "cdbhvb3kjrk"
                 }
-            ]
+            ],
+            "movies":[]
         }
     ],
     "events": [

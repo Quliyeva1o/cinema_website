@@ -15,7 +15,6 @@
     height: 100%;
 
     .swiperSlide {
-     
       position: relative;
       text-align: center;
       font-size: 18px;
@@ -25,6 +24,13 @@
       width: 70%;
       display: flex;
       align-items: end;
+      border-radius: 4px !important;
+      box-shadow: 0 0 8px #0a0a0a !important;
+      overflow: hidden;
+      filter: brightness(0.5);
+      >a{
+        text-decoration: none;
+      }
       img {
         position: absolute;
         top: 0;
@@ -44,15 +50,14 @@
         z-index: 77;
         position: relative;
         margin-bottom: 70px;
-      
-        h1{
+
+        h1 {
           color: #fff;
           font-size: 32px;
           font-weight: 500;
           font-family: "poppins";
-
         }
-        p{
+        p {
           margin-bottom: 0;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -70,4 +75,14 @@
       }
     }
   }
+}
+.span{
+  position: absolute;
+    left: -1px;
+    right: -1px;
+    bottom: 0;
+    height: 60%;
+    -webkit-transform: translateZ(0);
+    z-index: 1;
+    background: linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 100%);
 }

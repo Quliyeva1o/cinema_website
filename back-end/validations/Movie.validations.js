@@ -5,15 +5,17 @@ const MovieSchemaValidation=Joi.object({
     id:Joi.objectId(),
     name:Joi.string().required(),
     director:Joi.string().required(),
-    img:Joi.string().uri().required(),
+    bgImg:Joi.string().uri().required(),
     cast:Joi.string().required(),
     genre:Joi.string().required(),
     rating:Joi.string().required(),
     description:Joi.string().required(),
     runTime:Joi.number().required(),
     releaseDate:Joi.string().required(),
-    trailer:Joi.string().uri().required(),
+    trailers:Joi.array().default([]),
+    coverImg:Joi.string().uri().required(),
     ageRes:Joi.number().required(),
+    halls:Joi.array().default([]),
     sessionTimes:Joi.array().default([])
 })
 

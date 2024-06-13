@@ -5,14 +5,16 @@ const MovieSchema = new mongoose.Schema(
         name: String,
         director: String,
         cast: String,
-        img: String,
+        bgImg: String,
         genre: String,
         rating: String,
         description: String,
         runTime: Number,
+        coverImg: String,
+        trailers: { type: Array, default: [] },
         releaseDate: String,
-        trailer: String,
         ageRes: Number,
+        halls: { type: Array, default: [] },
         sessionTimes: { type: Array, default: [] }
     },
     { timestamps: true }

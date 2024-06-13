@@ -13,7 +13,8 @@ class Movie {
             this.releaseDate = releaseDate,
             this.trailer = trailer,
             this.ageRes = ageRes,
-            this.sessionTimes = []
+            this.sessionTimes = [],
+            this.halls = []
     }
 }
  

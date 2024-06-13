@@ -4,7 +4,52 @@
   margin: 0;
   padding: 0;
 }
-body{
+
+body {
   background-color: #282828;
+}
+
+.heading h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+  font-family: "poppins";
+  font-weight: 500;
+  line-height: 1.5;
+  color: #fff;
+  font-size: 24px;
+}
+
+.heading button {
+  display: inline-flex;
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 16px;
+  text-align: left;
+  background: 0 0;
+  cursor: pointer;
+  position: relative;
+  top: -16px;
+  max-width: 100%;
+  font-family: "poppins";
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #ff2e38;
+  transition: color .4s;
+
+}
+
+.heading button span {
+  font-size: 16px;
+  color: #ff2e38;
+  font-weight: 400;
+  font-family: "poppins";
+  text-align: left;
+}
+
+
+.swiper-slide-active {
+  filter: brightness(1)!important;
 }
 
