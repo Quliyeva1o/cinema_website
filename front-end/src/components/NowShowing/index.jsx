@@ -10,11 +10,11 @@ import { Link } from 'react-router-dom';
 import { useGetMoviesQuery } from '../../redux/MoviesSlice';
 
 const NowShowing = () => {
- 
+
   const { data: movies, error, isLoading, refetch } = useGetMoviesQuery();
-  const [myMovies, setMyMovies]=useState([])
+  const [myMovies, setMyMovies] = useState([])
   useEffect(() => {
-    setMyMovies(movies.data)
+    movies && setMyMovies(movies.data)
   }, [movies]);
   console.log(myMovies);
 

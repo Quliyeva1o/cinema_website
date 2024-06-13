@@ -15,8 +15,9 @@ const Hero = () => {
   const { data: movies, error, isLoading, refetch } = useGetMoviesQuery();
 const [myMovies, setMyMovies]=useState([])
   useEffect(() => {
-    setMyMovies(movies.data)
+    movies && setMyMovies(movies.data)
   }, [movies]);
+  console.log(movies);
   console.log(myMovies);
 
   return (
