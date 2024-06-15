@@ -1,34 +1,34 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const BASE_URL = "http://localhost:5050/api/"
-export const eventAPI = createApi({
-    reducerPath: "eventApi",
+export const cinemaAPI = createApi({
+    reducerPath: "cinemaApi",
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
     endpoints: (builder) => ({
-        getEvents: builder.query({
-            query: () => `events`,
+        getCinemas: builder.query({
+            query: () => `halls`,
         }),
-        getEventById: builder.query({
-            query: (id) => `events/${id}`,
+        getCinemaById: builder.query({
+            query: (id) => `halls/${id}`,
         }),
-        deleteEvent: builder.mutation({
+        deleteCinema: builder.mutation({
             query: (id) => ({
-                url: `events/${id}`,
+                url: `halls/${id}`,
                 method: "DELETE"
             }),
         }),
-        postEvent: builder.mutation({
-            query: (newEvent) => ({
-                url: `events`,
-                body: newEvent,
+        postCinema: builder.mutation({
+            query: (newCinema) => ({
+                url: `halls`,
+                body: newCinema,
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
             }),
         }),
-        patchEvent: builder.mutation({
+        patchCinema: builder.mutation({
             query: ({ id, changes }) => ({
-                url: `events/${id}`,
+                url: `halls/${id}`,
                 body: changes,
                 method: "PATCH",
                 headers: {
@@ -39,4 +39,4 @@ export const eventAPI = createApi({
     }),
 })
 
-export const { useGetEventByIdQuery, useDeleteEventMutation, usePostEventMutation, useGetEventsQuery, usePatchEventMutation } = eventAPI
+export const { useGetCinemaByIdQuery, useDeleteCinemaMutation, usePostCinemaMutation, useGetCinemasQuery, usePatchCinemaMutation } = cinemaAPI

@@ -1,0 +1,169 @@
+.films {
+    @media (min-width: 1681px) {
+        width: 1240px !important;
+    }
+    @media (min-width: 1241px) and (max-width: 1680px) {
+        width: 848px;
+    }
+    .nav {
+        align-items: center;
+        flex-wrap: wrap;
+        min-height: 34px;
+        display: flex;
+        justify-content: space-between;
+        .tabs {
+            ul {
+                list-style: none;
+                display: flex;
+                li {
+                    button {
+                        margin: 0;
+                        padding: 0;
+                        border: none;
+                        background: 0 0;
+                        cursor: pointer;
+                        margin-left: 10px;
+                        span {
+                            background-size: 100% 2px;
+
+                            font-size: 23px;
+                            padding-bottom: 8px;
+                            margin-bottom: -8px;
+                            text-decoration: none;
+                            background-image: linear-gradient(#ff2e38, #ff2e38);
+                            background-size: 0 2px;
+                            background-position: 0 100%;
+                            background-repeat: no-repeat;
+                            transition:
+                                color 0.4s,
+                                background-size 0.4s;
+                            position: relative;
+                            font-family: "poppins";
+                            font-weight: 600;
+                            color: #999;
+                        }
+                    }
+                    .isSelected {
+                        span {
+                            color: #dedede;
+                        }
+                    }
+                    .first {
+                        margin-left: 0;
+                    }
+                }
+            }
+        }
+        .filters {
+            ul {
+                display: flex;
+                display: flex;
+                align-items: center;
+                margin-bottom: 0;
+                padding-left: 0;
+                list-style: none;
+                li {
+                    button {
+                        padding: 8px;
+                        border: 1px solid #727272;
+                        border-radius: 4px;
+                        display: flex;
+                        align-items: center;
+                        background: 0 0;
+                        cursor: pointer;
+                        margin-left: 8px;
+                        span {
+                            font-weight: 400;
+                            color: #fff;
+                            font-size: 14px;
+                            font-family: "poppins";
+                            font-weight: 400;
+                            // color: #999;
+                            transition: color 0.4s;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .cards {
+        ul {
+            margin-top: 48px;
+            margin-bottom: 48px;
+            padding-left: 0;
+            list-style: none;
+            li {
+                margin-top: 48px;
+                .wrapper {
+                    display: flex;
+                    max-width: 848px;
+                    a {
+                        width: 160px;
+                        position: relative;
+                        display: block;
+                        flex-shrink: 0;
+                        border-radius: 4px;
+                        overflow: hidden;
+                        text-decoration: none;
+                        margin-right: 32px;
+                        img {
+                            width: 100%;
+                            object-fit: cover;
+                            &:hover {
+                                filter: brightness(0.8);
+                            }
+                            display: block;
+                            overflow: clip;
+                            transition: filter 0.4s;
+                        }
+                    }
+                    div {
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: flex-end;
+                        align-items: flex-start;
+                        h2 {
+                            margin-top: 0;
+                            font-size: 24px;
+                            line-height: 1.5;
+                            margin-bottom: 0;
+                            font-family: "poppins";
+                            font-weight: 600;
+                            a {
+                                padding-bottom: 1px;
+                                margin-bottom: -1px;
+                                text-decoration: none;
+                                background-image: linear-gradient(#fff, #fff);
+                                background-size: 0 1px;
+                                background-position: 0 100%;
+                                background-repeat: no-repeat;
+                                transition:
+                                    color 0.4s,
+                                    background-size 0.4s;
+                                color: #fff;
+                                text-decoration: none;
+                            }
+                        }
+                        > span {
+                            display: flex;
+                            align-items: center;
+                            margin-top: 8px;
+                            margin-top: 8px;
+                            font-family: "poppins";
+                            line-height: 1.5;
+                            color: #999;
+                            span {
+                                margin-left: 8px;
+                                font-family: "poppins";
+                                font-size: 12px;
+                                line-height: 1.5;
+                                font-weight: 600;
+                                color: #999;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

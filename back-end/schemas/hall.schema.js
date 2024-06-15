@@ -5,10 +5,11 @@ const HallSchema = new mongoose.Schema(
         name: String,
         location: String,
         img: String,
-        tel: Number,
+        adress: String,
         map: String,
-        events: { type: Array, default: [] }
-    },
+        events: { type: Array, default: [] },
+        tags: { type: Array, default: [] }
+    }, 
     { timestamps: true }
 );
 module.exports = HallSchema;

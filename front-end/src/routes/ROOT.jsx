@@ -1,5 +1,6 @@
+import CinemaDetail from "../pages/client/CinemaDetail";
 import Cinemas from "../pages/client/Cinemas";
-import Detail from "../pages/client/Detail";
+import MovieDetail from "../pages/client/Detail";
 import Events from "../pages/client/Events";
 import Home from "../pages/client/Home";
 import Movies from "../pages/client/Movies";
@@ -18,7 +19,11 @@ export const ROOT = [
             },
             {
                 path:"movies/:id",
-                element:<Detail/>
+                element:<MovieDetail/>
+            },
+            {
+                path:"cinemas/:id",
+                element:<CinemaDetail/>
             },
             {
                 path: "session-times",

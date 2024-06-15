@@ -1,32 +1,27 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
-import AppBar from '../../Layout/AppBar'
-
+import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import AppBar from '../../Layout/AppBar';
+import Header from '../../Layout/SearchBar';
+import { selectLoginIsActive } from '../../redux/LoginActiveBtnSlice';
+import LoginRegister from '../../Layout/LoginRegister';
+import styles from "./index.module.scss"
+import { useSelector } from 'react-redux';
 const RootPage = () => {
+    const loginIsActive = useSelector(selectLoginIsActive);
+
     return (
         <>
             <div style={{ display: "flex" }}>
-                <AppBar style={
-                    {
-                        position: "sticky",
-                        top: "0",
-                        alignSelf: "flex-start",
-                        flexShrink: "0",
-                        width: "272px",
-                        paddingTop: "32px",
-                        paddingLeft: "32px",
-                        paddingBottom: " 32px",
-                        boxSizing: "border-box"
-                    }
-                } />
-                <div style={{
-                    width: "calc(100% - 272px)"
-                }} >
+                <AppBar className={styles.appbar}/>
+                <div style={{ width: "calc(100% - 272px)" }}>
+                    <Header />
                     <Outlet />
                 </div>
-            </div>
-        </>
-    )
-}
 
-export default RootPage
+            </div> <div className={loginIsActive && styles.log} >
+                {loginIsActive && <LoginRegister />}
+            </div></>
+    );
+};
+
+export default RootPage;

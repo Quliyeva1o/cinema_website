@@ -2,7 +2,9 @@ import React, { useEffect, useState } from 'react'
 import { useGetMovieByIdQuery } from '../../../redux/MoviesSlice';
 import { Link, useParams } from 'react-router-dom';
 import styles from './index.module.scss';
-const Detail = () => {
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import FavoriteIcon from '@mui/icons-material/Favorite'; 
+const MovieDetail = () => {
     const { id } = useParams()
     const { data: movie } = useGetMovieByIdQuery(id)
     const [myMovie, setMyMovie] = useState([])
@@ -29,14 +31,30 @@ const Detail = () => {
                             <span >{myMovie.releaseDate}</span>
                         </div>
                         <p >{myMovie.rating}</p>
+                        <button className={styles.icons}>
+                            <span className={styles.icon}><PlayArrowIcon className={styles.play} /></span>
+                            <span>Trailer</span>
+                        </button>
+                        <button className={styles.icons}>
+                            <span className={styles.icon}><FavoriteIcon className={styles.heart} /></span>
+                            <span>Watchlist</span>
+                        </button>
 
                     </div>
                 </div>
                 <div className={styles.spann}></div>
 
             </div>
+            <div>
+                <div className="heading">
+                    <h2>Times & Tickets</h2>
+                    <button>
+                        <span>Add cinemas</span>
+                    </button>
+                </div>
+            </div>
         </>
     )
 }
 
-export default Detail
+export default MovieDetail

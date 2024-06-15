@@ -11,49 +11,54 @@ import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
 import { useGetMoviesQuery } from '../../redux/MoviesSlice';
 const Hero = () => {
- 
+
   const { data: movies, error, isLoading, refetch } = useGetMoviesQuery();
-const [myMovies, setMyMovies]=useState([])
+  const [myMovies, setMyMovies] = useState([])
   useEffect(() => {
     movies && setMyMovies(movies.data)
   }, [movies]);
-  console.log(movies);
-  console.log(myMovies);
-
+  
+ 
   return (
     <>
       <div className={styles.hero}>
-        <Swiper
-          slidesPerView={'auto'}
-          spaceBetween={20}
-          pagination={{
-            clickable: true,
-          }}
-          modules={[Navigation, Pagination]}
+        <div className={styles.paginationContainer}> 
 
-          className={`mySwiper ${styles.swiper}`}
-          navigation={true}
-        >
-          {myMovies && myMovies.map((movie) => (
-            <SwiperSlide className={styles.swiperSlide} key={movie.id}>
-              <Link to={`/movies/${movie._id}`}>
-                <div >
-                  <div className={styles.textContent}>
-                    <h1>
-                      {movie.name}
-                    </h1>
-                    <p>
-                      {movie.description}
-                    </p>
+          <Swiper
+            slidesPerView={'auto'}
+            spaceBetween={20}
+            pagination={{
+              clickable: true,
+              el: '.swiper-pagination-custom', 
+            }}
+
+            modules={[Navigation, Pagination]}
+
+            className={`mySwiper ${styles.swiper}`}
+            navigation={true}
+          >
+            {myMovies && myMovies.map((movie) => (
+              <SwiperSlide className={styles.swiperSlide} key={movie.id}>
+                <Link to={`/movies/${movie._id}`}>
+                  <div >
+                    <div className={styles.textContent}>
+                      <h1>
+                        {movie.name}
+                      </h1>
+                      <p>
+                        {movie.description}
+                      </p>
+                    </div>
+                    <div className="img">
+                      <img src={movie.bgImg} alt={movie.name} />
+                    </div>
                   </div>
-                  <div className="img">
-                    <img src={movie.bgImg} alt={movie.name} />
-                  </div>
-                </div>
-                <div className={styles.span}></div></Link>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+                  <div className={styles.span}></div></Link>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+        <div className="swiper-pagination-custom"></div> 
       </div>
     </>
   )
