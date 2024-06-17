@@ -35,7 +35,7 @@ const NowShowing = () => {
           className={`mySwiper ${styles.swiper}`}
         >
           {myMovies && myMovies.map((movie) => (
-            <SwiperSlide className={styles.swiperSlide} key={movie.id}>
+            <SwiperSlide className={styles.swiperSlide} key={movie._id}>
               <div >
                 <div className={styles.img}>
                   <img src={movie.coverImg} alt={movie.title} />

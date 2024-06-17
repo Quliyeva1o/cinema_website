@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './index.module.scss'
 import Login from '../Login'
 import CloseIcon from '@mui/icons-material/Close';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectLoginIsActive, setLoginIsActive } from '../../redux/LoginActiveBtnSlice';
+import Register from '../Register';
 const LoginRegister = () => {
   const loginIsActive = useSelector(selectLoginIsActive);
   const dispatch = useDispatch();
   const handleClose = () => {
     dispatch(setLoginIsActive(!loginIsActive));
   }
+  const [login, setLogin] = useState(true)
   return (
     <>
       <div className={styles.modall}>
@@ -20,7 +22,7 @@ const LoginRegister = () => {
             </button>
             <h1>hoyts</h1>
             <div>
-              <Login />
+              {login ? <Login setLogin={setLogin} /> : <Register />}
             </div>
           </div>
         </div>

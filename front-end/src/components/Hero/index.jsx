@@ -38,7 +38,7 @@ const Hero = () => {
             navigation={true}
           >
             {myMovies && myMovies.map((movie) => (
-              <SwiperSlide className={styles.swiperSlide} key={movie.id}>
+              <SwiperSlide className={styles.swiperSlide} key={movie._id}>
                 <Link to={`/movies/${movie._id}`}>
                   <div >
                     <div className={styles.textContent}>

@@ -4,6 +4,7 @@ dotenv.config();
 const PORT = process.env.PORT || 5050
 const express = require('express');
 const app = express();
+
 mongoose.connect(
     process.env.CONNECTION_STRING )
     .then(() => console.log('Connected!'))

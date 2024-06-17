@@ -11,8 +11,7 @@ const MovieDetail = () => {
     useEffect(() => {
         movie && setMyMovie(movie.data)
     }, [movie])
-
-
+    
     return (
         <>
             <div className={styles.movieHero}>

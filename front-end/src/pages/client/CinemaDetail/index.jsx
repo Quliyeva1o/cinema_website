@@ -9,6 +9,7 @@ const CinemaDetail = () => {
   useEffect(() => {
     cinema && setMyCinema(cinema.data)
   }, [cinema])
+  
 
   return (
     <>

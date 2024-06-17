@@ -19,7 +19,7 @@ const Cinemas = () => {
       </div>
       <div className={styles.cards}>
         {myCinemas && myCinemas.map((cinema) => (
-          <div className={styles.card}>
+          <div className={styles.card} key={cinema._id}>
             <img src={cinema.img} alt={cinema.title} />
             <div>
               <h2>

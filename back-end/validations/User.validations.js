@@ -1,18 +1,18 @@
-const Joi =require('joi');
-Joi.objectId=require('joi-objectid')(Joi)
+const Joi = require('joi');
+Joi.objectId = require('joi-objectid')(Joi);
 
-const UserSchemaValidation=Joi.object({
-    id:Joi.objectId(),
-    email:Joi.string().email().required(),
-    password:Joi.string().required(),
-    firstName:Joi.string().required(),
-    lastName:Joi.string().required(),
-    mobile:Joi.number().required(),
-    birthDate:Joi.number().required(),
-    postCode:Joi.number().required(),
-    gender:Joi.string().required(),
-    terms:Joi.bool().required(),
-    tickets:Joi.array().default([])
-})
+const UserSchemaValidation = Joi.object({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+    firstName: Joi.string().required(),
+    lastName: Joi.string().required(),
+    mobile: Joi.string().required(),
+    dateOfBirth: Joi.date().required(),
+    postCode: Joi.string().required(),
+    gender: Joi.string().valid('female', 'male', 'other').required(),
+    preferredCinema: Joi.string().required(),
+    receiveOffers: Joi.boolean().required(),
+    agreeTerms: Joi.boolean().required(),
+});
 
-module.exports=UserSchemaValidation
+module.exports = UserSchemaValidation;

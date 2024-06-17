@@ -6,13 +6,9 @@ import EventsFestivals from '../../../components/Events'
 const Home = () => {
   return (
     <>
-
-
       <Hero />
       <NowShowing />
       <EventsFestivals/>
-
-
     </>
   )
 }

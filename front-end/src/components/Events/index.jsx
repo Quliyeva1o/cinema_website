@@ -36,7 +36,7 @@ const EventsFestivals = () => {
           className={`mySwiper ${styles.swiper}`}
         >
           {myEvents && myEvents.map((event) => (
-            <SwiperSlide className={styles.swiperSlide} key={event.id}>
+            <SwiperSlide className={styles.swiperSlide} key={event._id}>
               <div >
                 <div className={styles.img}>
                   <img src={event.coverImg} alt={event.title} />
