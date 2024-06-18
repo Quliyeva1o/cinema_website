@@ -10,9 +10,16 @@ import { login } from "../../redux/UserSlice.jsx";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./index.module.scss"
+
 const Login = ({ setLogin }) => {
   const user = useSelector((state) => state.user);
+  const navigate= useNavigate("")
   const dispatch = useDispatch();
+  useEffect(()=>{
+    if(user.id){
+      navigate('/');
+    }
+  },[navigate,user]);
 
   const handleRegister = () => {
     setLogin(false)
@@ -26,6 +33,7 @@ const Login = ({ setLogin }) => {
     onSubmit: async ({ email, password }, actions) => {
       const response = await controller.post('/login', { email: email, password: password });
       console.log(response);
+
       if (response.auth) {
         actions.resetForm();
         dispatch(login(response.user));

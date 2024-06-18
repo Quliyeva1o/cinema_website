@@ -19,7 +19,7 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
     mobile: {
-        type: String, // Telefon numarasını esneklik için string olarak saklıyoruz
+        type: String, 
         required: true,
     },
     dateOfBirth: {
@@ -27,12 +27,12 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
     postCode: {
-        type: String, // Posta kodunu string olarak saklıyoruz
+        type: String, 
         required: true,
     },
     gender: {
         type: String,
-        enum: ['female', 'male', 'other'], // Cinsiyetin belirli değerlerden biri olması gerekiyor
+        enum: ['female', 'male', 'other'], 
         required: true,
     },
     preferredCinema: {
@@ -52,6 +52,18 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         default: Date.now,
     },
-});
+    favorites: Array,
+    isVerified: {
+      type: Boolean,
+      default: false
+    },
+    role: {
+        type: String,
+        enum: ['admin','super-admin','client',],
+        default:'client'
+      },
+},
+{ timestamps: true }
+);
 
 module.exports = UserSchema;

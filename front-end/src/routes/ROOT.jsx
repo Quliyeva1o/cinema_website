@@ -1,3 +1,6 @@
+import AddMovie from "../pages/admin/AddMovie";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminRoot from "../pages/admin/AdminRoot";
 import CinemaDetail from "../pages/client/CinemaDetail";
 import Cinemas from "../pages/client/Cinemas";
 import MovieDetail from "../pages/client/Detail";
@@ -10,7 +13,7 @@ import SessionTimes from "../pages/client/SessionTimes";
 export const ROOT = [
     {
         path: "/",
-        element: <RootPage/>,
+        element: <RootPage />,
         children: [
             { index: true, element: <Home /> },
             {
@@ -18,25 +21,36 @@ export const ROOT = [
                 element: <Movies />,
             },
             {
-                path:"movies/:id",
-                element:<MovieDetail/>
+                path: "movies/:id",
+                element: <MovieDetail />
             },
             {
-                path:"cinemas/:id",
-                element:<CinemaDetail/>
+                path: "cinemas/:id",
+                element: <CinemaDetail />
             },
             {
                 path: "session-times",
-                element: <SessionTimes/>,
+                element: <SessionTimes />,
             },
             {
                 path: "cinemas",
-                element: <Cinemas/>,
+                element: <Cinemas />,
             },
             {
-                path:"events",
-                element:<Events/>
-            }
+                path: "events",
+                element: <Events />
+            },
+
         ],
     },
+    {
+        path: "admin",
+        element: <AdminRoot />,
+        children: [
+            { index: true, element: <AdminDashboard /> },
+            {
+                path: "add-movie",
+                element: <AddMovie />,
+            }]
+    }
 ];

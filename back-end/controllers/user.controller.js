@@ -113,7 +113,7 @@ const user_controller = {
   user_login: async (req, res) => {
     const user = await UserModel.findOne({
       email: req.body.email,
-    }).or([{ role: "journalist" }, { role: "client" }]);
+    }).or([{ role: "admin" }, { role: "client" }]);
     
     if (user) {
       bcrypt.compare(
@@ -160,7 +160,7 @@ const user_controller = {
       const user = await UserModel.findOne({ email: email });
       if (user) {
         await UserModel.findByIdAndUpdate(user._id, { isVerified: true });
-        res.redirect("http://localhost:5050/login");
+        res.redirect("http://localhost:5173/login");
         return;
       } else {
         res.send({

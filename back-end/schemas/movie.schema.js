@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const MovieSchema = new mongoose.Schema(
     {
-        id: String,
         name: String,
         director: String,
         cast: String,
@@ -15,6 +14,7 @@ const MovieSchema = new mongoose.Schema(
         releaseDate: String,
         ageRes: Number,
         halls: { type: Array, default: [] },
+        cinemas: { type: Array, default: [] },
         sessionTimes: { type: Array, default: [] }
     },
     { timestamps: true }

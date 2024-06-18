@@ -2,7 +2,6 @@ const Joi =require('joi');
 Joi.objectId=require('joi-objectid')(Joi)
 
 const MovieSchemaValidation=Joi.object({
-    id:Joi.objectId(),
     name:Joi.string().required(),
     director:Joi.string().required(),
     bgImg:Joi.string().uri().required(),
@@ -16,6 +15,7 @@ const MovieSchemaValidation=Joi.object({
     coverImg:Joi.string().uri().required(),
     ageRes:Joi.number().required(),
     halls:Joi.array().default([]),
+    cinemas:Joi.array().default([]),
     sessionTimes:Joi.array().default([])
 })
 
