@@ -6,12 +6,14 @@ import { selectLoginIsActive } from '../../redux/LoginActiveBtnSlice';
 import LoginRegister from '../../Layout/LoginRegister';
 import styles from "./index.module.scss"
 import { useSelector } from 'react-redux';
+import Chat from '../../Layout/Chat';
 const RootPage = () => {
     const loginIsActive = useSelector(selectLoginIsActive);
 
     return (
         <>
-            <div style={{ display: "flex" }}>
+           <div style={{position:'relative'}}>
+           <div style={{ display: "flex" }}>
                 <AppBar className={styles.appbar}/>
                 <div style={{ width: "calc(100% - 272px)" }}>
                     <Header />
@@ -20,7 +22,12 @@ const RootPage = () => {
 
             </div> <div className={loginIsActive && styles.log} >
                 {loginIsActive && <LoginRegister />}
-            </div></>
+            </div>
+            <div className={styles.chat}>
+                <Chat/>
+            </div>
+           </div>
+            </>
     );
 };
 

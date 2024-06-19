@@ -23,3 +23,9 @@
     padding-bottom: 32px;
     box-sizing:border-box
 }
+.chat{
+    z-index: 555;
+    position:  fixed;
+    bottom: 10px ;
+    right: 20px;
+}
