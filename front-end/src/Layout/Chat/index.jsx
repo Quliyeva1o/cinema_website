@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styles from './index.module.scss';
 import Textarea from '@mui/joy/Textarea';
-
+import SendIcon from '@mui/icons-material/Send';
 const Chat = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
 
@@ -42,10 +42,12 @@ const Chat = () => {
                             </div>
                         </div>
                     </div>
-                    <div>
+                    <div className={styles.text}>
                         <form action="">
-                        <Textarea name="Outlined" placeholder="Type in here…" variant="outlined" />
-
+                            <Textarea name="Outlined" placeholder="Type in here…" variant="outlined" />
+                            <button>
+                            <SendIcon/>
+                            </button>
                         </form>
                     </div>
                 </div>

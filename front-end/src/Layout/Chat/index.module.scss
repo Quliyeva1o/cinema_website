@@ -138,16 +138,14 @@
     position: relative;
     display: flex;
     flex-direction: column;
-  
+
     div {
         position: relative;
         -webkit-box-flex: 1;
 
-     
         display: flex;
         flex-direction: column;
         > div {
-           
             height: 100%;
 
             .saat {
@@ -203,7 +201,7 @@
                         border-radius 0.15s linear 0.15s,
                         opacity 0.3s linear 0s,
                         background-color 0.2s linear 0s;
-                 
+
                     border-color: rgb(233, 235, 237);
                     background-color: rgb(244, 246, 248);
                     color: rgb(0, 0, 0);
@@ -213,11 +211,68 @@
                     padding: 0.5rem 0.75rem;
                     span {
                         white-space: pre-wrap;
-                    
+
                         font-size: 0.875rem;
                         line-height: 1.25rem;
                     }
                 }
+            }
+        }
+    }
+}
+
+.text {
+    position: relative;
+    margin: 10px;
+    border: 0px;
+    padding: 0px;
+    font-size: 0px;
+    border-radius: 10px;
+    border-radius: 10px;
+    border-radius: 1.375rem;
+    border: 1px solid rgb(115, 115, 115);
+    background: transparent;
+    // min-height: 2.5rem;
+    padding: 0.625rem calc(0px + 2.5rem) 0.625rem 1rem;
+    box-shadow: none;
+    font-size: 0.875rem;
+    scrollbar-width: none;
+    form{
+     display: flex; 
+     justify-content: space-between;  
+    }
+    
+    &:focus-within {
+      
+        --Textarea-focusedHighlight: transparent;
+        box-shadow: rgb(0, 166, 86) 0px 0px 0px 0.125rem;
+        border: 1px solid rgb(0, 166, 86);
+    }
+    div {
+        width: 100%;
+        border: none;
+        box-shadow: none;
+        &:focus-within {
+            --Textarea-focusedHighlight: transparent;
+            box-shadow: none;
+            border: none;
+        }
+    }
+    button {
+        position: absolute;
+        right: 0px;
+      
+        height: calc(0px + 2.5rem);
+        width: calc(0px + 2.5rem);
+        border-radius: 1.375rem;
+        background-color: transparent;
+        border: none ;
+        svg {
+            height: 1.5rem;
+            width: 1.5rem;
+            margin-left: 0.25rem;
+            path {
+                color: rgb(0, 166, 86);
             }
         }
     }

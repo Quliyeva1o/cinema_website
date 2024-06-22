@@ -7,6 +7,8 @@ const HallSchema = new mongoose.Schema(
         img: String,
         adress: String,
         map: String,
+        rows:Number,
+        seats:Number,
         events: { type: Array, default: [] },
         tags: { type: Array, default: [] }
     }, 

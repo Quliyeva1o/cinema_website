@@ -14,7 +14,6 @@ const MovieSchema = new mongoose.Schema(
         releaseDate: String,
         ageRes: Number,
         halls: { type: Array, default: [] },
-        cinemas: { type: Array, default: [] },
         sessionTimes: { type: Array, default: [] }
     },
     { timestamps: true }

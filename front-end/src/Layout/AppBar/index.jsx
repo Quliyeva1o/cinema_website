@@ -12,6 +12,7 @@ const AppBar = () => {
         <>
             <nav className={styles.nav}>
 
+                <div style={{position:"fixed"}}>
                 <div className={styles.logo}>
                     <Link>
                         <h1>HOYTS</h1>
@@ -86,6 +87,7 @@ const AppBar = () => {
                         </Link>
                     </li>
                 </ul>
+                </div>
 
             </nav>
         </>

@@ -1,13 +1,19 @@
 .add {
-    div {
-        color: #fff;
+    form {
+        display: flex;
+        padding: 30px 100px;
+        gap: 15px;
+        flex-direction: column;
     }
-    input {
-        color: #fff;
-        border: 1px solid #fff;
+    div {
+        border-radius: 10px;
+        border: 1px solid #dedede;
 
     }
+    input{
+        color: #dedede;
+    }
     label {
-        color: #fff;
+        color: #dedede;
     }
 }

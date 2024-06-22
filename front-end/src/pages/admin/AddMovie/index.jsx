@@ -50,27 +50,25 @@ const AddMovie = () => {
             ageRes: "",
             halls: [],
             sessionTimes: [],
-            cinemas: [],
         },
         onSubmit: async (values, actions) => {
-            const cinemaIds = values.cinemas.map((cinema) => cinema.value);
+            const cinemaIds = values.halls.map((hall) => hall.value);
 
             const formData = new FormData();
             formData.append("name", values.name);
             formData.append("director", values.director);
-            formData.append("bgImg", values.bgImg); // Append file
+            formData.append("bgImg", values.bgImg); 
             formData.append("cast", values.cast);
             formData.append("genre", values.genre);
             formData.append("rating", values.rating);
             formData.append("description", values.description);
             formData.append("runTime", values.runTime);
             formData.append("releaseDate", values.releaseDate);
-            formData.append("trailers", JSON.stringify(values.trailers)); // Convert array to string
+            formData.append("trailers", JSON.stringify(values.trailers)); 
             formData.append("coverImg", values.coverImg);
             formData.append("ageRes", values.ageRes);
-            formData.append("halls", JSON.stringify(values.halls)); // Convert array to string
-            formData.append("sessionTimes", JSON.stringify(values.sessionTimes)); // Convert array to string
-            formData.append("cinemas", JSON.stringify(cinemaIds)); // Convert array to string
+            formData.append("sessionTimes", JSON.stringify(values.sessionTimes)); 
+            formData.append("halls", JSON.stringify(cinemaIds)); 
 
             try {
                 await controller.post("/api/movies", formData, token);
@@ -105,7 +103,7 @@ const AddMovie = () => {
             <form
                 encType="multipart/form-data"
                 onSubmit={formik.handleSubmit}
-                style={{ display: "flex", flexDirection: "column", gap: "14px" }}
+               
             >
                 <TextField
                     name="name"
@@ -131,18 +129,19 @@ const AddMovie = () => {
                     error={formik.touched.director && Boolean(formik.errors.director)}
                     helperText={formik.touched.director && formik.errors.director}
                 />
-                <input
-                    onChange={handleImageChange}
-                    className="form-control"
-                    id="bgImg"
+                  <TextField
                     name="bgImg"
+                    onChange={handleImageChange}
                     onBlur={formik.handleBlur}
+                    id="bgImg"
                     type="file"
+                    label="bgImg"
+                    variant="outlined"
                     accept="image/*"
+                    error={formik.touched.bgImg && Boolean(formik.errors.bgImg)}
+                    helperText={formik.touched.bgImg && formik.errors.bgImg}
                 />
-                {formik.touched.bgImg && formik.errors.bgImg && (
-                    <span style={{ color: "red" }}>{formik.errors.bgImg}</span>
-                )}
+              
                 <TextField
                     name="cast"
                     onChange={formik.handleChange}
@@ -249,21 +248,21 @@ const AddMovie = () => {
                     helperText={formik.touched.ageRes && formik.errors.ageRes}
                 />
                 <Select
-                    id="cinemas"
-                    name="cinemas"
+                    id="halls"
+                    name="halls"
                     onChange={(selectedOptions) => {
-                        formik.setFieldValue("cinemas", selectedOptions);
+                        formik.setFieldValue("halls", selectedOptions);
                     }}
                     onBlur={formik.handleBlur}
-                    value={formik.values.cinemas}
+                    value={formik.values.halls}
                     options={cinemass}
                     isMulti
                     className="basic-multi-select"
                     classNamePrefix="select"
                     placeholder="Select cinemas"
                 />
-                {formik.touched.cinemas && formik.errors.cinemas && (
-                    <span style={{ color: "red" }}>{formik.errors.cinemas}</span>
+                {formik.touched.halls && formik.errors.halls && (
+                    <span style={{ color: "red" }}>{formik.errors.halls}</span>
                 )}
                 <Button variant="contained" color="primary" type="submit">
                     Add

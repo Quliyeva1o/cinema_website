@@ -4,6 +4,7 @@ import AdminRoot from "../pages/admin/AdminRoot";
 import CinemaDetail from "../pages/client/CinemaDetail";
 import Cinemas from "../pages/client/Cinemas";
 import MovieDetail from "../pages/client/Detail";
+import EventDetail from "../pages/client/EventDetail";
 import Events from "../pages/client/Events";
 import Home from "../pages/client/Home";
 import Movies from "../pages/client/Movies";
@@ -39,6 +40,10 @@ export const ROOT = [
             {
                 path: "events",
                 element: <Events />
+            },
+            {
+                path: "events/:id",
+                element: <EventDetail />
             },
 
         ],

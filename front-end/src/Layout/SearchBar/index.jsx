@@ -14,7 +14,7 @@ const Header = () => {
   const [myCinemas, setMyCinemas] = useState([]);
   const loginIsActive = useSelector(selectLoginIsActive);
   const dispatch = useDispatch();
-  console.log(loginIsActive);
+  // console.log(loginIsActive);
 
  
   useEffect(() => {
