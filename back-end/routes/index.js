@@ -3,6 +3,7 @@ const movie_router=require("./movie.route");
 const event_router=require("./event.route");
 const hall_router=require("./hall.route");
 const tag_router=require("./tag.route");
+const food_router=require("./food.route");
 const time_router=require("./time.route");
 
 const router={
@@ -11,7 +12,8 @@ const router={
     event:event_router,
     hall:hall_router,
     tags:tag_router,
-    times:time_router
+    times:time_router,
+    foods:food_router
 }
 
 module.exports=router;

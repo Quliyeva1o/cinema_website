@@ -7,17 +7,19 @@ import 'swiper/css/navigation';
 import { useEffect } from 'react';
 import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
-import { useGetEventsQuery } from '../../redux/EventsSlice';
-const EventsFestivals = () => {
+import { useGetCinemasQuery } from '../../redux/CinemasSlice';
+const ScreenExperiences = () => {
   
-  const { data: events, error, isLoading, refetch } = useGetEventsQuery();
+  const { data: cinemas, error, isLoading, refetch } = useGetCinemasQuery();
 
-  const [myEvents, setMyEvents] = useState([])
+
+  const [myCinemas, setMyCinemas] = useState([])
   useEffect(() => {
-    events && setMyEvents(events.data)
-  }, [events]);
-  console.log(myEvents);
+    cinemas && setMyCinemas(cinemas.data)
+  }, [cinemas]);
+  console.log(myCinemas);
   return (
+    
     <>
       <div className="heading">
         <h2>
@@ -29,23 +31,18 @@ const EventsFestivals = () => {
       <div className="slider">
         <Swiper
 
-          slidesPerView={3}
+          slidesPerView={4}
           spaceBetween={15}
           navigation={true}
 
           modules={[Navigation]}
           className={`mySwiper ${styles.swiper}`}
         >
-          {myEvents && myEvents.map((event) => (
-            <SwiperSlide className={styles.swiperSlide} key={event._id}>
+          {myCinemas && myCinemas.map((cinema) => (
+            <SwiperSlide className={styles.swiperSlide} key={cinema._id}>
               <div >
                 <div className={styles.img}>
-                  <img src={event.img} alt={event.title} />
-                </div>
-                <div className={styles.textContent}>
-                  <span>
-                      {event.desc}
-                  </span>
+                  <img src={cinema.img} alt={cinema.name} />
                 </div>
               </div>
               <span className={styles.span}></span>
@@ -59,4 +56,5 @@ const EventsFestivals = () => {
   )
 }
 
-export default EventsFestivals
+export default ScreenExperiences
+

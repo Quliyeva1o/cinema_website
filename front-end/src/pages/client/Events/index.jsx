@@ -33,7 +33,6 @@ const Events = () => {
                     <h5>
                       {event.title}
                       </h5>
-
                     <Typography variant="body2" color="text.secondary">
                       {event.desc}
                     </Typography>

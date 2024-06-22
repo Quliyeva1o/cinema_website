@@ -16,7 +16,6 @@ const NowShowing = () => {
   useEffect(() => {
     movies && setMyMovies(movies.data)
   }, [movies]);
-  console.log(myMovies);
 
   return (
     <>
