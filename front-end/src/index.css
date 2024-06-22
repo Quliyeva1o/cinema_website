@@ -105,3 +105,16 @@ body {
   font-size: 22px;
   font-weight: 700;
 }
+
+
+.Mui-selected{
+  color:#dedede!important;
+}
+
+.MuiTabs-indicator{
+  background-color: #ff2e38!important;
+}
+
+.MuiBox-root {
+  padding: 24px 0!important;
+}

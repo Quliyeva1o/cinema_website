@@ -1,17 +1,16 @@
-const MovieSchemaValidation = require("../validations/Movie.validations.js");
+const multer = require("multer");
 
-const movie_middleware = (req, res, next) => {
-    const { error } = MovieSchemaValidation.validate(req.body);
-    if (!error) {
-        next();
-    }
-    else {
-        const { details } = error;
-        res.send({
-            message: details[0].message,
-            error: true,
-        });
-    }
-};
+// Set up storage for uploaded files
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + "-" + file.originalname);
+  },
+});
 
-module.exports = movie_middleware;
+// Create the multer instance
+const upload = multer({ storage: storage });
+
+module.exports = upload;

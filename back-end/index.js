@@ -6,7 +6,6 @@ require("./config/index.js")
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(cors());
-
 app.use(router.event);
 app.use(router.hall);
 app.use(router.user);

@@ -2,70 +2,105 @@ const MovieModel = require("../models/movie.model.js");
 
 const movie_controller = {
   getAll: async (req, res) => {
-    const movies = await MovieModel.find();
+    try {
+      const movies = await MovieModel.find();
 
-    if (movies.length > 0) {
-      res.status(200).send({
-        message: "success",
-        data: movies,
-      });
-    } else {
-      res.send({
-        message: "not found",
-        data: null,
+      if (movies.length > 0) {
+        res.status(200).json({
+          message: "success",
+          data: movies,
+        });
+      } else {
+        res.status(404).json({
+          message: "not found",
+          data: null,
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
       });
     }
   },
   getOne: async (req, res) => {
     const { id } = req.params;
-    let movie;
     try {
-      movie = await MovieModel.findById(id);
+      const movie = await MovieModel.findById(id);
+      if (movie) {
+        res.status(200).json({
+          message: "success",
+          data: movie,
+        });
+      } else {
+        res.status(204).json({
+          message: "no content",
+          data: null,
+        });
+      }
     } catch (error) {
-      res.send({ error: error });
-    }
-    if (movie) {
-      res.status(200).send({
-        message: "success",
-        data: movie,
-      });
-    } else {
-      res.send({
-        message: "no content",
-        data: null,
+      res.status(500).json({
+        error: error.message,
       });
     }
   },
   delete: async (req, res) => {
     const { id } = req.params;
-    let response;
     try {
-      response = await MovieModel.findByIdAndDelete(id);
+      const response = await MovieModel.findByIdAndDelete(id);
+      if (response) {
+        res.status(200).json({
+          message: "deleted",
+          response: response,
+        });
+      } else {
+        res.status(404).json({
+          message: "not found",
+          data: null,
+        });
+      }
     } catch (error) {
-      res.send({
-        error: error,
+      res.status(500).json({
+        error: error.message,
       });
     }
-    res.send({
-      message: "deleted",
-      response: response,
-    });
   },
   update: async (req, res) => {
     const { id } = req.params;
-    const response = await MovieModel.findByIdAndUpdate(id, req.body);
-    res.send({
-      message: "updated",
-      response: response,
-    });
+    try {
+      const response = await MovieModel.findByIdAndUpdate(id, req.body);
+      if (response) {
+        res.status(200).json({
+          message: "updated",
+          response: response,
+        });
+      } else {
+        res.status(404).json({
+          message: "not found",
+          data: null,
+        });
+      }
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
   },
   post: async (req, res) => {
-    const movie = new MovieModel(req.body);
-    await movie.save();
-    res.send({
-      message: "posted",
-      data: movie,
-    });
+    try {
+      const movie = new MovieModel(req.body);
+      if (req.file) {
+        movie.bgImg = "http://localhost:5050/uploads/" + req.file.filename;
+      }
+      await movie.save();
+      res.status(201).json({
+        message: "posted",
+        data: movie,
+      });
+    } catch (error) {
+      res.status(500).json({
+        error: error.message,
+      });
+    }
   },
 };
 

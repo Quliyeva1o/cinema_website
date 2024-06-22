@@ -12,7 +12,7 @@ const RootPage = () => {
 
     return (
         <>
-           <div style={{position:'relative'}}>
+           <div style={{position:'relative',overflow:"hidden"}}>
            <div style={{ display: "flex" }}>
                 <AppBar className={styles.appbar}/>
                 <div style={{ width: "calc(100% - 272px)" }}>

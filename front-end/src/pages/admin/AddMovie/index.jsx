@@ -9,7 +9,6 @@ import Cookies from "js-cookie";
 import Select from "react-select";
 import controller from "../../../API/requests.js";
 import Movie from "../../../classes/Movie.js";
-import movieValidations from "../../../validations/movie.validations.js";
 import styles from "./index.module.scss";
 
 const AddMovie = () => {
@@ -24,10 +23,6 @@ const AddMovie = () => {
         }
     }, [navigate, user]);
 
-    // function handleImageChange(event, setFieldValue) {
-    //     const file = event.currentTarget.files[0];
-    //     setFieldValue('bgImg', file);
-    // }
     useEffect(() => {
         controller.getAll("/api/halls", token).then((res) => {
             setCinemas(
@@ -43,7 +38,7 @@ const AddMovie = () => {
         initialValues: {
             name: "",
             director: "",
-            bgImg: "",
+            bgImg: null, // Changed to null for file upload
             cast: "",
             genre: "",
             rating: "",
@@ -57,32 +52,28 @@ const AddMovie = () => {
             sessionTimes: [],
             cinemas: [],
         },
-        // validationSchema: movieValidations,
         onSubmit: async (values, actions) => {
             const cinemaIds = values.cinemas.map((cinema) => cinema.value);
 
-            console.log(cinemaIds);
-            const newMovie = new Movie(
-                values.name,
-                values.director,
-                values.bgImg,
-                values.cast,
-                values.genre,
-                values.rating,
-                values.description,
-                parseInt(values.runTime),
-                values.releaseDate,
-                values.trailers,
-                values.coverImg,
-                parseInt(values.ageRes),
-                values.halls,
-                values.sessionTimes,
-                cinemaIds
-            );
-            console.log(newMovie);
+            const formData = new FormData();
+            formData.append("name", values.name);
+            formData.append("director", values.director);
+            formData.append("bgImg", values.bgImg); // Append file
+            formData.append("cast", values.cast);
+            formData.append("genre", values.genre);
+            formData.append("rating", values.rating);
+            formData.append("description", values.description);
+            formData.append("runTime", values.runTime);
+            formData.append("releaseDate", values.releaseDate);
+            formData.append("trailers", JSON.stringify(values.trailers)); // Convert array to string
+            formData.append("coverImg", values.coverImg);
+            formData.append("ageRes", values.ageRes);
+            formData.append("halls", JSON.stringify(values.halls)); // Convert array to string
+            formData.append("sessionTimes", JSON.stringify(values.sessionTimes)); // Convert array to string
+            formData.append("cinemas", JSON.stringify(cinemaIds)); // Convert array to string
 
             try {
-                await controller.post("/api/movies", newMovie, token);
+                await controller.post("/api/movies", formData, token);
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
@@ -102,21 +93,17 @@ const AddMovie = () => {
         },
     });
 
+    const handleImageChange = (event) => {
+        formik.setFieldValue("bgImg", event.currentTarget.files[0]);
+    };
+
     return (
-        <div
-            className={styles.add}
-            style={{
-                width: "40%",
-                margin: "50px auto",
-                borderRadius: "6px",
-                padding: "15px 25px",
-                boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
-            }}
-        >
+        <div className={styles.add}>
             <h3 style={{ textAlign: "center", marginBottom: "14px" }}>
                 Add New Movie
             </h3>
             <form
+                encType="multipart/form-data"
                 onSubmit={formik.handleSubmit}
                 style={{ display: "flex", flexDirection: "column", gap: "14px" }}
             >
@@ -144,30 +131,18 @@ const AddMovie = () => {
                     error={formik.touched.director && Boolean(formik.errors.director)}
                     helperText={formik.touched.director && formik.errors.director}
                 />
-                <TextField
-                    name="bgImg"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.bgImg}
-                    id="bgImg"
-                    type="text"
-                    label="bg Image URL"
-                    variant="outlined"
-                    error={formik.touched.bgImg && Boolean(formik.errors.bgImg)}
-                    helperText={formik.touched.bgImg && formik.errors.bgImg}
-                />
-                {/* <TextField
-                    onChange={(event) => {
-                        handleImageChange(event, formik.setFieldValue);
-                    }}
+                <input
+                    onChange={handleImageChange}
+                    className="form-control"
                     id="bgImg"
                     name="bgImg"
                     onBlur={formik.handleBlur}
                     type="file"
+                    accept="image/*"
                 />
                 {formik.touched.bgImg && formik.errors.bgImg && (
                     <span style={{ color: "red" }}>{formik.errors.bgImg}</span>
-                )} */}
+                )}
                 <TextField
                     name="cast"
                     onChange={formik.handleChange}

@@ -4,6 +4,9 @@ dotenv.config();
 const PORT = process.env.PORT || 5050
 const express = require('express');
 const app = express();
+//multer
+const path = require('path')
+app.use('/uploads', express.static(path.join(__dirname, '../uploads')));
 
 mongoose.connect(
     process.env.CONNECTION_STRING )
