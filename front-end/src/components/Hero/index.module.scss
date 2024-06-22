@@ -28,7 +28,11 @@
       box-shadow: 0 0 8px #0a0a0a !important;
       overflow: hidden;
       filter: brightness(0.5);
-      >a{
+      @media (max-width: 1240px) {
+        border-radius: 0px !important;
+        width: 100%;
+      }
+      > a {
         text-decoration: none;
       }
       img {
@@ -76,17 +80,17 @@
     }
   }
 }
-.span{
+.span {
   position: absolute;
-    left: -1px;
-    right: -1px;
-    bottom: 0;
-    height: 60%;
-    -webkit-transform: translateZ(0);
-    z-index: 1;
-    background: linear-gradient(180deg,rgba(0,0,0,0) 0%,#000 100%);
+  left: -1px;
+  right: -1px;
+  bottom: 0;
+  height: 60%;
+  -webkit-transform: translateZ(0);
+  z-index: 1;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
 }
 
-.paginationContainer{
+.paginationContainer {
   height: 100%;
 }

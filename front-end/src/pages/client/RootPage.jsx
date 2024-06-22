@@ -7,27 +7,29 @@ import LoginRegister from '../../Layout/LoginRegister';
 import styles from "./index.module.scss"
 import { useSelector } from 'react-redux';
 import Chat from '../../Layout/Chat';
+import MobileAppBar from '../../Layout/MobileAppBar';
 const RootPage = () => {
     const loginIsActive = useSelector(selectLoginIsActive);
-
+    const [menu, setMenu] = useState(false)
     return (
         <>
-           <div style={{position:'relative',overflow:"hidden"}}>
-           <div style={{ display: "flex" }}>
-                <AppBar className={styles.appbar}/>
-                <div style={{ width: "calc(100% - 272px)" }}>
-                    <Header />
-                    <Outlet />
-                </div>
+            <div className={styles.root}>
+                <div className={styles.df}>
+                    <AppBar className={styles.appbar} menu={menu} setMenu={setMenu} />
+                    <div className={styles.out}>
+                        {/* <MobileAppBar/> */}
+                        <Header menu={menu} setMenu={setMenu}/>
+                        <Outlet />
+                    </div>
 
-            </div> <div className={loginIsActive && styles.log} >
-                {loginIsActive && <LoginRegister />}
+                </div> <div className={loginIsActive && styles.log} >
+                    {loginIsActive && <LoginRegister />}
+                </div>
+                <div className={styles.chat}>
+                    <Chat />
+                </div>
             </div>
-            <div className={styles.chat}>
-                <Chat/>
-            </div>
-           </div>
-            </>
+        </>
     );
 };
 

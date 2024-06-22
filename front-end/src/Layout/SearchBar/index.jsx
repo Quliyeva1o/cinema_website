@@ -6,8 +6,8 @@ import { useGetMoviesQuery } from '../../redux/MoviesSlice';
 import { useGetCinemasQuery } from '../../redux/CinemasSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { selectLoginIsActive, setLoginIsActive } from "../../redux/LoginActiveBtnSlice";
-
-const Header = () => {
+import MenuIcon from '@mui/icons-material/Menu';
+const Header = ({menu,setMenu}) => {
   const [isActive, setIsActive] = useState(false);
   const [searchItems, setSearchItems] = useState([]);
   const { data: cinemas } = useGetCinemasQuery();
@@ -16,7 +16,7 @@ const Header = () => {
   const dispatch = useDispatch();
   // console.log(loginIsActive);
 
- 
+
   useEffect(() => {
     if (cinemas) {
       setMyCinemas(cinemas.data);
@@ -55,7 +55,8 @@ const Header = () => {
   };
 
   const handleLogin = () => {
-    dispatch(setLoginIsActive(!loginIsActive));  };
+    dispatch(setLoginIsActive(!loginIsActive));
+  };
 
   return (
     <>
@@ -89,11 +90,23 @@ const Header = () => {
             </div>
           )}
         </div>
-        <div className={styles.login}>
-          <button onClick={handleLogin}>
-            <PermIdentityIcon />
-            <span>Log In</span>
-          </button>
+        <div className={styles.mobile}>
+          <div className={styles.mobilemenu}>
+            <div className={styles.burger}>
+              <MenuIcon onClick={()=>{setMenu(!menu)}}/>
+            </div>
+          </div>
+          <div className={styles.mobilelogo}>
+            <h1>
+              Hoyts
+            </h1>
+          </div>
+          <div className={styles.login}>
+            <button onClick={handleLogin}>
+              <PermIdentityIcon />
+              <span>Log In</span>
+            </button>
+          </div>
         </div>
       </div>
     </>

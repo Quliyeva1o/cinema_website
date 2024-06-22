@@ -1,29 +1,22 @@
 import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
-import controller from "../../API/requests.js";
+import controller from "../../../API/requests.js";
 import Swal from "sweetalert2";
-import loginValidation from "../../validations/login.validations.js";
+import loginValidation from "../../../validations/login.validations.js";
 import { useSelector, useDispatch } from "react-redux";
-import { login } from "../../redux/UserSlice.jsx";
+import { login } from "../../../redux/UserSlice.jsx";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./index.module.scss"
 
-const Login = ({ setLogin }) => {
+const AdminLogin = () => {
   const user = useSelector((state) => state.user);
   const navigate= useNavigate("")
   const dispatch = useDispatch();
-  useEffect(()=>{
-    if(user.id){
-      navigate('/');
-    }
-  },[navigate,user]);
+ 
 
-  const handleRegister = () => {
-    setLogin(false)
-  }
+ 
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -35,7 +28,7 @@ const Login = ({ setLogin }) => {
       console.log(response);
 
       if (response.auth) {
-        if(response.user.role=="client"){
+        if(response.user.role=="admin"){
         actions.resetForm();
         dispatch(login(response.user));
         //token
@@ -48,7 +41,7 @@ const Login = ({ setLogin }) => {
           showConfirmButton: false,
           timer: 1000,
         }).then(() => {
-          navigate("/");
+          navigate("/admin");
         });
       }else{
         Swal.fire({
@@ -73,7 +66,7 @@ const Login = ({ setLogin }) => {
 
   return (
     <div className={styles.login}>
-      <h2>Sign in to My Rewards</h2>
+      <h2>Sign in Hoyts Admin</h2>
       <div className={styles.form}>
         <form
           onSubmit={formik.handleSubmit}
@@ -112,14 +105,11 @@ const Login = ({ setLogin }) => {
             </div>
           </div></form>
       </div>
-      <p>
-        Having trouble signing in?<br />
-        <button type="button">Reset Password</button> or <button type="button" onClick={handleRegister}>Join Now</button>
-      </p>
+     
 
     </div>
 
   );
 };
 
-export default Login;
+export default AdminLogin;

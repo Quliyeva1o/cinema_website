@@ -19,7 +19,7 @@ const AddMovie = () => {
 
     useEffect(() => {
         if (user.role !== "admin") {
-            navigate("/");
+            navigate("/admin/login");
         }
     }, [navigate, user]);
 

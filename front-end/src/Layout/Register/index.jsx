@@ -118,7 +118,7 @@ const Register = () => {
                     error={formik.touched.repeat_password && Boolean(formik.errors.repeat_password)}
                     helperText={formik.touched.repeat_password && formik.errors.repeat_password}
                 />
-                <TextField
+                <TextField 
                     id="firstName"
                     name="firstName"
                     label="First Name"
@@ -189,6 +189,7 @@ const Register = () => {
                 <FormControl fullWidth>
                     <InputLabel id="preferredCinema-label">Preferred Cinema</InputLabel>
                     <Select
+                   className={styles.select}
                         labelId="preferredCinema-label"
                         id="preferredCinema"
                         name="preferredCinema"
@@ -207,6 +208,7 @@ const Register = () => {
                     )}
                 </FormControl>
                 <FormControlLabel
+                 className={styles.check}
                     control={<Checkbox
                         name='receiveOffers'
                         checked={formik.values.receiveOffers}
@@ -215,6 +217,7 @@ const Register = () => {
                     label="I want to receive offers from HOYTS"
                 />
                 <FormControlLabel
+                 className={styles.check}
                     control={<Checkbox
                         name='agreeTerms'
                         checked={formik.values.agreeTerms}
@@ -229,6 +232,7 @@ const Register = () => {
                     helperText={formik.touched.agreeTerms && formik.errors.agreeTerms}
                 />
                 <Button
+                className={styles.btn}
                     type="submit"
                     variant="contained"
                     color="primary"

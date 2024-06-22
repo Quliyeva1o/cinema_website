@@ -17,7 +17,13 @@
         color: #999;
     }
     >form {
+        gap:10px;
         margin-top: 24px;
+        span{
+            width: 100%;
+            
+            color: #DEDEDE;
+        }
         >div {
             display: flex;
             margin-left: -8px;
@@ -31,13 +37,16 @@
                     padding-top: 16px;
                     padding-left: 12px;
                     padding-right: 12px;
-                    border: 1px solid #616161;
+                    // border: 1px solid #616161;
                     border-radius: 4px;
                     box-sizing: border-box;
                     font-family: "poppins";
                     font-size: 16px;
                     color: #fff;
                     background-color: #353535;
+                }
+                fieldset{
+                    border: none;
                 }
                 label{
                     width: 100%;
@@ -48,4 +57,43 @@
                
             }
         }
+        legend{
+            color: #DEDEDE;
+            padding: 15px 0;
+        }
+    }
+
+    .check{
+       span{ width: auto!important}
+        input{
+            width: auto;
+        }
+    }
+
+    .btn{
+        border-radius: 4px;
+        font-family: "poppins";
+        width: 100%;
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #fff!important;
+        background-color: #cd242c!important;
+        transition:
+            border-color 0.4s,
+            background-color 0.4s,
+            opacity 0.4s;
+        padding: 16px 24px;
+        font-size: 14px;
+        display: block;
+    }
+    a{
+        color: #cd242c;
+        text-decoration: none;
+    }
+
+    .select{
+        background-color:#353535;
     }

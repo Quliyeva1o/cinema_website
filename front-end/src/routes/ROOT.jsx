@@ -1,6 +1,7 @@
 import AddMovie from "../pages/admin/AddMovie";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminRoot from "../pages/admin/AdminRoot";
+import AdminLogin from "../pages/admin/Login";
 import CinemaDetail from "../pages/client/CinemaDetail";
 import Cinemas from "../pages/client/Cinemas";
 import MovieDetail from "../pages/client/Detail";
@@ -61,6 +62,11 @@ export const ROOT = [
             {
                 path: "add-movie",
                 element: <AddMovie />,
-            }]
+            },
+            {
+                path: "login",
+                element: <AdminLogin />,
+            },
+        ]
     }
 ];
