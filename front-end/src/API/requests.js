@@ -9,8 +9,8 @@ async function getAll(endpoint) {
     return error;
   }
 }
-
-//get one 
+ 
+//get one  
 async function getOne(endpoint, id, token) {
   try {
     const response = await axios.get(BASE_URL + endpoint + `/${id}`,{

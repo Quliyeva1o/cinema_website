@@ -28,7 +28,7 @@ const hall_controller = {
       res.status(200).send({
         message: "success",
         data: hall,
-      });
+      }); 
     } else {
       res.send({
         message: "no content",
@@ -59,13 +59,24 @@ const hall_controller = {
       response: response,
     });
   },
+
   post: async (req, res) => {
-    const hall = new HallModel(req.body);
-    await hall.save();
-    res.send({
-      message: "posted",
-      data: hall,
-    });
+    try {
+      const hall = new HallModel(req.body);
+      if (req.file) {
+        hall.img = "http://localhost:5050/uploads/" + req.file.filename;
+      }
+      await hall.save();
+      res.status(201).json({
+        message: "posted",
+        data: hall,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: error.message,
+      });
+    }
   },
 };
 

@@ -19,26 +19,24 @@ const tag_controller = {
       });
     }
   },
-  getOne: async (req, res) => {
-    const { id } = req.params;
-    let tag;
+   getOne : async (req, res) => {
     try {
-      tag = await TagModel.findById(id);
-    } catch (error) {
-      res.send({ error: error });
-    }
-    if (tag) {
-      res.status(200).send({
-        message: "success",
-        data: tag,
-      });
-    } else {
-      res.send({
-        message: "no content",
-        data: null,
-      });
+      // Example asynchronous operation (fetching data from database)
+      const tagId = req.params.id;
+      const tag = await tag.findById(tagId);
+  
+      if (!tag) {
+        return res.status(404).json({ error: 'Tag not found' });
+      }
+  
+      // Only send response once
+      res.json({ title: tag.title });
+    } catch (err) {
+      console.error('Error in getOne:', err);
+      res.status(500).json({ error: 'Internal server error' });
     }
   },
+  
   delete: async (req, res) => {
     const { id } = req.params;
     let response;

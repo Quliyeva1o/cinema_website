@@ -27,7 +27,7 @@ const Cinemas = () => {
               </h2>
               <ul>
               {cinema.tags && cinema.tags.map((tag, index) => (
-                  <li key={index}>{tag.tagName}</li>
+                  <li key={index}>{tag}</li>
                 ))}
               </ul>
               <div>

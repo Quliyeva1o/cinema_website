@@ -1,0 +1,20 @@
+.add {
+    form {
+        display: flex;
+        width: 600px;
+        margin: 0 auto;
+        gap: 15px;
+        flex-direction: column;
+    }
+    div {
+        border-radius: 10px;
+        border: 1px solid #dedede;
+
+    }
+    input{
+        color: #dedede;
+    }
+    label {
+        color: #dedede;
+    }
+}

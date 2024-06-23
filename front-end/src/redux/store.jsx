@@ -6,6 +6,7 @@ import { movieAPI } from './MoviesSlice';
 import { eventAPI } from './EventsSlice';
 import { cinemaAPI } from './CinemasSlice';
 import { genreAPI } from './GenresSlice';
+import { tagAPI } from './TagsSlice';
 import { setupListeners } from "@reduxjs/toolkit/query";
 import userReducer from "./UserSlice";
 
@@ -17,13 +18,16 @@ const store = configureStore({
     [eventAPI.reducerPath]: eventAPI.reducer,
     [cinemaAPI.reducerPath]: cinemaAPI.reducer,
     [genreAPI.reducerPath]: genreAPI.reducer,
+    [tagAPI.reducerPath]: tagAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       movieAPI.middleware,
       eventAPI.middleware,
       cinemaAPI.middleware,
-      genreAPI.middleware
+      genreAPI.middleware,
+      tagAPI.middleware,
+
     ),
 });
 

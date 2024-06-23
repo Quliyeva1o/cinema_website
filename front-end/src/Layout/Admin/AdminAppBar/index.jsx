@@ -25,14 +25,14 @@ const AdminAppBar = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to="session-times">
+                        <Link to="add-session-times">
                             <IoTicketOutline />
 
                             <span >SESSION TIMES</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="cinemas">
+                        <Link to="add-cinema">
                             <BiCameraMovie />
 
                             <span >CINEMAS</span>

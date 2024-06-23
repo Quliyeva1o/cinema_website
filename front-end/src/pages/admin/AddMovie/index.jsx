@@ -251,18 +251,7 @@ const AddMovie = () => {
                         formik.touched.releaseDate && formik.errors.releaseDate
                     }
                 />
-                {/* <TextField
-                    name="coverImg"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.coverImg}
-                    id="coverImg"
-                    type="text"
-                    label="Cover Image URL"
-                    variant="outlined"
-                    error={formik.touched.coverImg && Boolean(formik.errors.coverImg)}
-                    helperText={formik.touched.coverImg && formik.errors.coverImg}
-                /> */}
+           
                 <TextField
                     name="coverImg"
                     onChange={handleImageChangee}

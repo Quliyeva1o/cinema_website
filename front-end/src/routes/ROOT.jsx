@@ -1,4 +1,6 @@
+import AddCinema from "../pages/admin/AddCinema";
 import AddMovie from "../pages/admin/AddMovie";
+import AddSessionTime from "../pages/admin/AddSessionTime";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminRoot from "../pages/admin/AdminRoot";
 import AdminLogin from "../pages/admin/Login";
@@ -66,6 +68,14 @@ export const ROOT = [
             {
                 path: "login",
                 element: <AdminLogin />,
+            },
+            {
+                path: "add-session-times",
+                element: <AddSessionTime />,
+            },
+            {
+                path: "add-cinema",
+                element: <AddCinema />,
             },
         ]
     }
