@@ -6,7 +6,7 @@ const MovieSchemaValidation=Joi.object({
     director:Joi.string().required(),
     bgImg:Joi.string().uri().required(),
     cast:Joi.string().required(),
-    genre:Joi.string().required(),
+    genre:Joi.array(),
     rating:Joi.string().required(),
     description:Joi.string().required(),
     runTime:Joi.number().required(),
@@ -14,7 +14,7 @@ const MovieSchemaValidation=Joi.object({
     trailers:Joi.array().default([]),
     coverImg:Joi.string().uri().required(),
     ageRes:Joi.number().required(),
-    halls:Joi.array().default([]),
+    halls:Joi.array().default([]) ,
     sessionTimes:Joi.array().default([])
 })
 
