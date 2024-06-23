@@ -6,7 +6,6 @@ const EventDetail = () => {
     const { id } = useParams();
     const [myEvent, setMyEvent] = useState([])
     const { data: event } = useGetEventByIdQuery(id);
-    console.log(event);
     useEffect(() => {
         if (event) {
             setMyEvent(event.data)

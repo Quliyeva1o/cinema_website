@@ -17,13 +17,13 @@ const RootPage = () => {
                 <div className={styles.df}>
                     <AppBar className={styles.appbar} menu={menu} setMenu={setMenu} />
                     <div className={styles.out}>
-                        {/* <MobileAppBar/> */}
                         <Header menu={menu} setMenu={setMenu}/>
                         <Outlet />
                     </div>
 
-                </div> <div className={loginIsActive && styles.log} >
-                    {loginIsActive && <LoginRegister />}
+                </div> 
+                <div className={loginIsActive && styles.log} >
+                    <LoginRegister />
                 </div>
                 <div className={styles.chat}>
                     <Chat />

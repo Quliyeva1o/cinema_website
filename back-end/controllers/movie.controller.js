@@ -1,4 +1,5 @@
 const MovieModel = require("../models/movie.model.js");
+const multer = require("multer");
 
 const movie_controller = {
   getAll: async (req, res) => {
@@ -86,17 +87,24 @@ const movie_controller = {
     }
   },
   post: async (req, res) => {
+    console.log(req);
     try {
       const movie = new MovieModel(req.body);
-      if (req.file) {
-        movie.bgImg = "http://localhost:5050/uploads/" + req.file.filename;
+
+      if (req.files && req.files.bgImg && req.files.coverImg) {
+        const bgImgPath = "http://localhost:5050/uploads/" + req.files.bgImg[0].filename;
+        const coverImgPath = "http://localhost:5050/uploads/" + req.files.coverImg[0].filename;
+        movie.bgImg = bgImgPath;
+        movie.coverImg = coverImgPath;
       }
+
       await movie.save();
       res.status(201).json({
         message: "posted",
         data: movie,
       });
     } catch (error) {
+      console.log(error);
       res.status(500).json({
         error: error.message,
       });

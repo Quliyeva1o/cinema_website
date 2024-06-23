@@ -16,7 +16,6 @@ const EventsFestivals = () => {
   useEffect(() => {
     events && setMyEvents(events.data)
   }, [events]);
-  console.log(myEvents);
   return (
     <>
       <div className="heading">

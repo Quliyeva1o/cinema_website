@@ -5,6 +5,7 @@ import authReducer from "./LoginActiveBtnSlice";
 import { movieAPI } from './MoviesSlice';
 import { eventAPI } from './EventsSlice';
 import { cinemaAPI } from './CinemasSlice';
+import { genreAPI } from './GenresSlice';
 import { setupListeners } from "@reduxjs/toolkit/query";
 import userReducer from "./UserSlice";
 
@@ -15,12 +16,14 @@ const store = configureStore({
     [movieAPI.reducerPath]: movieAPI.reducer,
     [eventAPI.reducerPath]: eventAPI.reducer,
     [cinemaAPI.reducerPath]: cinemaAPI.reducer,
+    [genreAPI.reducerPath]: genreAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(
       movieAPI.middleware,
       eventAPI.middleware,
-      cinemaAPI.middleware
+      cinemaAPI.middleware,
+      genreAPI.middleware
     ),
 });
 

@@ -6,11 +6,13 @@
     align-self: flex-start;
     flex-shrink: 0;
     width: 272px;
-    padding-top: 32px;
+    padding-top: 27px;
     padding-left: 32px;
     padding-bottom: 32px;
     transition: left .4s;
     box-sizing: border-box;
+    transition: all .4s;
+
     @media (max-width:1240px) {
         position: fixed;
         left: -100%;
@@ -26,6 +28,10 @@
             transition: color 0.4s;
             cursor: pointer;
             text-decoration: none;
+            img{
+                margin-left: -10px;
+                width: 200px;
+            }
         }
     }
     ul {
@@ -102,6 +108,7 @@
     padding-left: 32px;
     padding-bottom: 32px;
     width: 100% ;
+    transition: all .4s;
     box-sizing: border-box;
     .close{
         svg{

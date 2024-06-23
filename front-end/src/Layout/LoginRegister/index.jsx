@@ -15,7 +15,7 @@ const LoginRegister = () => {
   return (
     <>
       <div className={styles.modall}>
-        <div className={styles.modal}>
+        <div className={styles.modal} style={{ transform: loginIsActive ? "translateX(0%)" : "translateX(100%)" }}>
           <div>
             <button className={styles.close} onClick={handleClose}>
               <CloseIcon />

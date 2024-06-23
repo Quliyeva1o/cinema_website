@@ -12,6 +12,11 @@
         object-position: end;
     }
 }
+.mobile{
+    @media(max-width:1240px){
+        padding: 0 24px;
+    }
+}
 .movieHero {
     height: 450px;
     border-radius: 4px;
@@ -180,7 +185,8 @@
         color: #dedede;
         line-height: 28px;
     }
-    dd {
+    dd,span {
+        text-transform: capitalize;
         margin-top: 0;
         margin-left: 0;
         font-family: "poppins";

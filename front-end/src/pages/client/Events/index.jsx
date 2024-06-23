@@ -11,7 +11,6 @@ import styles from './index.module.scss'
 import { Link } from 'react-router-dom';
 const Events = () => {
   const { data: events, error, isLoading, refetch } = useGetEventsQuery();
-  // console.log(events.data);
   return (
     <div>
       <Hero />

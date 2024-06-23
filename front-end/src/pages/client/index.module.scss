@@ -10,6 +10,7 @@
         -webkit-backdrop-filter: blur(8px);
         backdrop-filter: blur(8px);
         z-index: 9;
+        
     }
 }
 .appbar {
@@ -22,7 +23,7 @@
     padding-left: 32px;
     padding-bottom: 32px;
     box-sizing: border-box;
-   
+    transition:  all .4s;
 }
 .chat {
     z-index: 555;
@@ -36,6 +37,7 @@
     overflow: hidden;
     .df {
         display: flex;
+        
     }
 }
 

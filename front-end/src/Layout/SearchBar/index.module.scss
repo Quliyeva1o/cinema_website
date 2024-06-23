@@ -3,9 +3,10 @@
     padding-right: 32px;
     padding-bottom: 48px;
     display: flex;
-    // @media (max-width:1240px) {
-    //     display: none!important;
-    // }
+    @media (max-width:1240px) {
+        padding-top: 0;
+
+    }
     .search {
         width: 100%;
         position: relative;
@@ -199,7 +200,7 @@
         align-items: center;
         padding: 13px 0;
         background-color: #2e2e2e;
-        z-index: 999;
+        z-index: 2;
     }
     justify-content: space-between;
     .mobilemenu {
@@ -215,7 +216,11 @@
         }
     }
     .mobilelogo {
+        img{
+            width: 150px;
+        }
         @media (min-width: 1241px) {
+           
             display: none !important;
         }
     }

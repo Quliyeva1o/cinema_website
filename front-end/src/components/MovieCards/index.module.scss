@@ -167,3 +167,213 @@
         }
     }
 }
+
+.modalisActive {
+    height: 100%;
+    transition-delay: 0s;
+    z-index: 9;
+    overflow: hidden;
+    transition: height 0s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    > span {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(8px);
+        transition: opacity 0.4s;
+    }
+}
+.modalpanel {
+    overflow: hidden;
+    transition: height 0s;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    transition-delay: 0s;
+    z-index: 999;
+    @media (min-width: 641px) {
+        max-width: 488px;
+    }
+}
+.modall {
+    position: absolute;
+    top: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    @media (min-width: 641px) {
+        max-width: 488px;
+    }
+    height: 100%;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 8px #0a0a0a;
+    background-color: #121212;
+    transition: transform 0.4s;
+    z-index: 2;
+    .modalcontent {
+        padding-top: 24px;
+        padding-bottom: 24px;
+        position: relative;
+        padding-left: 24px;
+        padding-right: 24px;
+        overflow-y: auto;
+        scrollbar-width: none;
+        scroll-behavior: smooth;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            h2 {
+                margin-top: 0;
+                margin-bottom: 0;
+                font-family: "poppins";
+                font-size: 16px;
+                font-weight: 600;
+                color: #fff;
+            }
+            button {
+                margin: 0;
+                padding: 0;
+                border: none;
+                background: 0 0;
+                color: #fff;
+                cursor: pointer;
+                transition: color 0.4s;
+                z-index: 1;
+            }
+        }
+        .ul {
+            display: flex;
+            margin-top: 0;
+            margin-bottom: 0;
+            padding-left: 0;
+            list-style: none;
+            li {
+                margin-top: 16px;
+                button {
+                    margin: 0;
+                    padding: 0;
+                    border: none;
+                    background: 0 0;
+                    cursor: pointer;
+                    span {
+                        padding-bottom: 8px;
+                        margin-bottom: -8px;
+                        text-decoration: none;
+                        background-image: linear-gradient(#ff2e38, #ff2e38);
+                        background-size: 0 2px;
+                        background-position: 0 100%;
+                        background-repeat: no-repeat;
+                        transition:
+                            color 0.4s,
+                            background-size 0.4s;
+                        position: relative;
+                        font-family: "poppins";
+                        font-size: 12px;
+                        font-weight: 600;
+                        text-transform: uppercase;
+                        background-size: 100% 2px;
+                        color: #fff;
+                    }
+                }
+            }
+        }
+        .ull {
+            padding-top: 24px;
+            display: flex;
+            flex-wrap: wrap;
+            margin: -4px;
+            padding-left: 0;
+            list-style: none;
+            li {
+                padding: 4px;
+                box-sizing: border-box;
+                width: 100%;
+              
+                    input {
+                        right: 16px;
+                        width: 16px;
+                        height: 16px;
+                        margin: 0;
+                        border: none;
+                        border-radius: 50%;
+                        box-sizing: border-box;
+                        background-color: #383838;
+                        transition: background-color 0.4s;
+                        position: absolute;
+                        display: block;
+                        appearance: none;
+                        pointer-events: none;
+                        z-index: 1;
+                    }
+                    label {
+                        display: block;
+                        margin-right: 0;
+                        padding: 3px 16px;
+                        border: 1px solid #353535;
+                        border-radius: 4px;
+                        font-family: "poppins";
+                        font-size: 14px;
+                        font-weight: 700;
+                        text-transform: uppercase;
+                        text-decoration: none;
+                        color: #fff;
+                        background-color: #222;
+                        transition: background-color 0.4s;
+                        cursor: pointer;
+                        top: 50%;
+                        display: flex;
+                    }
+                }
+            }
+        
+    }
+    .footer {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        margin-top: auto;
+        padding: 16px 24px;
+        box-shadow: 0px 0px 8px #0a0a0a;
+        background-color: #1e1e1e;
+        .apply {
+            border: 1px solid #f04249;
+            border-radius: 4px;
+            font-family: poppins;
+            font-weight: 700;
+            line-height: 1;
+            white-space: nowrap;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: #fff;
+            background-color: #cd242c;
+            transition:
+                border-color 0.4s,
+                background-color 0.4s,
+                opacity 0.4s;
+            padding: 16px 24px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .clear {
+            margin: 16px auto 0;
+            padding: 0;
+            border: none;
+            font-family: poppins;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            color: #ff2e38;
+            background: 0 0;
+            cursor: pointer;
+            transition: color 0.4s;
+        }
+    }
+}

@@ -17,7 +17,6 @@ const ScreenExperiences = () => {
   useEffect(() => {
     cinemas && setMyCinemas(cinemas.data)
   }, [cinemas]);
-  console.log(myCinemas);
   return (
     
     <>

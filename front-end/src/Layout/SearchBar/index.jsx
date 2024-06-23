@@ -97,9 +97,7 @@ const Header = ({menu,setMenu}) => {
             </div>
           </div>
           <div className={styles.mobilelogo}>
-            <h1>
-              Hoyts
-            </h1>
+              <img src='http://localhost:5050/uploads/codemobile.png' alt="" />
           </div>
           <div className={styles.login}>
             <button onClick={handleLogin}>

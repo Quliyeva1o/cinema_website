@@ -5,7 +5,7 @@ const movieValidations = yup.object({
   director: yup.string().required(),
   bgImg: yup.string().url().required(),
   cast: yup.string().required(),
-  genre: yup.string().required(),
+  genre: yup.array().default([]),
   rating: yup.string().required(),
   description: yup.string().required(),
   runTime: yup.number().required(),

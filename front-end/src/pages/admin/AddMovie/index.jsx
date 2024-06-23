@@ -10,12 +10,21 @@ import Select from "react-select";
 import controller from "../../../API/requests.js";
 import Movie from "../../../classes/Movie.js";
 import styles from "./index.module.scss";
+import { useGetGenresQuery } from "../../../redux/GenresSlice.jsx";
 
 const AddMovie = () => {
     const user = useSelector((state) => state.user);
     const [cinemass, setCinemas] = useState([]);
     const token = Cookies.get("token");
     const navigate = useNavigate();
+    const { data: genres } = useGetGenresQuery();
+
+    const [genress, setgenres] = useState([]);
+    const [myGenres, setMyGenres] = useState([])
+    useEffect(() => {
+        genres && setMyGenres(genres.data)
+    }, [genres]);
+
 
     useEffect(() => {
         if (user.role !== "admin") {
@@ -33,42 +42,53 @@ const AddMovie = () => {
             );
         });
     }, [token]);
-
+    useEffect(() => {
+        controller.getAll("/api/genres", token).then((res) => {
+            setgenres(
+                res?.data.map((genre) => ({
+                    value: genre._id,
+                    label: genre.name,
+                }))
+            );
+        });
+    }, [token]);
     const formik = useFormik({
         initialValues: {
             name: "",
             director: "",
-            bgImg: null, // Changed to null for file upload
+            bgImg: null,
             cast: "",
-            genre: "",
+            genres: "",
             rating: "",
             description: "",
             runTime: "",
             releaseDate: "",
             trailers: [],
-            coverImg: "",
+            coverImg: null,
             ageRes: "",
             halls: [],
             sessionTimes: [],
         },
         onSubmit: async (values, actions) => {
             const cinemaIds = values.halls.map((hall) => hall.value);
+            const genreIds = values.genres.map((genre) => genre.value);
 
             const formData = new FormData();
             formData.append("name", values.name);
             formData.append("director", values.director);
-            formData.append("bgImg", values.bgImg); 
+            formData.append("bgImg", values.bgImg);
             formData.append("cast", values.cast);
-            formData.append("genre", values.genre);
+            formData.append("genre", JSON.stringify(genreIds));
             formData.append("rating", values.rating);
             formData.append("description", values.description);
             formData.append("runTime", values.runTime);
             formData.append("releaseDate", values.releaseDate);
-            formData.append("trailers", JSON.stringify(values.trailers)); 
+            formData.append("trailers", JSON.stringify(values.trailers));
             formData.append("coverImg", values.coverImg);
             formData.append("ageRes", values.ageRes);
-            formData.append("sessionTimes", JSON.stringify(values.sessionTimes)); 
-            formData.append("halls", JSON.stringify(cinemaIds)); 
+            formData.append("sessionTimes", JSON.stringify(values.sessionTimes));
+            formData.append("halls", JSON.stringify(cinemaIds));
+            console.log(values);
 
             try {
                 await controller.post("/api/movies", formData, token);
@@ -94,7 +114,9 @@ const AddMovie = () => {
     const handleImageChange = (event) => {
         formik.setFieldValue("bgImg", event.currentTarget.files[0]);
     };
-
+    const handleImageChangee = (event) => {
+        formik.setFieldValue("coverImg", event.currentTarget.files[0]);
+    };
     return (
         <div className={styles.add}>
             <h3 style={{ textAlign: "center", marginBottom: "14px" }}>
@@ -103,7 +125,7 @@ const AddMovie = () => {
             <form
                 encType="multipart/form-data"
                 onSubmit={formik.handleSubmit}
-               
+
             >
                 <TextField
                     name="name"
@@ -129,7 +151,7 @@ const AddMovie = () => {
                     error={formik.touched.director && Boolean(formik.errors.director)}
                     helperText={formik.touched.director && formik.errors.director}
                 />
-                  <TextField
+                <TextField
                     name="bgImg"
                     onChange={handleImageChange}
                     onBlur={formik.handleBlur}
@@ -141,7 +163,7 @@ const AddMovie = () => {
                     error={formik.touched.bgImg && Boolean(formik.errors.bgImg)}
                     helperText={formik.touched.bgImg && formik.errors.bgImg}
                 />
-              
+
                 <TextField
                     name="cast"
                     onChange={formik.handleChange}
@@ -154,18 +176,24 @@ const AddMovie = () => {
                     error={formik.touched.cast && Boolean(formik.errors.cast)}
                     helperText={formik.touched.cast && formik.errors.cast}
                 />
-                <TextField
-                    name="genre"
-                    onChange={formik.handleChange}
+
+                <Select
+                    id="genres"
+                    name="genres"
+                    onChange={(selectedOptions) => {
+                        formik.setFieldValue("genres", selectedOptions);
+                    }}
                     onBlur={formik.handleBlur}
-                    value={formik.values.genre}
-                    id="genre"
-                    type="text"
-                    label="Genre"
-                    variant="outlined"
-                    error={formik.touched.genre && Boolean(formik.errors.genre)}
-                    helperText={formik.touched.genre && formik.errors.genre}
+                    value={formik.values.genres}
+                    options={genress}
+                    isMulti
+                    className="basic-multi-select"
+                    classNamePrefix="select"
+                    placeholder="Select genres"
                 />
+                {formik.touched.genres && formik.errors.genres && (
+                    <span style={{ color: "red" }}>{formik.errors.genres}</span>
+                )}
                 <TextField
                     name="rating"
                     onChange={formik.handleChange}
@@ -223,7 +251,7 @@ const AddMovie = () => {
                         formik.touched.releaseDate && formik.errors.releaseDate
                     }
                 />
-                <TextField
+                {/* <TextField
                     name="coverImg"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -234,7 +262,20 @@ const AddMovie = () => {
                     variant="outlined"
                     error={formik.touched.coverImg && Boolean(formik.errors.coverImg)}
                     helperText={formik.touched.coverImg && formik.errors.coverImg}
+                /> */}
+                <TextField
+                    name="coverImg"
+                    onChange={handleImageChangee}
+                    onBlur={formik.handleBlur}
+                    id="coverImg"
+                    type="file"
+                    label="coverImg"
+                    variant="outlined"
+                    accept="image/*"
+                    error={formik.touched.coverImg && Boolean(formik.errors.coverImg)}
+                    helperText={formik.touched.coverImg && formik.errors.coverImg}
                 />
+
                 <TextField
                     name="ageRes"
                     onChange={formik.handleChange}

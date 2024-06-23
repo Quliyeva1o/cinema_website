@@ -15,7 +15,7 @@ const AppBar = ({ menu,setMenu }) => {
                 <div style={{ position: "fixed" }}>
                     <div className={styles.logo}>
                         <Link>
-                            <h1>HOYTS</h1>
+                            <img src="http://localhost:5050/uploads/code.png" alt="" />
                         </Link>
                     </div>
                     <div className={styles.close}>
