@@ -10,6 +10,7 @@ const Cinemas = () => {
   useEffect(() => {
     cinemas && setMyCinemas(cinemas.data)
   }, [cinemas]);
+  console.log(myCinemas);
 
   return (
     <>
@@ -26,7 +27,7 @@ const Cinemas = () => {
                 <Link to={`/cinemas/${cinema._id}`}><span>{cinema.name}</span></Link>
               </h2>
               <ul>
-              {cinema.tags && cinema.tags.map((tag, index) => (
+              {cinema.tags && cinema.tags[0].split(',').map((tag, index) => (
                   <li key={index}>{tag}</li>
                 ))}
               </ul>

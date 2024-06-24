@@ -71,7 +71,7 @@ const AddCinema = () => {
       formData.append("address", values.address);
       formData.append("parking", values.parking);
       formData.append("location", values.location.value); 
-      formData.append("tags", values.tags.map(tag => tag.label));
+      formData.append("tags", values.tags.map(tag =>tag.label));
       formData.append("map", values.map);
       formData.append("phone", values.phone);
       console.log(values);

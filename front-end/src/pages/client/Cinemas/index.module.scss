@@ -8,6 +8,7 @@
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
+        height: 350px;
         @media (min-width: 641px) and (max-width: 1024px) {
             width: 50%;
         }
@@ -71,7 +72,8 @@
         img {
             display: block;
             width: 100%;
-            height: auto;
+            object-fit: cover;
+            height: 100%;
             transition: filter 0.4s;
         }
         a {
