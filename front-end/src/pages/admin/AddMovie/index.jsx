@@ -14,7 +14,6 @@ import { useGetGenresQuery } from "../../../redux/GenresSlice.jsx";
 
 const AddMovie = () => {
     const user = useSelector((state) => state.user);
-    const [cinemass, setCinemas] = useState([]);
     const token = Cookies.get("token");
     const navigate = useNavigate();
     const { data: genres } = useGetGenresQuery();
@@ -32,16 +31,7 @@ const AddMovie = () => {
         }
     }, [navigate, user]);
 
-    useEffect(() => {
-        controller.getAll("/api/halls", token).then((res) => {
-            setCinemas(
-                res?.data.map((cinema) => ({
-                    value: cinema._id,
-                    label: cinema.name,
-                }))
-            );
-        });
-    }, [token]);
+
     useEffect(() => {
         controller.getAll("/api/genres", token).then((res) => {
             setgenres(
@@ -66,11 +56,9 @@ const AddMovie = () => {
             trailers: [],
             coverImg: null,
             ageRes: "",
-            halls: [],
             sessionTimes: [],
         },
         onSubmit: async (values, actions) => {
-            const cinemaIds = values.halls.map((hall) => hall.value);
             const genreIds = values.genres.map((genre) => genre.value);
 
             const formData = new FormData();
@@ -87,7 +75,6 @@ const AddMovie = () => {
             formData.append("coverImg", values.coverImg);
             formData.append("ageRes", values.ageRes);
             formData.append("sessionTimes", JSON.stringify(values.sessionTimes));
-            formData.append("halls", JSON.stringify(cinemaIds));
             console.log(values);
 
             try {
@@ -277,23 +264,7 @@ const AddMovie = () => {
                     error={formik.touched.ageRes && Boolean(formik.errors.ageRes)}
                     helperText={formik.touched.ageRes && formik.errors.ageRes}
                 />
-                <Select
-                    id="halls"
-                    name="halls"
-                    onChange={(selectedOptions) => {
-                        formik.setFieldValue("halls", selectedOptions);
-                    }}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.halls}
-                    options={cinemass}
-                    isMulti
-                    className="basic-multi-select"
-                    classNamePrefix="select"
-                    placeholder="Select cinemas"
-                />
-                {formik.touched.halls && formik.errors.halls && (
-                    <span style={{ color: "red" }}>{formik.errors.halls}</span>
-                )}
+           
                 <Button variant="contained" color="primary" type="submit">
                     Add
                 </Button>

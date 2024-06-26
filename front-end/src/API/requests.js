@@ -8,7 +8,7 @@ async function getAll(endpoint) {
   } catch (error) {
     return error;
   }
-}
+} 
  
 //get one  
 async function getOne(endpoint, id, token) {

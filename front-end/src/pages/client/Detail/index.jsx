@@ -12,7 +12,7 @@ import { useGetGenreByIdQuery } from '../../../redux/GenresSlice';
 import controller from '../../../API/requests';
 
 const MovieDetail = () => {
-    const { id } = useParams();
+    const { id } = useParams(); 
     const { data: movie } = useGetMovieByIdQuery(id);
     const [myMovie, setMyMovie] = useState(null);
     const [showModal, setShowModal] = useState(false);

@@ -7,7 +7,7 @@ import controller from '../../../API/requests';
 import Box from '@mui/material/Box';
 import Modal from '@mui/material/Modal';
 import Button from '@mui/material/Button';
-
+import {Link} from 'react-router-dom'
 const style = {
     position: 'absolute',
     top: '50%',
@@ -34,7 +34,7 @@ const AddSessionTime = () => {
             title: 'Action 1',
             key: 'action1',
             render: (_, record) => (
-                <a onClick={() => { handleModal(record.halls) }}>Delete</a>
+                <Link to={`/admin/add-session-times/${record._id}`}>Add  Session Time</Link>
             ),
         },
         {
@@ -49,45 +49,13 @@ const AddSessionTime = () => {
 
     const { data: movies } = useGetMoviesQuery();
     const [myMovies, setMyMovies] = useState([])
-    const [halls, setHalls] = useState([])
-    const [open, setOpen] = useState(false)
     useEffect(() => {
         movies && setMyMovies(movies.data)
     }, [movies]);
-    const handleModal = (halls) => {
-        JSON.parse(halls).map((hall) => {
-            controller.getOne('/api/halls', hall).then((res) => {
-                setHalls((curr) => [...curr, res.data])
-            })
-        })
-        setOpen(true)
-    }
-
+  
     return (
         <>
             <Table columns={columns} dataSource={myMovies} />
-    
-
-            {open && (
-                <Modal
-                    open={open}
-                    onClose={() => { setOpen(false), setHalls([]) }}
-                    aria-labelledby="child-modal-title"
-                    aria-describedby="child-modal-description"
-                >
-
-                    <Box sx={{ ...style, width: 200 }}>
-                        {halls && halls.map((x) => (
-                            <>
-                                <h2>{x.name}</h2>
-                                <button>
-                                    {x.name}
-                                </button></>
-                        ))}
-                        <Button onClick={() => { setOpen(false), setHalls([]) }}>Close</Button>
-                    </Box>
-                </Modal>
-            )}
 
         </>
     )

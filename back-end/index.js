@@ -12,3 +12,4 @@ app.use(router.user);
 app.use(router.movie);
 app.use(router.tags);
 app.use(router.genres);
+app.use(router.times);

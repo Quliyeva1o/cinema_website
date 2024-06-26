@@ -14,7 +14,6 @@ const MovieSchemaValidation=Joi.object({
     trailers:Joi.array().default([]),
     coverImg:Joi.string().uri().required(),
     ageRes:Joi.number().required(),
-    halls:Joi.array().default([]) ,
     sessionTimes:Joi.array().default([])
 })
 

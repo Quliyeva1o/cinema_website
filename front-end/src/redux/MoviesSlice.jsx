@@ -123,7 +123,7 @@ export const movieAPI = createApi({
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json"
-                },
+                }, 
             }),
         }),
     }),

@@ -13,7 +13,6 @@ const MovieSchema = new mongoose.Schema(
         trailers: { type: Array, default: [] },
         releaseDate: String,
         ageRes: Number,
-        halls: { type: Array, default: [] },
         sessionTimes: { type: Array, default: [] }
     },
     { timestamps: true }
