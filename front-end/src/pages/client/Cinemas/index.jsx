@@ -14,7 +14,7 @@ const Cinemas = () => {
   useEffect(() => {
     cinemas && setMyCinemas(cinemas.data)
   }, [cinemas]);
-  console.log(myCinemas);
+  // console.log(myCinemas);
   function CustomTabPanel(props) {
     const { children, value, index, ...other } = props;
 

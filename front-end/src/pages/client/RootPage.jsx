@@ -22,7 +22,7 @@ const RootPage = () => {
                     </div>
 
                 </div> 
-                <div className={loginIsActive && styles.log} >
+                <div className={loginIsActive ? styles.log:""} >
                     <LoginRegister />
                 </div>
                 <div className={styles.chat}>

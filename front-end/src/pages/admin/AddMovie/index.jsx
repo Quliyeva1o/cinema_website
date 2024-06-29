@@ -53,10 +53,8 @@ const AddMovie = () => {
             description: "",
             runTime: "",
             releaseDate: "",
-            trailers: [],
             coverImg: null,
             ageRes: "",
-            sessionTimes: [],
         },
         onSubmit: async (values, actions) => {
             const genreIds = values.genres.map((genre) => genre.value);
@@ -66,15 +64,13 @@ const AddMovie = () => {
             formData.append("director", values.director);
             formData.append("bgImg", values.bgImg);
             formData.append("cast", values.cast);
-            formData.append("genre", JSON.stringify(genreIds));
+            formData.append("genres", JSON.stringify(genreIds));
             formData.append("rating", values.rating);
             formData.append("description", values.description);
             formData.append("runTime", values.runTime);
             formData.append("releaseDate", values.releaseDate);
-            formData.append("trailers", JSON.stringify(values.trailers));
             formData.append("coverImg", values.coverImg);
             formData.append("ageRes", values.ageRes);
-            formData.append("sessionTimes", JSON.stringify(values.sessionTimes));
             console.log(values);
 
             try {

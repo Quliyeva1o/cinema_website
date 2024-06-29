@@ -90,7 +90,7 @@ const MovieCards = () => {
                         </li>)
                     })}</ul>
             </div>
-            <div className={modal && styles.modalisActive}>   <div className={modal && styles.modalpanel}>
+            <div className={modal ? styles.modalisActive : ""}>   <div className={modal ? styles.modalpanel:""}>
                 <div className={styles.modall} style={{ transform: modal ? "translateX(0%)" : "translateX(100%)" }}>
                     <div className={styles.modalcontent}>
                         <div className={styles.header}>
@@ -109,9 +109,9 @@ const MovieCards = () => {
                         <FormGroup>
                             <ul className={styles.ull}>
                                 {myGenres && myGenres.map((genre) => (
-                                    <li>
+                                    <li   key={genre._id}>
                                         <FormControlLabel
-                                            key={genre._id}
+                                          
                                             control={
                                                 <Checkbox
                                                     checked={selectedGenres.includes(genre._id)}

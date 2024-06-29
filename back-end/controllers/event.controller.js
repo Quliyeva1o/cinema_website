@@ -59,13 +59,24 @@ const event_controller = {
       response: response,
     });
   },
+ 
   post: async (req, res) => {
-    const event = new EventModel(req.body);
-    await event.save();
-    res.send({
-      message: "posted",
-      data: event,
-    });
+    try {
+      const event = new EventModel(req.body);
+      if (req.file) {
+        event.img = "http://localhost:5050/uploads/" + req.file.filename;
+      }
+      await event.save();
+      res.status(201).json({
+        message: "posted",
+        data: event,
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        error: error.message,
+      });
+    }
   },
 };
 

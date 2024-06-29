@@ -56,13 +56,12 @@ const AddCinema = () => {
   const formik = useFormik({
     initialValues: {
       name: "",
-      location: null, // Initialize as null for single selection
+      location: null,
       img: null,
       address: "",
       parking: "",
       tags: [],
       map: "",
-   
     },
     onSubmit: async (values, actions) => {
       const formData = new FormData();
@@ -70,13 +69,13 @@ const AddCinema = () => {
       formData.append("img", values.img);
       formData.append("address", values.address);
       formData.append("parking", values.parking);
-      formData.append("location", values.location.value); 
-      formData.append("tags", values.tags.map(tag =>tag.label));
+      formData.append("location", values.location.value);
+      formData.append("tags", values.tags.map(tag => tag.label));
       formData.append("map", values.map);
       formData.append("phone", values.phone);
-      console.log(values);
+      console.log(formData);
       try {
-        await controller.post("/api/halls", formData, token);
+        await controller.post("/api/halls", formData, token)
         Swal.fire({
           position: "top-end",
           icon: "success",
@@ -195,8 +194,8 @@ const AddCinema = () => {
           error={formik.touched.map && Boolean(formik.errors.map)}
           helperText={formik.touched.map && formik.errors.map}
         />
-       
-               <TextField
+
+        <TextField
           name="phone"
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}

@@ -1,4 +1,5 @@
 import AddCinema from "../pages/admin/AddCinema";
+import AddEvent from "../pages/admin/AddEvent";
 import AddMovie from "../pages/admin/AddMovie";
 import AddSessionTime from "../pages/admin/AddSessionTime";
 import AddSessionTimeId from "../pages/admin/AddSessionTimeId";
@@ -81,6 +82,10 @@ export const ROOT = [
             {
                 path: "add-cinema",
                 element: <AddCinema />,
+            },
+            {
+                path: "add-event",
+                element: <AddEvent />,
             },
         ]
     }

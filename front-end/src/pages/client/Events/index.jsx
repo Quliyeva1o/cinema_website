@@ -20,7 +20,7 @@ const Events = () => {
           {
             events && events.data.map((event, idx) => {
               return (
-                <div className={styles.gap}>
+                <div className={styles.gap} key={idx}>
                 <Link to={`/events/${event._id}`}>
                 <Card sx={{ maxWidth: 345 }} key={idx} className={styles.card}>
                   <CardMedia

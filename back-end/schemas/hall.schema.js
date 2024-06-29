@@ -7,7 +7,7 @@ const HallSchema = new mongoose.Schema(
         address: String,
         parking: String,
         map: String,
-        phone: String,
+        phone: String, 
         events: { type: Array, default: [] },
         tags: { type: Array, default: [] }
     },

@@ -14,7 +14,7 @@ const AdminAppBar = () => {
 
                 <div className={styles.logo}>
                     <Link>
-                        <h1>HOYTS</h1>
+                        <h1>CODESCREEN</h1>
                     </Link>
                 </div>
                 <ul >
@@ -28,32 +28,32 @@ const AdminAppBar = () => {
                         <Link to="add-session-times">
                             <IoTicketOutline />
 
-                            <span >SESSION TIMES</span>
+                            <span >ADD SESSION TIME</span>
                         </Link>
                     </li>
                     <li>
                         <Link to="add-cinema">
                             <BiCameraMovie />
 
-                            <span >CINEMAS</span>
+                            <span >ADD CINEMA</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="events">
+                        <Link to="add-event">
                             <IoCalendarOutline />
 
-                            <span >EVENTS & FESTIVALS</span>
+                            <span > ADD EVENT</span>
                         </Link>
                     </li>
                     <li>
-                        <Link to="rewards">
+                        <Link to="/admin">
                             <CiStar />
 
-                            <span >HOYTS REWARDS</span>
+                            <span > DASHBOARD</span>
                         </Link>
                     </li>
                 </ul>
-                <ul className={styles.secondUl}>
+                {/* <ul className={styles.secondUl}>
                     <li>
                         <Link to="offers">
                             <span >Offers & Promotions</span>
@@ -84,7 +84,7 @@ const AdminAppBar = () => {
                            <span >Accessibility</span>
                         </Link>
                     </li>
-                </ul>
+                </ul> */}
 
             </nav>
         </>

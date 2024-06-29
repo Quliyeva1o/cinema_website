@@ -1,12 +1,10 @@
 const mongoose = require("mongoose")
 const EventSchema = new mongoose.Schema(
     {
-        id:String,
         title:String,
-        video:String,
+        movies:String,
         img:String,
-        desc:String
-      
+        description:String
     },
     { timestamps: true }
 );
