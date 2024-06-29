@@ -3,6 +3,8 @@ import AddEvent from "../pages/admin/AddEvent";
 import AddMovie from "../pages/admin/AddMovie";
 import AddSessionTime from "../pages/admin/AddSessionTime";
 import AddSessionTimeId from "../pages/admin/AddSessionTimeId";
+import AddTrailer from "../pages/admin/AddTrailer";
+import AddTrailerId from "../pages/admin/AddTrailerId";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminRoot from "../pages/admin/AdminRoot";
 import AdminLogin from "../pages/admin/Login";
@@ -66,6 +68,15 @@ export const ROOT = [
             {
                 path: "add-movie",
                 element: <AddMovie />,
+
+            },
+            {
+                path: "add-trailer",
+                element: <AddTrailer />,
+            },
+            {
+                path: "add-trailers/:id",
+                element: <AddTrailerId />,
             },
             {
                 path: "login",

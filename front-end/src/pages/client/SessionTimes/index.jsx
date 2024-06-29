@@ -2,23 +2,21 @@ import React, { useEffect, useState } from 'react';
 import { useGetTimesQuery } from '../../../redux/TimesSlice';
 import controller from '../../../API/requests';
 import styles from './index.module.scss'
-import CancelIcon from '@mui/icons-material/Cancel';
+import { useDispatch } from 'react-redux';
+import { setTicketModalIsActive } from '../../../redux/TicketModal';
+import TicketModall from '../../../Layout/TicketModal';
+import { setSelectedTickets } from '../../../redux/TicketSlice';
+
 const SessionTimes = () => {
   const { data: times, error, isLoading, refetch } = useGetTimesQuery();
   const [sessionTimes, setSessionTimes] = useState([]);
-  const [ticketMovie, setTicketMovie] = useState([])
-  const [ticketTime, setticketTime] = useState([])
-  const [ticketCinema, setticketCinema] = useState([])
-  const [ticketisopen, setTicketisopen] = useState(false)
-  const handleTicket = (movie, time, cinema) => {
-    setTicketMovie(movie)
-    setticketTime(time)
-    setticketCinema(cinema)
-    setTicketisopen(!ticketisopen)
-  }
+  const dispatch = useDispatch()
 
-  // console.log(ticketisopen);
-  console.log(ticketTime);
+  const handleTicket = (moviee, timee, cinemaa) => {
+    dispatch(setSelectedTickets({ time: timee, movie: moviee, cinema: cinemaa }));
+    dispatch(setTicketModalIsActive(true));
+  };
+  
 
   useEffect(() => {
     if (times) {
@@ -93,80 +91,8 @@ const SessionTimes = () => {
           </li>
         ))}
       </ul></div>
-      <div className={ticketisopen ? styles.ticketingIsActive : styles.isnotopen} >
-        <div className={ticketisopen ? styles.ticketing : styles.notticketing}>
-
-          <div className={styles.container}>
-            <button className={styles.close} onClick={()=>{setTicketisopen(!ticketisopen)}}>
-              <CancelIcon/>
-            </button>
-            <div className={styles.movie}>
-              <div className={styles.foreground}>
-                <h2>{ticketMovie.name}</h2>
-                <span>
-                  {ticketMovie.runTime} min
-                </span>
-                <span>
-                  {ticketCinema.cinemaName}
-                </span>
-                <span className={styles.scrim}></span>
-              </div>
-              <div className={styles.background}>
-                <img src={ticketMovie.bgImg} alt="" />
-                <span className={styles.scrimleft}></span>
-                <span className={styles.scrimright}></span>
-              </div>
-            </div>
-            <div className={styles.session}>
-              <div>
-                <div className={styles.wrapper}>
-                  <div>
-                    <button>
-                      <span>
-                        <span className={styles.time}>{ticketTime.formattedTime}</span>
-                      </span>
-                      <span className={styles.attr}>
-                        <span>{ticketTime.tag}</span>
-                      </span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className={styles.step}>
-              <div>
-                <h3>
-                  <span>Choose your seats</span>
-                  <button>Show legend</button>
-                </h3>
-              </div>
-              <div className={styles.seats}>
-                <div className={styles.wrapper}>
-                  <div className={styles.map}>
-                    <div className={styles.border}>
-                      <div>
-                        <div>
-                          <div className={styles.screen}>
-                            <span className={styles.name}>
-                              Screen
-                            </span>
-                            <span className={styles.bor}></span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className={styles.footer}>
-
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="footer">
-          </div>
-        </div>
-        <span></span>
+      <div>
+        <TicketModall />
       </div>
     </>
 

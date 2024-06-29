@@ -2,6 +2,10 @@
 
 import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./LoginActiveBtnSlice";
+import selectedCinemas from "./SelectedCinemas";
+import selectedTickets from "./TicketSlice";
+import cinemaModal from "./CinemaModal";
+import ticketModal from "./TicketModal";
 import { movieAPI } from './MoviesSlice';
 import { eventAPI } from './EventsSlice';
 import { cinemaAPI } from './CinemasSlice';
@@ -13,6 +17,10 @@ import { timeAPI } from "./TimesSlice";
 
 const store = configureStore({
   reducer: {
+    selectedCinemas: selectedCinemas,
+    selectedTickets: selectedTickets,
+    cinemaModal: cinemaModal,
+    ticketModal: ticketModal,
     auth: authReducer,
     user: userReducer,
     [movieAPI.reducerPath]: movieAPI.reducer,

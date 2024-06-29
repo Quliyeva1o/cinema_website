@@ -46,6 +46,13 @@ const AdminAppBar = () => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="add-trailer">
+                            <BiCameraMovie />
+
+                            <span > ADD TRAILER</span>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="/admin">
                             <CiStar />
 

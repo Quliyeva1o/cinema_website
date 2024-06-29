@@ -7,37 +7,113 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
+import CancelIcon from '@mui/icons-material/Cancel';
 import Box from '@mui/material/Box';
 import { useGetGenreByIdQuery } from '../../../redux/GenresSlice';
 import controller from '../../../API/requests';
-
+import CinemasModal from '../../../Layout/CinemasModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCinemaModalIsActive } from '../../../redux/CinemaModal';
+import { useGetTimesQuery } from '../../../redux/TimesSlice';
+import { setSelectedTickets } from '../../../redux/TicketSlice';
+import { setTicketModalIsActive } from '../../../redux/TicketModal';
+import TicketModall from '../../../Layout/TicketModal';
 const MovieDetail = () => {
-    const { id } = useParams(); 
+
+
+
+    const { id } = useParams();
     const { data: movie } = useGetMovieByIdQuery(id);
     const [myMovie, setMyMovie] = useState(null);
-    const [showModal, setShowModal] = useState(false);
-    const [genres, setGenres] = useState([])
-    const [myGenres, setmyGenres] = useState([])
+    const cinemaModal = useSelector((state) => state.cinemaModal);
+    const dispatch = useDispatch()
+    const [genres, setGenres] = useState([]);
+    const [myGenres, setMyGenres] = useState([]);
+    const [value, setValue] = useState(0);
+    const [trailersData, setTrailersData] = useState([]);
+    const [trailerdata, setTrailerdata] = useState([]);
+    const [trailerModal, setTrailerModal] = useState(false);
+    const selectedCinemas = useSelector((state) => state.selectedCinemas);
+    const { data: times } = useGetTimesQuery();
+    const [myTimes, setMyTimes] = useState([])
+    const [sessionTimes, setSessionTimes] = useState([]);
+
+
+    const selectedTickets = useSelector((state) => state.selectedTickets);
+    const ticketModal = useSelector((state) => state.ticketModal);
+    console.log('t', ticketModal);
+    console.log('t', selectedTickets);
+
+
+
     useEffect(() => {
         if (movie) {
             setMyMovie(movie.data);
-            setGenres(JSON.parse(movie.data.genre))
+            setGenres(JSON.parse(movie.data.genre));
+            times && setMyTimes(times.data.find((x) => (x.movieId == movie.data._id))?.showTimes)
         }
-    }, [movie]);
+    }, [movie, times]);
+
+
+    const handleTicket = (moviee, timee, cinemaa) => {
+        dispatch(setSelectedTickets({ time: timee, movie: moviee, cinema: cinemaa }));
+        dispatch(setTicketModalIsActive(true));
+      };
 
     useEffect(() => {
-        genres.map((id) => {
-            controller.getOne('/api/genres', id).then((res) => {
-                console.log(res.data);
-                setmyGenres((curr) => [...curr, res.data])
-            })
-        })
-    }, [genres])
+        if (times && myMovie) {
+            const selectedCinemaIds = selectedCinemas.cinemas
+            const filteredTimes = myTimes?.filter(time => selectedCinemaIds.includes(time.cinemaId));
+            setSessionTimes(filteredTimes);
+        }
+    }, [times, myMovie, selectedCinemas]);
+    console.log(sessionTimes);
+
+    useEffect(() => {
+        if (genres.length > 0) {
+            Promise.all(genres.map((id) => controller.getOne('/api/genres', id)))
+                .then((responses) => {
+                    const genresData = responses.map((res) => res.data);
+                    setMyGenres(genresData);
+                })
+                .catch((error) => {
+                    console.error('Error fetching genres:', error);
+                });
+        }
+    }, [genres]);
+
+    useEffect(() => {
+        const fetchTrailersData = async () => {
+            if (myMovie?.trailers) {
+                try {
+                    const fetchedData = await Promise.all(
+                        myMovie.trailers.map((trailer) =>
+                            fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(trailer.url)}&format=json`)
+                                .then((response) => response.json())
+                        )
+                    );
+                    setTrailersData(fetchedData);
+                } catch (error) {
+                    console.error('Error fetching trailers:', error);
+                }
+            }
+        };
+
+        fetchTrailersData();
+    }, [myMovie]);
 
     const handleCinemas = () => {
-        setShowModal(!showModal);
+        dispatch(setCinemaModalIsActive(!cinemaModal.cinemaModalIsActive));
     };
 
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    if (!myMovie) {
+        return null;
+    }
     const CustomTabPanel = (props) => {
         const { children, value, index } = props;
 
@@ -67,16 +143,10 @@ const MovieDetail = () => {
         };
     };
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
-
-    const [value, setValue] = useState(0);
-
-    if (!myMovie) {
-        return null;
+    const handletrailer = (data) => {
+        setTrailerdata(data)
+        setTrailerModal(true)
     }
-
     return (
         <>
             <div className={styles.movieHero}>
@@ -112,20 +182,56 @@ const MovieDetail = () => {
                     <div className="heading">
                         <h2>Times & Tickets</h2>
                         <button onClick={handleCinemas}>
-                            <span>Add cinemas</span>
+
+                            {sessionTimes && sessionTimes.length > 0 ? sessionTimes.map((time) => (
+                                <span style={{ marginRight: "5px" }}>{time.cinemaName}</span>
+                            )) :
+                                <span>Add cinemas</span>}
                         </button>
+
                     </div>
+                    <div>
+                        {sessionTimes && sessionTimes.length > 0 &&
+                            sessionTimes.map((cinemaaa) => (
+                                <div key={cinemaaa.cinemaId} className={styles.times}>
+                                    <h2>{cinemaaa.cinemaName}</h2>
+                                    <ul>
+                                        {cinemaaa.showTime.map((time, index) => (
+                                            <li key={index}>
+                                                <a onClick={() => { handleTicket(myMovie,time, cinemaaa) }}>
+                                                    <span >{time.formattedTime}</span>
+                                                    <span>{time.tag}</span>
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            ))}
+                    </div>
+
                 </div>
 
                 <div>
+
                     <div className="heading">
                         <h2>Teasers & Trailers</h2>
                     </div>
-                    {/* <div className="trailers">
-                    {myMovie.trailers && myMovie.trailers.map((trailer, idx) => (
-                        // <iframe key={idx} src={`${trailer.trailer}`}></iframe>
-                    ))}
-                </div> */}
+                    <div className={styles.trailers} >
+
+                        {trailersData.map((data, idx) => (
+                            <>
+                                <div>
+                                    <a onClick={() => handletrailer(data)}> <span>{data.title}</span>
+                                        <span className={styles.scrim}></span>
+                                        <img src={data.thumbnail_url} alt="" />
+                                    </a>
+                                </div>
+
+                            </>
+
+                        ))}
+
+                    </div>
                 </div>
 
                 <div className={styles.trailers}>
@@ -144,7 +250,7 @@ const MovieDetail = () => {
                             </div>
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
-                            <div >
+                            <div>
                                 <dl>
                                     <dt>Director</dt>
                                     <dd>{myMovie.director}</dd>
@@ -152,13 +258,12 @@ const MovieDetail = () => {
                                     <dd>{myMovie.cast}</dd>
                                     <dt>Genre</dt>
                                     {
-                                        myGenres.map((genre) => {
+                                        myGenres.map((genre, idxx) => {
                                             return (
-                                                <span>{genre.name}, </span>
+                                                <span key={idxx}>{genre.name}, </span>
                                             )
                                         })
                                     }
-
                                     <dt>Rating</dt>
                                     <dd>{myMovie.rating}</dd>
                                     <dt>Release Date</dt>
@@ -171,59 +276,15 @@ const MovieDetail = () => {
 
                     </Box>
                 </div>
-
-                <div className={styles.modal} style={{ transform: showModal ? "translateX(0%)" : "translateX(100%)" }}>
-
-
-                    <div className={styles.modalHeader}>
-                        <h2>
-                            Select Cinemas
-                        </h2>
-                        <button class="modal__close-button" type="button">x</button>
-
-                    </div>
-                    <ul className={styles.states}>
-                        <li>
-                            <button type="button">
-                                <span>Near Me</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <span>ACT</span>
-                            </button>
-                        </li>
-                        <li className={styles.selected}>
-                            <button type="button">
-                                <span>NSW</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <span>QLD</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <span>SA</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <span>VIC</span>
-                            </button>
-                        </li>
-                        <li>
-                            <button type="button">
-                                <span>WA</span>
-                            </button>
-                        </li>
-                    </ul>
-                    <ul>
-                        {/* Additional modal content */}
-                    </ul>
-                </div >
+                {trailerModal && <div className={styles.trailModal}>
+                    <button onClick={() => { setTrailerModal(false) }}>
+                        <CancelIcon />
+                    </button>
+                    <div dangerouslySetInnerHTML={{ __html: trailerdata.html }} />
+                </div>}
+                <CinemasModal />
             </div>
+            <TicketModall/>
 
         </>
     );
