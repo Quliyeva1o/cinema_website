@@ -7,7 +7,11 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './index.module.scss'
-const AppBar = ({ menu,setMenu }) => {
+import { useSelector } from 'react-redux';
+const AppBar = ({ menu, setMenu }) => {
+    const user = useSelector((state) => state.user);
+
+
     return (
         <>
             <nav className={menu ? `${styles.navactive}` : `${styles.nav}`}>
@@ -19,7 +23,7 @@ const AppBar = ({ menu,setMenu }) => {
                         </Link>
                     </div>
                     <div className={styles.close}>
-                        <CloseIcon onClick={()=>{setMenu(!menu)}}/>
+                        <CloseIcon onClick={() => { setMenu(!menu) }} />
                     </div>
                     <ul >
                         <li>
@@ -57,6 +61,13 @@ const AppBar = ({ menu,setMenu }) => {
                                 <span >HOYTS REWARDS</span>
                             </Link>
                         </li>
+                        {user.id != null && <li>
+                            <Link to="tickets">
+                                <CiStar />
+
+                                <span >TICKETS</span>
+                            </Link>
+                        </li>}
                     </ul>
                     <ul className={styles.secondUl}>
                         <li>

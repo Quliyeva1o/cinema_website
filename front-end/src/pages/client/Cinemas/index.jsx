@@ -72,12 +72,10 @@ const Cinemas = () => {
 
       <Box sx={{ width: '100%' }}>
         <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-          <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
+          <Tabs className={styles.tabs} value={value} onChange={handleChange} aria-label="basic tabs example">
             {states.map((state) => {
-              return (<Tab label={state.label} {...a11yProps(state.value)} />)
+              return (<Tab className={styles.tab} label={state.label} {...a11yProps(state.value)} />)
             })}
-
-
           </Tabs>
         </Box>
         <CustomTabPanel value={value} index={0}>

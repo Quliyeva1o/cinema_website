@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-if (!JSON.parse(localStorage.getItem('user'))) {
+if (!JSON.parse(localStorage.getItem('user'))) { 
     localStorage.setItem('user',JSON.stringify({id:null,role:''}))
 }
 

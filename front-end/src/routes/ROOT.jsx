@@ -18,6 +18,8 @@ import Home from "../pages/client/Home";
 import Movies from "../pages/client/Movies";
 import RootPage from "../pages/client/RootPage";
 import SessionTimes from "../pages/client/SessionTimes";
+import Success from "../pages/client/Success";
+import Tickets from "../pages/client/Tickets";
 
 export const ROOT = [
     {
@@ -50,12 +52,20 @@ export const ROOT = [
                 element: <Events />
             },
             {
+                path: "tickets",
+                element: <Tickets />
+            },
+            {
                 path: "events/:id",
                 element: <EventDetail />
             },
             {
                 path: "food-and-drinks",
                 element: <FoodsDrinks />
+            },
+            {
+                path: "success",
+                element: <Success />
             },
 
         ],

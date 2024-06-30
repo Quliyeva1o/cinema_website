@@ -20,7 +20,7 @@ const AddCinema = () => {
     { value: "VIC", label: "VIC" },
     { value: "WA", label: "WA" },
   ];
-
+ 
   const user = useSelector((state) => state.user);
   const [cinemas, setCinemas] = useState([]);
   const token = Cookies.get("token");

@@ -6,6 +6,7 @@ const tag_router=require("./tag.route");
 const food_router=require("./food.route");
 const time_router=require("./time.route");
 const genre_router = require("./genre.route");
+const payment_router = require("./payment.route");
 
 const router={
     user:user_router,
@@ -15,7 +16,8 @@ const router={
     tags:tag_router,
     times:time_router,
     foods:food_router,
-    genres:genre_router
+    genres:genre_router,
+    payment:payment_router
 }
 
 module.exports=router;

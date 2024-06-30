@@ -6,6 +6,7 @@ const tag_controller = require("./tag.controller.js");
 const time_controller = require("./time.controller.js");
 const food_controller = require("./food.controller.js");
 const genre_controller = require("./genre.controller.js");
+const PaymentController = require("./payment.controller.js");
 
 const controller = {
     user: user_controller,
@@ -15,7 +16,8 @@ const controller = {
     tag: tag_controller,
     food: food_controller,
     time: time_controller,
-    genre:genre_controller
+    genre:genre_controller,
+    payment:PaymentController
 }
 
 module.exports = controller;

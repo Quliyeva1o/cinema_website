@@ -13,6 +13,7 @@ import { genreAPI } from './GenresSlice';
 import { tagAPI } from './TagsSlice';
 import { setupListeners } from "@reduxjs/toolkit/query";
 import userReducer from "./UserSlice";
+import basketSlice from "./BasketSlice";
 import { timeAPI } from "./TimesSlice";
 
 const store = configureStore({
@@ -23,6 +24,7 @@ const store = configureStore({
     ticketModal: ticketModal,
     auth: authReducer,
     user: userReducer,
+    basket: basketSlice,
     [movieAPI.reducerPath]: movieAPI.reducer,
     [eventAPI.reducerPath]: eventAPI.reducer,
     [cinemaAPI.reducerPath]: cinemaAPI.reducer,
