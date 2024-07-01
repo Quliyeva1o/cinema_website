@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Table, Modal, Form, Input } from 'antd';
 import { useGetMoviesQuery } from '../../../redux/MoviesSlice';
+import controller from '../../../API/requests';
 
 const EditMovie = () => {
   const { data: movies } = useGetMoviesQuery();
@@ -8,7 +9,6 @@ const EditMovie = () => {
   const [editModalVisible, setEditModalVisible] = useState(false);
   const [currentMovie, setCurrentMovie] = useState(null);
 
-  // Effect to update myMovies state when movies data changes
   useEffect(() => {
     if (movies) {
       setMyMovies(movies.data);
@@ -22,6 +22,7 @@ const EditMovie = () => {
 
   const handleEditModalOk = () => {
     setMyMovies(myMovies.map(movie => (movie._id === currentMovie._id ? currentMovie : movie)));
+    controller.patch('/api/movies', currentMovie._id, currentMovie)
     setEditModalVisible(false);
   };
 
@@ -58,6 +59,7 @@ const EditMovie = () => {
   ];
 
   const handleDelete = (movieId) => {
+    controller.delete('/api/movies', movieId)
     setMyMovies(myMovies.filter(movie => movie._id !== movieId));
   };
 
@@ -76,7 +78,7 @@ const EditMovie = () => {
           onCancel={handleEditModalCancel}
         >
           <Form>
-          {/* name: "",
+            {/* name: "",
             director: "",
             bgImg: null,
             cast: "",
@@ -87,7 +89,7 @@ const EditMovie = () => {
             releaseDate: "",
             coverImg: null,
             ageRes: "", */}
-            
+
             <Form.Item label="Name">
               <Input value={currentMovie.name} onChange={(e) => setCurrentMovie({ ...currentMovie, name: e.target.value })} />
             </Form.Item>
@@ -112,7 +114,7 @@ const EditMovie = () => {
             <Form.Item label="Age Restriction">
               <Input value={currentMovie.ageRes} type='number' onChange={(e) => setCurrentMovie({ ...currentMovie, ageRes: e.target.value })} />
             </Form.Item>
-           
+
           </Form>
         </Modal>
       )}

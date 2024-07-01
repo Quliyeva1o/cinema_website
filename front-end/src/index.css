@@ -9,6 +9,9 @@ body {
   background-color: #121212;
 }
 
+tspan{
+  fill: #999!important ;
+}
 .heading h2 {
   margin-top: 0;
   margin-bottom: 16px;

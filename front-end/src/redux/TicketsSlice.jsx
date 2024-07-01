@@ -18,7 +18,7 @@ export const ticketAPI = createApi({
         }), 
         postTicket: builder.mutation({
             query: (newTicket) => ({
-                url: `tickets`,
+                url: `tickets`, 
                 body: newTicket,
                 method: "POST",
                 headers: {

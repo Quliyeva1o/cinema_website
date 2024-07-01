@@ -9,6 +9,8 @@ import controller from '../../../API/requests';
 import { useGetTagsQuery } from '../../../redux/TagsSlice';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
+import Swal from 'sweetalert2';
+
 import Select from 'react-select';
 import { useGetTimesQuery } from '../../../redux/TimesSlice';
 import styles from './index.module.scss'
@@ -18,6 +20,7 @@ const AddSessionTimeId = () => {
     const { data: cinemas } = useGetCinemasQuery();
     const { data: tags } = useGetTagsQuery();
     const { data: times } = useGetTimesQuery();
+    const [myTime, setMyTime] = useState(null);
     const [myMovie, setMyMovie] = useState(null);
     const [cinemasData, setCinemasData] = useState(null);
     const [value, setValue] = useState(dayjs());
@@ -45,6 +48,7 @@ const AddSessionTimeId = () => {
     useEffect(() => {
         if (times && myMovie) {
             const myTime = times.data.find(x => x.movieId === myMovie._id);
+            setMyTime(myTime)
             if (myTime && myTime.showTimes) {
                 const initialSessions = myTime.showTimes.map(showTime => ({
                     cinemaId: showTime.cinemaId,
@@ -85,7 +89,15 @@ const AddSessionTimeId = () => {
             })()
         }),
         onSubmit: (values) => {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Your work has been saved",
+                showConfirmButton: false,
+                timer: 1500
+            });
             handleSaveSessions(values);
+
         },
     });
 
@@ -180,8 +192,8 @@ const AddSessionTimeId = () => {
         };
 
         console.log("sessionData", sessionData);
-        const myTime = times.data.find(x => x.movieId === myMovie._id);
-        console.log(myTime);
+        console.log('myt',myTime);
+
         if (myTime) {
             controller.patch('/api/times', myTime._id, sessionData)
                 .then((res) => {
@@ -204,61 +216,61 @@ const AddSessionTimeId = () => {
     return (
         <div className={styles.sessad}>
             <h1>{myMovie && myMovie.name}</h1>
-          <div>
-          {cinemasData &&
-                cinemasData.map(cinema => (
-                  <div className={styles.divv}>
-                      <div key={cinema._id} className={styles.div}>
-                        <span className={styles.cinemaname}>{cinema.name}</span>
-                        <span>
-                            <DateTimePicker
-                                className={styles.datePicker}
-                                label="Select Date and Time"
-                                value={value}
-                                onAccept={value => {
-                                    handleInputChange(cinema._id, cinema.name, value);
-                                }}
-                                renderInput={props => <TextField {...props} />}
-                            />
-                        </span>
-                        {sessions.filter(session => session.cinemaId === cinema._id).map((session, sessionIndex) => (
-                            <div key={sessionIndex}>
-                                {session.showTime.map((showtime, index) =>
-                                (
-                                    <div key={index}>
-                                        <div>  <span>{showtime.formattedTime}</span>
-                                            <button onClick={() => handleDeleteSession(cinema._id, showtime)}>
-                                                Delete
-                                            </button>
-                                        </div>
-                                        <Select
-                                        className={styles.select}
-                                            id={`tags-${cinema._id}-${index}`}
-                                            name={`tags-${cinema._id}-${index}`}
-                                            onChange={(selectedOption) => {
-                                                handleTagChange(cinema._id, index, selectedOption);
-                                            }}
-                                            value={getTagValue(cinema._id, index)}
-                                            options={tagsList.map(tag => ({ value: tag._id, label: tag.title }))}
-                                            isMulti={false}
-                                            placeholder="Select a tag"
-                                        />
+            <div>
+                {cinemasData &&
+                    cinemasData.map(cinema => (
+                        <div className={styles.divv}>
+                            <div key={cinema._id} className={styles.div}>
+                                <span className={styles.cinemaname}>{cinema.name}</span>
+                                <span>
+                                    <DateTimePicker
+                                        className={styles.datePicker}
+                                        label="Select Date and Time"
+                                        value={value}
+                                        onAccept={value => {
+                                            handleInputChange(cinema._id, cinema.name, value);
+                                        }}
+                                        renderInput={props => <TextField {...props} />}
+                                    />
+                                </span>
+                                {sessions.filter(session => session.cinemaId === cinema._id).map((session, sessionIndex) => (
+                                    <div key={sessionIndex}>
+                                        {session.showTime.map((showtime, index) =>
+                                        (
+                                            <div key={index}>
+                                                <div>  <span>{showtime.formattedTime}</span>
+                                                    <button onClick={() => handleDeleteSession(cinema._id, showtime)}>
+                                                        Delete
+                                                    </button>
+                                                </div>
+                                                <Select
+                                                    className={styles.select}
+                                                    id={`tags-${cinema._id}-${index}`}
+                                                    name={`tags-${cinema._id}-${index}`}
+                                                    onChange={(selectedOption) => {
+                                                        handleTagChange(cinema._id, index, selectedOption);
+                                                    }}
+                                                    value={getTagValue(cinema._id, index)}
+                                                    options={tagsList.map(tag => ({ value: tag._id, label: tag.title }))}
+                                                    isMulti={false}
+                                                    placeholder="Select a tag"
+                                                />
 
-                                        {
+                                                {
 
 
-                                            formik.touched[`tags-${cinema._id}-${index}`] && formik.errors[`tags-${cinema._id}-${index}`] && (
-                                                <span style={{ color: 'red' }}>{formik.errors[`tags-${cinema._id}-${index}`]}</span>
-                                            )}
+                                                    formik.touched[`tags-${cinema._id}-${index}`] && formik.errors[`tags-${cinema._id}-${index}`] && (
+                                                        <span style={{ color: 'red' }}>{formik.errors[`tags-${cinema._id}-${index}`]}</span>
+                                                    )}
+                                            </div>
+                                        )
+                                        )}
                                     </div>
-                                )
-                                )}
+                                ))}
                             </div>
-                        ))}
-                    </div>
-                  </div>
-                ))}
-          </div>
+                        </div>
+                    ))}
+            </div>
             <button className={styles.btn} type="submit" onClick={formik.handleSubmit}>Save Sessions</button>
         </div>
     );

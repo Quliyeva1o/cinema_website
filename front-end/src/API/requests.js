@@ -6,7 +6,7 @@ async function getAll(endpoint) {
     const response = await axios.get(BASE_URL + endpoint);
     return response.data;
   } catch (error) {
-    return error;
+    return error; 
   }
 } 
  
