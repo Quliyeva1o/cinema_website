@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import controller from '../../../API/requests';
 import styles from './index.module.scss'
+import { useNavigate } from 'react-router-dom';
 const UserInfo = () => {
   const user = useSelector((state) => state.user); 
+  const navigate=useNavigate()
   const [userr, setUser] = useState(null); 
   useEffect(() => {
+
     if (user.id) {
       controller.getOne('/api/users', user.id)
         .then((res) => {
@@ -15,9 +18,10 @@ const UserInfo = () => {
           console.error('Error fetching user data:', error);
         });
     }
+    else{
+      navigate('/')
+    }
   }, [user]); 
-  console.log(userr);
-
   return (
     <div className={styles.info}>
       {userr && ( 
