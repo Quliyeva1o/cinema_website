@@ -7,6 +7,8 @@ import { IoCalendarOutline } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
 import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import CloseIcon from '@mui/icons-material/Close';
+import PermIdentityIcon from '@mui/icons-material/PermIdentity';
+
 import styles from './index.module.scss'
 import { useDispatch, useSelector } from 'react-redux';
 import { setLoginIsActive } from '../../redux/LoginActiveBtnSlice';
@@ -59,6 +61,13 @@ const AppBar = ({ menu, setMenu }) => {
                                 <span >EVENTS & FESTIVALS</span>
                             </Link>
                         </li>
+
+                        {user.id != null && <li>
+                            <Link to="info">
+                                <PermIdentityIcon />
+                                <span >PROFILE</span>
+                            </Link>
+                        </li>}
 
 
 

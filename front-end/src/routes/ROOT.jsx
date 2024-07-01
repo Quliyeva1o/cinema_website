@@ -22,6 +22,7 @@ import RootPage from "../pages/client/RootPage";
 import SessionTimes from "../pages/client/SessionTimes";
 import Success from "../pages/client/Success";
 import Tickets from "../pages/client/Tickets";
+import UserInfo from "../pages/client/UserInfo";
 
 export const ROOT = [
     {
@@ -75,6 +76,10 @@ export const ROOT = [
             {
                 path: "orders",
                 element: <Orders />
+            },
+            {
+                path: "info",
+                element: <UserInfo />
             },
 
         ],

@@ -1,6 +1,6 @@
 import axios from "axios";
 const BASE_URL="http://localhost:5050"
-//get all
+//get all 
 async function getAll(endpoint) {
   try {
     const response = await axios.get(BASE_URL + endpoint);
