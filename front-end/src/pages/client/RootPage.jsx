@@ -25,9 +25,9 @@ const RootPage = () => {
                 <div className={loginIsActive ? styles.log:""} >
                     <LoginRegister />
                 </div>
-                <div className={styles.chat}>
+                {/* <div className={styles.chat}>
                     <Chat />
-                </div>
+                </div> */}
             </div>
         </>
     );

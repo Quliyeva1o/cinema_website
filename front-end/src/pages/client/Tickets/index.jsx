@@ -39,7 +39,7 @@ const Tickets = () => {
     return (
         <div className={styles.tickets}>
             {
-                myBasket.basket.length > 0 && myBasket.basket.map((item, index) => (
+                myBasket.basket.length > 0 ? myBasket.basket.map((item, index) => (
                     <div key={index}>
                         <p>
                             <span>Hall:</span>
@@ -70,6 +70,9 @@ const Tickets = () => {
                         </p>
                     </div>
                 ))
+                    : <>
+                    <h1>you haven't any tickets...</h1>
+                    </>
             }
             {myBasket.basket.length > 0 && <button onClick={handleCheckout}>Proceed to Checkout</button>}
         </div >
