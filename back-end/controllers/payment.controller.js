@@ -20,11 +20,6 @@ const PaymentController = {
             currency: 'usd',
             product_data: {
               name: product.movie,
-              // tickets: product.tickets,
-              // hall: product.hall,
-              // time: product.time,
-              // location: product.location,
-              // price: product.price
             },
             unit_amount: unitAmount,
           },

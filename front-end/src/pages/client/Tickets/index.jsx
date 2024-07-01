@@ -64,14 +64,14 @@ const Tickets = () => {
                         <p>
                             tickets:{
                                 item.tickets.map((t) => {
-                                  return(  <span className={styles.seat}>{t}</span>)
+                                    return (<span className={styles.seat}>{t}</span>)
                                 })
                             }
-                    </p>
+                        </p>
                     </div>
-    ))
-}
-{ myBasket.basket.length > 0 && <button onClick={handleCheckout}>Proceed to Checkout</button> }
+                ))
+            }
+            {myBasket.basket.length > 0 && <button onClick={handleCheckout}>Proceed to Checkout</button>}
         </div >
     );
 };

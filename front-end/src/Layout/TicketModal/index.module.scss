@@ -385,13 +385,14 @@
     div {
         align-items: center;
         justify-content: center;
+        cursor: pointer;
 
         &:hover span {
             background-color: #cd242c !important;
         }
         span {
             position: relative;
-
+            transition: 0.4s;
             width: 10px;
             height: 10px;
             margin-top: 6px;
@@ -415,13 +416,12 @@
     .selected span {
         background-color: #cd242c !important;
     }
-    
+
     .reserved span {
-        background-color: #000!important;
+        background-color: #000 !important;
     }
-    
-    
-    .reserved{
+
+    .reserved {
         &:hover span {
             background-color: #000 !important;
         }
