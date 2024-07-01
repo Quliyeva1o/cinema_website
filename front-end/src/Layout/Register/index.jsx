@@ -9,10 +9,9 @@ import Swal from 'sweetalert2';
 import controller from '../../API/requests';
 import styles from './index.module.scss';
 
-const Register = () => {
+const Register = ({setLogin}) => {
     const { data: cinemas } = useGetCinemasQuery();
     const [myCinemas, setMyCinemas] = useState([]);
-    const user = useSelector((state) => state.user);
 
     const formik = useFormik({
         initialValues: {
@@ -61,6 +60,7 @@ const Register = () => {
                 });
             } if (response.error == false) {
                 actions.resetForm();
+                setLogin(true)
                 Swal.fire({
                     position: "top-end",
                     icon: "success",

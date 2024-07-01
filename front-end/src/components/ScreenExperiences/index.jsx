@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
 import { useGetCinemasQuery } from '../../redux/CinemasSlice';
 const ScreenExperiences = () => {
-  
+
   const { data: cinemas, error, isLoading, refetch } = useGetCinemasQuery();
 
 
@@ -18,11 +18,11 @@ const ScreenExperiences = () => {
     cinemas && setMyCinemas(cinemas.data)
   }, [cinemas]);
   return (
-    
+
     <>
       <div className="heading">
         <h2>
-          Events & Festivals</h2>
+          Screen Experiences</h2>
         <button>
           <span>Browse all</span>
         </button>
@@ -38,13 +38,14 @@ const ScreenExperiences = () => {
           className={`mySwiper ${styles.swiper}`}
         >
           {myCinemas && myCinemas.map((cinema) => (
+
             <SwiperSlide className={styles.swiperSlide} key={cinema._id}>
-              <div >
+              <Link to={`/cinemas/${cinema._id}`}>  <div >
                 <div className={styles.img}>
                   <img src={cinema.img} alt={cinema.name} />
                 </div>
               </div>
-              <span className={styles.span}></span>
+                <span className={styles.span}></span></Link>
             </SwiperSlide>
           ))}
 

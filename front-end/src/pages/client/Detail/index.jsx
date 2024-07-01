@@ -18,15 +18,13 @@ import { useGetTimesQuery } from '../../../redux/TimesSlice';
 import { setSelectedTickets } from '../../../redux/TicketSlice';
 import { setTicketModalIsActive } from '../../../redux/TicketModal';
 import TicketModall from '../../../Layout/TicketModal';
+import { setLoginIsActive } from '../../../redux/LoginActiveBtnSlice';
+
 const MovieDetail = () => {
-
-
-
+    const user = useSelector((state) => state.user);
     const { id } = useParams();
     const { data: movie } = useGetMovieByIdQuery(id);
-    const [myMovie, setMyMovie] = useState(null);
-    const cinemaModal = useSelector((state) => state.cinemaModal);
-    const dispatch = useDispatch()
+    const [myMovie, setMyMovie] = useState([]);
     const [genres, setGenres] = useState([]);
     const [myGenres, setMyGenres] = useState([]);
     const [value, setValue] = useState(0);
@@ -35,39 +33,29 @@ const MovieDetail = () => {
     const [trailerModal, setTrailerModal] = useState(false);
     const selectedCinemas = useSelector((state) => state.selectedCinemas);
     const { data: times } = useGetTimesQuery();
-    const [myTimes, setMyTimes] = useState([])
+    const [myTimes, setMyTimes] = useState([]);
     const [sessionTimes, setSessionTimes] = useState([]);
-
-
     const selectedTickets = useSelector((state) => state.selectedTickets);
     const ticketModal = useSelector((state) => state.ticketModal);
-    console.log('t', ticketModal);
-    console.log('t', selectedTickets);
-
-
+    const dispatch = useDispatch();
+    const cinemaModal = useSelector((state) => state.cinemaModal);
+    const [myUser, setMyUser] = useState(null);
 
     useEffect(() => {
         if (movie) {
             setMyMovie(movie.data);
             setGenres(JSON.parse(movie.data.genre));
-            times && setMyTimes(times.data.find((x) => (x.movieId == movie.data._id))?.showTimes)
+            times && setMyTimes(times.data.find((x) => x.movieId === movie.data._id)?.showTimes);
         }
     }, [movie, times]);
 
-
-    const handleTicket = (moviee, timee, cinemaa) => {
-        dispatch(setSelectedTickets({ time: timee, movie: moviee, cinema: cinemaa }));
-        dispatch(setTicketModalIsActive(true));
-      };
-
     useEffect(() => {
         if (times && myMovie) {
-            const selectedCinemaIds = selectedCinemas.cinemas
-            const filteredTimes = myTimes?.filter(time => selectedCinemaIds.includes(time.cinemaId));
+            const selectedCinemaIds = selectedCinemas.cinemas;
+            const filteredTimes = myTimes?.filter((time) => selectedCinemaIds.includes(time.cinemaId));
             setSessionTimes(filteredTimes);
         }
     }, [times, myMovie, selectedCinemas]);
-    console.log(sessionTimes);
 
     useEffect(() => {
         if (genres.length > 0) {
@@ -102,18 +90,59 @@ const MovieDetail = () => {
         fetchTrailersData();
     }, [myMovie]);
 
+    useEffect(() => {
+        if (user.id) {
+            controller.getOne('/api/users', user.id).then((res) => {
+                setMyUser(res.data);
+            });
+        }
+    }, [user]);
+
+    const handleTicket = (moviee, timee, cinemaa) => {
+        dispatch(setSelectedTickets({ time: timee, movie: moviee, cinema: cinemaa }));
+        dispatch(setTicketModalIsActive(true));
+    };
+
     const handleCinemas = () => {
         dispatch(setCinemaModalIsActive(!cinemaModal.cinemaModalIsActive));
     };
-
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    if (!myMovie) {
-        return null;
-    }
+    const handleWishlist = () => {
+        if (user.id && user.role === 'client') {
+            let updatedWishlist;
+            if (myUser.favorites.includes(myMovie._id)) {
+                updatedWishlist = myUser.favorites.filter((fav) => fav !== myMovie._id);
+            } else {
+                updatedWishlist = [...myUser.favorites, myMovie._id];
+            }
+            const updatedUser = {
+                ...myUser,
+                favorites: updatedWishlist
+            };
+            controller
+                .patch(`/api/users`, user.id, updatedUser)
+                .then((res) => {
+                    setMyUser(updatedUser);
+                })
+                .catch((error) => {
+                    console.error('Error updating user wishlist:', error);
+                });
+        } else {
+            dispatch(setLoginIsActive(true));
+        }
+    };
+
+    const handletrailer = (data) => {
+        setTrailerdata(data);
+        setTrailerModal(true);
+    };
+
+    
+
     const CustomTabPanel = (props) => {
         const { children, value, index } = props;
 
@@ -123,7 +152,6 @@ const MovieDetail = () => {
                 hidden={value !== index}
                 id={`simple-tabpanel-${index}`}
                 aria-labelledby={`simple-tab-${index}`}
-
             >
                 {value === index && <Box sx={{ p: 3 }}>{children}</Box>}
             </div>
@@ -142,12 +170,7 @@ const MovieDetail = () => {
             'aria-controls': `simple-tabpanel-${index}`,
         };
     };
-
-    const handletrailer = (data) => {
-        setTrailerdata(data)
-        setTrailerModal(true)
-    }
-    return (
+  return (
         <>
             <div className={styles.movieHero}>
                 <div className={styles.bgi}>
@@ -164,31 +187,29 @@ const MovieDetail = () => {
                             <span>{myMovie.releaseDate}</span>
                         </div>
                         <p>{myMovie.rating}</p>
-                        <button className={styles.icons}>
+                        <button className={styles.icons} onClick={() => handletrailer(trailersData[0])}>
                             <span className={styles.icon}><PlayArrowIcon className={styles.play} /></span>
-                            <span>Trailer</span>
+                            <span className={styles.soz}>Trailer</span>
                         </button>
-                        <button className={styles.icons}>
-                            <span className={styles.icon}><FavoriteIcon className={styles.heart} /></span>
-                            <span>Watchlist</span>
+                        <button className={styles.icons} onClick={handleWishlist}>
+                            <span className={`${styles.icon} ${myUser?.favorites.includes(myMovie._id) ? styles.favoriteActive : ''}`}>
+                                <FavoriteIcon className={styles.heart} />
+                            </span>
+                            <span className={styles.soz}>Watchlist</span>
                         </button>
                     </div>
                 </div>
                 <div className={styles.spann}></div>
             </div>
             <div className={styles.mobile}>
-
-                <div >
+                <div>
                     <div className="heading">
                         <h2>Times & Tickets</h2>
                         <button onClick={handleCinemas}>
-
                             {sessionTimes && sessionTimes.length > 0 ? sessionTimes.map((time) => (
                                 <span style={{ marginRight: "5px" }}>{time.cinemaName}</span>
-                            )) :
-                                <span>Add cinemas</span>}
+                            )) : <span>Add cinemas</span>}
                         </button>
-
                     </div>
                     <div>
                         {sessionTimes && sessionTimes.length > 0 &&
@@ -198,8 +219,8 @@ const MovieDetail = () => {
                                     <ul>
                                         {cinemaaa.showTime.map((time, index) => (
                                             <li key={index}>
-                                                <a onClick={() => { handleTicket(myMovie,time, cinemaaa) }}>
-                                                    <span >{time.formattedTime}</span>
+                                                <a onClick={() => { handleTicket(myMovie, time, cinemaaa) }}>
+                                                    <span>{time.formattedTime}</span>
                                                     <span>{time.tag}</span>
                                                 </a>
                                             </li>
@@ -208,29 +229,22 @@ const MovieDetail = () => {
                                 </div>
                             ))}
                     </div>
-
                 </div>
 
                 <div>
-
                     <div className="heading">
                         <h2>Teasers & Trailers</h2>
                     </div>
-                    <div className={styles.trailers} >
-
+                    <div className={styles.trailers}>
                         {trailersData.map((data, idx) => (
-                            <>
-                                <div>
-                                    <a onClick={() => handletrailer(data)}> <span>{data.title}</span>
-                                        <span className={styles.scrim}></span>
-                                        <img src={data.thumbnail_url} alt="" />
-                                    </a>
-                                </div>
-
-                            </>
-
+                            <div key={idx}>
+                                <a onClick={() => handletrailer(data)}>
+                                    <span>{data.title}</span>
+                                    <span className={styles.scrim}></span>
+                                    <img src={data.thumbnail_url} alt="" />
+                                </a>
+                            </div>
                         ))}
-
                     </div>
                 </div>
 
@@ -244,9 +258,7 @@ const MovieDetail = () => {
                         </Box>
                         <CustomTabPanel value={value} index={0}>
                             <div>
-                                <p>
-                                    {myMovie.description}
-                                </p>
+                                <p>{myMovie.description}</p>
                             </div>
                         </CustomTabPanel>
                         <CustomTabPanel value={value} index={1}>
@@ -257,13 +269,9 @@ const MovieDetail = () => {
                                     <dt>Cast</dt>
                                     <dd>{myMovie.cast}</dd>
                                     <dt>Genre</dt>
-                                    {
-                                        myGenres.map((genre, idxx) => {
-                                            return (
-                                                <span key={idxx}>{genre.name}, </span>
-                                            )
-                                        })
-                                    }
+                                    {myGenres.map((genre, idxx) => (
+                                        <span key={idxx}>{genre.name}, </span>
+                                    ))}
                                     <dt>Rating</dt>
                                     <dd>{myMovie.rating}</dd>
                                     <dt>Release Date</dt>
@@ -273,19 +281,21 @@ const MovieDetail = () => {
                                 </dl>
                             </div>
                         </CustomTabPanel>
-
                     </Box>
                 </div>
-                {trailerModal && <div className={styles.trailModal}>
-                    <button onClick={() => { setTrailerModal(false) }}>
-                        <CancelIcon />
-                    </button>
-                    <div dangerouslySetInnerHTML={{ __html: trailerdata.html }} />
-                </div>}
+
+                {trailerModal && (
+                    <div className={styles.trailModal}>
+                        <button onClick={() => setTrailerModal(false)}>
+                            <CancelIcon />
+                        </button>
+                        <div dangerouslySetInnerHTML={{ __html: trailerdata.html }} />
+                    </div>
+                )}
+
                 <CinemasModal />
             </div>
-            <TicketModall/>
-
+            <TicketModall />
         </>
     );
 };

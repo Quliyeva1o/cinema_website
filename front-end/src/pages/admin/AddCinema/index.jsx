@@ -10,6 +10,7 @@ import Select from "react-select";
 import controller from "../../../API/requests.js";
 import styles from "./index.module.scss";
 import { useGetTagsQuery } from "../../../redux/TagsSlice.jsx";
+import * as Yup from 'yup';
 
 const AddCinema = () => {
   const states = [
@@ -63,6 +64,29 @@ const AddCinema = () => {
       tags: [],
       map: "",
     },
+    validationSchema: Yup.object().shape({
+      name: Yup.string()
+          .required('Name is required'),
+      address: Yup.string()
+          .required('Address is required'),
+      parking: Yup.string()
+          .required('Parking information is required'),
+      img: Yup.mixed()
+          .required('Image is required'),
+      location: Yup.object()
+          .shape({
+              value: Yup.string().required('Location is required'),
+              label: Yup.string().required('Location is required'),
+          }),
+      tags: Yup.array()
+          .min(1, 'Select at least one tag')
+          .required('Tags are required'),
+      map: Yup.string()
+          .required('Map information is required'),
+      phone: Yup.string()
+          .matches(/^\d+$/, 'Invalid phone number')
+          .required('Phone number is required'),
+  }),
     onSubmit: async (values, actions) => {
       const formData = new FormData();
       formData.append("name", values.name);

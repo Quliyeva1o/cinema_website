@@ -67,15 +67,15 @@ const TicketModall = () => {
     };
 
     const seats = generateSeats(10, 15);
-    console.log(selectedTickets);
+    // console.log(selectedTickets);
     const reserved = tickets && tickets.data.filter((x) => x.cinemaId == selectedTickets.cinema.cinemaId && x.movie == selectedTickets.movie.name && x.tag == selectedTickets.time.tag && x.time == selectedTickets.time.formattedTime)
-    console.log(reserved);
+    // console.log(reserved);
     let reservedSeats = [];
     reserved && reserved.forEach(reserved => {
         reservedSeats = reservedSeats.concat(reserved.seats);
     });
 
-    console.log(reservedSeats);
+    // console.log(reservedSeats);
     return (
         <div>
             <div className={ticketModal.ticketModalIsActive ? styles.ticketingIsActive : styles.isnotopen}>

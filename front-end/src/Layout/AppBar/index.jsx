@@ -54,13 +54,7 @@ const AppBar = ({ menu, setMenu }) => {
                                 <span >EVENTS & FESTIVALS</span>
                             </Link>
                         </li>
-                        <li>
-                            <Link to="rewards">
-                                <CiStar />
-
-                                <span >HOYTS REWARDS</span>
-                            </Link>
-                        </li>
+                    
                         {user.id != null && <li>
                             <Link to="tickets">
                                 <CiStar />
@@ -71,12 +65,12 @@ const AppBar = ({ menu, setMenu }) => {
                     </ul>
                     <ul className={styles.secondUl}>
                         <li>
-                            <Link to="offers">
+                            <Link to="https://www.hoyts.com.au/offers">
                                 <span >Offers & Promotions</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to="experiences">
+                            <Link to="/">
                                 <span >Experiences</span>
                             </Link>
                         </li>
@@ -91,7 +85,7 @@ const AppBar = ({ menu, setMenu }) => {
                             </Link>
                         </li>
                         <li>
-                            <Link to="functions">
+                            <Link to="https://www.hoyts.com.au/accessibility">
                                 <span >Functions & Parties</span>
                             </Link>
                         </li>

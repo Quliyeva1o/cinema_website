@@ -5,6 +5,9 @@
     @media (min-width: 1241px) and (max-width: 1680px) {
         width: 848px;
     }
+    @media(max-width:1200px){
+        padding-left: 20px;
+    }
     .nav {
         align-items: center;
         flex-wrap: wrap;
@@ -87,11 +90,15 @@
         }
     }
     .cards {
+
+     
         ul {
+
             margin-top: 48px;
             margin-bottom: 48px;
             padding-left: 0;
             list-style: none;
+           
             li {
                 margin-top: 48px;
                 .wrapper {

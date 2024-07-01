@@ -1,4 +1,10 @@
 .login {
+    label{
+        color: #999!important;
+    }
+    fieldset{
+        border-color: transparent!important;
+    }
     h2 {
         margin-top: 40px;
         margin-bottom: 0;
@@ -22,7 +28,7 @@
             position: relative;
             width: 100%;
             label{
-                color: #999;
+                color: #999!important;
             }
             input {
                 width: 100%;
@@ -38,7 +44,7 @@
             }
             label {
                 font-size: 11px;
-                color: #999;
+                color: #999!important;
                 transform: translateY(-125%);
                 position: absolute;
                 top: 50%;

@@ -87,7 +87,6 @@ const movie_controller = {
     }
   },
   post: async (req, res) => {
-    console.log(req);
     try {
       const movie = new MovieModel(req.body);
 

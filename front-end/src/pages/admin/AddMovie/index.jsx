@@ -11,6 +11,7 @@ import controller from "../../../API/requests.js";
 import Movie from "../../../classes/Movie.js";
 import styles from "./index.module.scss";
 import { useGetGenresQuery } from "../../../redux/GenresSlice.jsx";
+import movieValidations from "../../../validations/movie.validations.js";
 
 const AddMovie = () => {
     const user = useSelector((state) => state.user);
@@ -56,6 +57,7 @@ const AddMovie = () => {
             coverImg: null,
             ageRes: "",
         },
+        validationSchema:movieValidations,
         onSubmit: async (values, actions) => {
             const genreIds = values.genres.map((genre) => genre.value);
 
@@ -173,6 +175,7 @@ const AddMovie = () => {
                     className="basic-multi-select"
                     classNamePrefix="select"
                     placeholder="Select genres"
+                    
                 />
                 {formik.touched.genres && formik.errors.genres && (
                     <span style={{ color: "red" }}>{formik.errors.genres}</span>

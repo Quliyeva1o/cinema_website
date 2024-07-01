@@ -7,8 +7,8 @@ import { Button } from "@mui/material";
 import Swal from "sweetalert2";
 import Cookies from "js-cookie";
 import Select from "react-select";
+import * as Yup from "yup"; // Import Yup for validation
 import controller from "../../../API/requests.js";
-import Movie from "../../../classes/Movie.js";
 import styles from "./index.module.scss";
 import { useGetMoviesQuery } from "../../../redux/MoviesSlice.jsx";
 
@@ -19,19 +19,17 @@ const AddEvent = () => {
     const { data: movies } = useGetMoviesQuery();
 
     const [moviess, setmovies] = useState([]);
-    const [myMovies, setMyMovies] = useState([])
+    const [myMovies, setMyMovies] = useState([]);
 
     useEffect(() => {
-        movies && setMyMovies(movies.data)
+        movies && setMyMovies(movies.data);
     }, [movies]);
-
 
     useEffect(() => {
         if (user.role !== "admin") {
             navigate("/admin/login");
         }
     }, [navigate, user]);
-
 
     useEffect(() => {
         controller.getAll("/api/movies", token).then((res) => {
@@ -43,7 +41,14 @@ const AddEvent = () => {
             );
         });
     }, [token]);
-    console.log(moviess);
+
+    const validationSchema = Yup.object({
+        title: Yup.string().required("Title is required"),
+        description: Yup.string().required("Description is required"),
+        movies: Yup.array().min(1, "Please select at least one movie"),
+        img: Yup.mixed().required("Image is required"),
+    });
+
     const formik = useFormik({
         initialValues: {
             title: "",
@@ -51,6 +56,7 @@ const AddEvent = () => {
             img: null,
             movies: [],
         },
+        validationSchema: validationSchema,
         onSubmit: async (values, actions) => {
             const movieIds = values.movies.map((movie) => movie.value);
 
@@ -58,16 +64,14 @@ const AddEvent = () => {
             formData.append("title", values.title);
             formData.append("description", values.description);
             formData.append("img", values.img);
-            formData.append("movies",JSON.stringify(movieIds));
-            console.log(values);
-            console.log(movieIds);
+            formData.append("movies", JSON.stringify(movieIds));
 
             try {
                 await controller.post("/api/events", formData, token);
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "New Movie Added",
+                    title: "New Event Added",
                     showConfirmButton: false,
                     timer: 1000,
                 });
@@ -83,20 +87,16 @@ const AddEvent = () => {
         },
     });
 
-   
-    const handleImageChangee = (event) => {
+    const handleImageChange = (event) => {
         formik.setFieldValue("img", event.currentTarget.files[0]);
     };
+
     return (
         <div className={styles.add}>
             <h3 style={{ textAlign: "center", marginBottom: "14px" }}>
                 Add New Event
             </h3>
-            <form
-                encType="multipart/form-data"
-                onSubmit={formik.handleSubmit}
-
-            >
+            <form encType="multipart/form-data" onSubmit={formik.handleSubmit}>
                 <TextField
                     name="title"
                     onChange={formik.handleChange}
@@ -109,7 +109,6 @@ const AddEvent = () => {
                     error={formik.touched.title && Boolean(formik.errors.title)}
                     helperText={formik.touched.title && formik.errors.title}
                 />
-
 
                 <Select
                     id="movies"
@@ -140,17 +139,17 @@ const AddEvent = () => {
                     placeholder="Description"
                     variant="outlined"
                     error={
-                        formik.touched.description && Boolean(formik.errors.description)
+                        formik.touched.description &&
+                        Boolean(formik.errors.description)
                     }
                     helperText={
                         formik.touched.description && formik.errors.description
                     }
                 />
 
-
                 <TextField
                     name="img"
-                    onChange={handleImageChangee}
+                    onChange={handleImageChange}
                     onBlur={formik.handleBlur}
                     id="img"
                     type="file"
@@ -160,7 +159,6 @@ const AddEvent = () => {
                     error={formik.touched.img && Boolean(formik.errors.img)}
                     helperText={formik.touched.img && formik.errors.img}
                 />
-
 
                 <Button variant="contained" color="primary" type="submit">
                     Add

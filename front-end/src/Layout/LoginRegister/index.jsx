@@ -22,7 +22,7 @@ const LoginRegister = () => {
             </button>
             <h1>hoyts</h1>
             <div>
-              {login ? <Login setLogin={setLogin} /> : <Register />}
+              {login ? <Login setLogin={setLogin} /> : <Register setLogin={setLogin} />}
             </div>
           </div>
         </div>

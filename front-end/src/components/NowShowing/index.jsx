@@ -8,20 +8,31 @@ import { useEffect } from 'react';
 import styles from './index.module.scss';
 import { Link } from 'react-router-dom';
 import { useGetMoviesQuery } from '../../redux/MoviesSlice';
+import { setCinemaModalIsActive } from '../../redux/CinemaModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { useGetTimesQuery } from '../../redux/TimesSlice';
 
 const NowShowing = () => {
+  const selectedCinemas = useSelector((state) => state.selectedCinemas);
 
-  const { data: movies, error, isLoading, refetch } = useGetMoviesQuery();
+  const cinemaModal = useSelector((state) => state.cinemaModal);
+  const dispatch = useDispatch()
+  const { data: movies } = useGetMoviesQuery();
+  const { data: times } = useGetTimesQuery();
   const [myMovies, setMyMovies] = useState([])
   useEffect(() => {
     movies && setMyMovies(movies.data)
   }, [movies]);
+  const handleCinemas = () => {
+    dispatch(setCinemaModalIsActive(!cinemaModal.cinemaModalIsActive));
+
+  }
 
   return (
     <>
       <div className="heading">
         <h2>Now Showing</h2>
-        <button><span>Add cinemas</span></button>
+        {/* <button onClick={handleCinemas}><span>Add cinemas</span></button> */}
       </div>
       <div className="slider">
         <Swiper
@@ -35,24 +46,27 @@ const NowShowing = () => {
         >
           {myMovies && myMovies.map((movie) => (
             <SwiperSlide className={styles.swiperSlide} key={movie._id}>
-              <div >
-                <div className={styles.img}>
-                  <img src={movie.coverImg} alt={movie.title} />
-                </div>
-                <div className={styles.textContent}>
-                  <h2>
-                    <Link>
-                      {movie.name}
-                    </Link>
-                  </h2>
-                </div>
-              </div>
+              <Link to={`/movies/${movie._id}`}>
+                <div >
+                  <div className={styles.img}>
+                    <img src={movie.coverImg} alt={movie.title} />
+                  </div>
+                  <div className={styles.textContent}>
+                    <h2>
+                      <Link>
+                        {movie.name}
+                      </Link>
+                    </h2>
+                  </div>
+                </div></Link>
             </SwiperSlide>
           ))}
 
 
         </Swiper>
+
       </div>
+
     </>
   )
 }
