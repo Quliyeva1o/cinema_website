@@ -1,29 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import controller from '../../../API/requests';
-
+import styles from './index.module.scss'
 const UserInfo = () => {
-  const user = useSelector((state) => state.user); // Redux store'dan user bilgisini al
-  const [userr, setUser] = useState(null); // Kullanıcı bilgilerini tutacak state
-
+  const user = useSelector((state) => state.user); 
+  const [userr, setUser] = useState(null); 
   useEffect(() => {
     if (user.id) {
-      // Eğer Redux store'dan gelen user.id varsa API isteği yap
       controller.getOne('/api/users', user.id)
         .then((res) => {
-          setUser(res.data); // API'den gelen veriyi state'e kaydet
+          setUser(res.data); 
         })
         .catch((error) => {
           console.error('Error fetching user data:', error);
         });
     }
-  }, [user]); // useEffect, user state'i değiştiğinde tetiklenecek
-
-  console.log(userr); // Konsola userr state'ini yazdır
+  }, [user]); 
+  console.log(userr);
 
   return (
-    <div>
-      {userr && ( // userr state'i doluysa bilgileri ekrana yazdır
+    <div className={styles.info}>
+      {userr && ( 
         <div>
           <h2>User Information</h2>
           <p><strong>Username:</strong> {userr.username}</p>
@@ -31,7 +28,6 @@ const UserInfo = () => {
           <p><strong>Role:</strong> {userr.role}</p>
           <p><strong>Registration Date:</strong> {new Date(userr.createdAt).toLocaleDateString()}</p>
           <p><strong>Receive Offers:</strong> {userr.receiveOffers ? 'Yes' : 'No'}</p>
-          {/* Diğer bilgileri buraya ekleyebilirsiniz */}
         </div>
       )}
     </div>
