@@ -8,6 +8,7 @@ event_router.get('/api/events', controller.event.getAll);
 event_router.get('/api/events/:id', controller.event.getOne);
 event_router.delete('/api/events/:id', controller.event.delete);
 event_router.patch('/api/events/:id', controller.event.update);
-event_router.post('/api/events', upload.single("img"), event_middleware, controller.event.post);
+event_router.post('/api/events',  upload.fields([{ name: "img", maxCount: 1 }, { name: "coverImg", maxCount: 1 }]), event_middleware, controller.event.post);
 
 module.exports = event_router;
+  

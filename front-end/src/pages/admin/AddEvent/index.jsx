@@ -47,6 +47,7 @@ const AddEvent = () => {
         description: Yup.string().required("Description is required"),
         movies: Yup.array().min(1, "Please select at least one movie"),
         img: Yup.mixed().required("Image is required"),
+        coverImg: Yup.mixed().required("Image is required"),
     });
 
     const formik = useFormik({
@@ -54,6 +55,7 @@ const AddEvent = () => {
             title: "",
             description: "",
             img: null,
+            coverImg: null,
             movies: [],
         },
         validationSchema: validationSchema,
@@ -64,6 +66,7 @@ const AddEvent = () => {
             formData.append("title", values.title);
             formData.append("description", values.description);
             formData.append("img", values.img);
+            formData.append("coverImg", values.coverImg);
             formData.append("movies", JSON.stringify(movieIds));
 
             try {
@@ -89,6 +92,9 @@ const AddEvent = () => {
 
     const handleImageChange = (event) => {
         formik.setFieldValue("img", event.currentTarget.files[0]);
+    };
+    const handlecoverImageChange = (event) => {
+        formik.setFieldValue("coverImg", event.currentTarget.files[0]);
     };
 
     return (
@@ -158,6 +164,18 @@ const AddEvent = () => {
                     accept="image/*"
                     error={formik.touched.img && Boolean(formik.errors.img)}
                     helperText={formik.touched.img && formik.errors.img}
+                />
+                    <TextField
+                    name="coverImg"
+                    onChange={handlecoverImageChange}
+                    onBlur={formik.handleBlur}
+                    id="coverImg"
+                    type="file"
+                    label="coverImg"
+                    variant="outlined"
+                    accept="image/*"
+                    error={formik.touched.coverImg && Boolean(formik.errors.coverImg)}
+                    helperText={formik.touched.coverImg && formik.errors.coverImg}
                 />
 
                 <Button variant="contained" color="primary" type="submit">

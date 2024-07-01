@@ -45,7 +45,6 @@ const Login = ({ setLogin }) => {
           timer: 1000,
         }).then(() => {
           dispatch(setLoginIsActive(false));
-          navigate("/");
         });
       }else{
         Swal.fire({

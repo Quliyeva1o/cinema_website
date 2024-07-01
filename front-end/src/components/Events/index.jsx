@@ -1,17 +1,15 @@
-import React, { useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import "./index.module.scss";
 import 'swiper/css';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
-import { useEffect } from 'react';
 import styles from './index.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useGetEventsQuery } from '../../redux/EventsSlice';
+import React, { useEffect, useState } from 'react';
 const EventsFestivals = () => {
-  
   const { data: events, error, isLoading, refetch } = useGetEventsQuery();
-
+  const navigate = useNavigate()
   const [myEvents, setMyEvents] = useState([])
   useEffect(() => {
     events && setMyEvents(events.data)
@@ -21,7 +19,7 @@ const EventsFestivals = () => {
       <div className="heading">
         <h2>
           Events & Festivals</h2>
-        <button>
+        <button onClick={()=>{navigate("/events")}}>
           <span>Browse all</span>
         </button>
       </div>
@@ -37,20 +35,21 @@ const EventsFestivals = () => {
         >
           {myEvents && myEvents.map((event) => (
             <SwiperSlide className={styles.swiperSlide} key={event._id}>
-              <div >
-                <div className={styles.img}>
-                  <img src={event.img} alt={event.title} />
+              <Link to={`/events/${event._id}`}>
+                <div>
+                  <div className={styles.img}>
+                    <img src={event.coverImg} alt={event.title} />
+                  </div>
+                  <div className={styles.textContent}>
+                    <span style={{ maxHeight: '67px', overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                      {event.description}
+                    </span>
+                  </div>
                 </div>
-                <div className={styles.textContent}>
-                  <span>
-                      {event.desc}
-                  </span>
-                </div>
-              </div>
-              <span className={styles.span}></span>
+                <span className={styles.span}></span>
+              </Link>
             </SwiperSlide>
           ))}
-
 
         </Swiper>
       </div>

@@ -63,14 +63,16 @@ const event_controller = {
   post: async (req, res) => {
     try {
       const event = new EventModel(req.body);
-      if (req.file) {
-        event.img = "http://localhost:5050/uploads/" + req.file.filename;
+      console.log(req.files);
+      if (req.files &&req.files.img && req.files.coverImg) {
+        event.img = "http://localhost:5050/uploads/" + req.files.img[0].filename;
+        event.coverImg = "http://localhost:5050/uploads/" + req.files.coverImg[0].filename;
       }
       await event.save();
       res.status(201).json({
         message: "posted",
         data: event,
-      });
+      });  
     } catch (error) {
       console.log(error);
       res.status(500).json({

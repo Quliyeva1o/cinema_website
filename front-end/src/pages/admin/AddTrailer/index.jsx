@@ -1,12 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useGetMoviesQuery } from '../../../redux/MoviesSlice';
+import {Table } from 'antd';
 
-import styles from './index.module.scss'
-import { Space, Table, Tag } from 'antd';
-import controller from '../../../API/requests';
-import Box from '@mui/material/Box';
-import Modal from '@mui/material/Modal';
-import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
 const style = {
     position: 'absolute',

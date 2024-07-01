@@ -7,6 +7,7 @@ import AddTrailer from "../pages/admin/AddTrailer";
 import AddTrailerId from "../pages/admin/AddTrailerId";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminRoot from "../pages/admin/AdminRoot";
+import EditMovie from "../pages/admin/EditMovie";
 import AdminLogin from "../pages/admin/Login";
 import CinemaDetail from "../pages/client/CinemaDetail";
 import Cinemas from "../pages/client/Cinemas";
@@ -115,6 +116,10 @@ export const ROOT = [
             {
                 path: "add-event",
                 element: <AddEvent />,
+            },
+            {
+                path: "edit-movie",
+                element: <EditMovie />,
             },
         ]
     }

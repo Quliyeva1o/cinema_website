@@ -25,6 +25,12 @@ const AdminAppBar = () => {
                         </Link>
                     </li>
                     <li>
+                        <Link to="edit-movie">
+                            <TbMovie />
+                            <span >EDIT MOVIE</span>
+                        </Link>
+                    </li>
+                    <li>
                         <Link to="add-session-times">
                             <IoTicketOutline />
 

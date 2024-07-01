@@ -4,6 +4,7 @@ const EventSchema = new mongoose.Schema(
         title:String,
         movies:String,
         img:String,
+        coverImg:String,
         description:String
     },
     { timestamps: true }

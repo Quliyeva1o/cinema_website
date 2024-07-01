@@ -6,12 +6,12 @@ import { Navigation } from 'swiper/modules';
 import 'swiper/css/navigation';
 import { useEffect } from 'react';
 import styles from './index.module.scss';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useGetCinemasQuery } from '../../redux/CinemasSlice';
 const ScreenExperiences = () => {
 
   const { data: cinemas, error, isLoading, refetch } = useGetCinemasQuery();
-
+  const navigate = useNavigate()
 
   const [myCinemas, setMyCinemas] = useState([])
   useEffect(() => {
@@ -23,7 +23,7 @@ const ScreenExperiences = () => {
       <div className="heading">
         <h2>
           Screen Experiences</h2>
-        <button>
+        <button onClick={() => { navigate("/cinemas") }}>
           <span>Browse all</span>
         </button>
       </div>

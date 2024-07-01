@@ -5,13 +5,18 @@ import { IoTicketOutline } from "react-icons/io5";
 import { BiCameraMovie } from "react-icons/bi";
 import { IoCalendarOutline } from "react-icons/io5";
 import { CiStar } from "react-icons/ci";
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
 import CloseIcon from '@mui/icons-material/Close';
 import styles from './index.module.scss'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setLoginIsActive } from '../../redux/LoginActiveBtnSlice';
 const AppBar = ({ menu, setMenu }) => {
     const user = useSelector((state) => state.user);
 
-
+    const dispatch = useDispatch()
+    const handle = () => {
+        dispatch(setLoginIsActive(true))
+    }
     return (
         <>
             <nav className={menu ? `${styles.navactive}` : `${styles.nav}`}>
@@ -54,46 +59,36 @@ const AppBar = ({ menu, setMenu }) => {
                                 <span >EVENTS & FESTIVALS</span>
                             </Link>
                         </li>
-                    
-                        {user.id != null && <li>
-                            <Link to="tickets">
-                                <CiStar />
 
-                                <span >TICKETS</span>
-                            </Link>
-                        </li>}
+
+
                     </ul>
                     <ul className={styles.secondUl}>
-                        <li>
-                            <Link to="https://www.hoyts.com.au/offers">
-                                <span >Offers & Promotions</span>
+                        {user.id != null ? <li>
+                            <Link to="tickets">
+
+                                <span >Tickets</span>
                             </Link>
-                        </li>
-                        <li>
-                            <Link to="/">
-                                <span >Experiences</span>
+                        </li> : <li><Link onClick={handle}> <span >Tickets</span></Link></li>
+                        }
+                        {user.id != null ? <li>
+                            <Link to="orders">
+                                <span >Orders</span>
                             </Link>
-                        </li>
+                        </li> : <li> <Link onClick={handle}> <span >Orders</span></Link></li>
+                        }
+
                         <li>
                             <Link to="food-and-drinks">
                                 <span >Food & Drink</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to="https://shop.hoyts.com.au/">
-                                <span >Gift Shop</span>
-                            </Link>
-                        </li>
-                        <li>
-                            <Link to="https://www.hoyts.com.au/accessibility">
+                            <Link to="events">
                                 <span >Functions & Parties</span>
                             </Link>
                         </li>
-                        <li>
-                            <Link to="accessibility">
-                                <span >Accessibility</span>
-                            </Link>
-                        </li>
+
                     </ul>
                 </div>
 

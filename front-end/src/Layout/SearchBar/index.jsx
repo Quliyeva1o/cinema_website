@@ -7,15 +7,16 @@ import { useGetCinemasQuery } from '../../redux/CinemasSlice';
 import { useSelector, useDispatch } from "react-redux";
 import { selectLoginIsActive, setLoginIsActive } from "../../redux/LoginActiveBtnSlice";
 import MenuIcon from '@mui/icons-material/Menu';
-const Header = ({menu,setMenu}) => {
+import { logout } from '../../redux/UserSlice';
+const Header = ({ menu, setMenu }) => {
   const [isActive, setIsActive] = useState(false);
   const [searchItems, setSearchItems] = useState([]);
   const { data: cinemas } = useGetCinemasQuery();
   const [myCinemas, setMyCinemas] = useState([]);
   const loginIsActive = useSelector(selectLoginIsActive);
   const dispatch = useDispatch();
-  // console.log(loginIsActive);
 
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     if (cinemas) {
@@ -32,6 +33,16 @@ const Header = ({menu,setMenu}) => {
     }
   }, [movies]);
 
+  const handleLogOut = () => {
+    dispatch(logout());
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: 'log out successfully!',
+      showConfirmButton: false,
+      timer: 1000,
+    })
+  }
   const handleInputFocus = () => {
     setIsActive(true);
   };
@@ -93,17 +104,20 @@ const Header = ({menu,setMenu}) => {
         <div className={styles.mobile}>
           <div className={styles.mobilemenu}>
             <div className={styles.burger}>
-              <MenuIcon onClick={()=>{setMenu(!menu)}}/>
+              <MenuIcon onClick={() => { setMenu(!menu) }} />
             </div>
           </div>
           <div className={styles.mobilelogo}>
-              <img src='http://localhost:5050/uploads/codemobile.png' alt="" />
+            <img src='http://localhost:5050/uploads/codemobile.png' alt="" />
           </div>
           <div className={styles.login}>
-            <button onClick={handleLogin}>
+            {user.id == null ? <button onClick={handleLogin}>
               <PermIdentityIcon />
               <span>Log In</span>
-            </button>
+            </button> : <button onClick={handleLogOut}>
+              <PermIdentityIcon />
+              <span>Log Out</span>
+            </button>}
           </div>
         </div>
       </div>

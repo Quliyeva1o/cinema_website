@@ -20,7 +20,7 @@ const LoginRegister = () => {
             <button className={styles.close} onClick={handleClose}>
               <CloseIcon />
             </button>
-            <h1>hoyts</h1>
+            <h1>CODESCREEN</h1>
             <div>
               {login ? <Login setLogin={setLogin} /> : <Register setLogin={setLogin} />}
             </div>

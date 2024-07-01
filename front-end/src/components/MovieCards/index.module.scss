@@ -303,7 +303,9 @@
                 padding: 4px;
                 box-sizing: border-box;
                 width: 100%;
-              
+              label{
+                width: 100%;
+              }
                     input {
                         right: 16px;
                         width: 16px;
