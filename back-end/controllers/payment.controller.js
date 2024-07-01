@@ -20,6 +20,11 @@ const PaymentController = {
             currency: 'usd',
             product_data: {
               name: product.movie,
+              // tickets: product.tickets,
+              // hall: product.hall,
+              // time: product.time,
+              // location: product.location,
+              // price: product.price
             },
             unit_amount: unitAmount,
           },
@@ -31,7 +36,7 @@ const PaymentController = {
         payment_method_types: ['card'],
         line_items: lineItems,
         mode: 'payment',
-        success_url: `http://localhost:5050/success`,
+        success_url: `http://localhost:5173/success`,
       });
 
       res.status(200).json({

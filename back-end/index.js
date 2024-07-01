@@ -16,3 +16,4 @@ app.use(router.tags);
 app.use(router.genres);
 app.use(router.times);
 app.use(router.payment);
+app.use(router.tickets);

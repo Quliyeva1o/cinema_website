@@ -5,11 +5,15 @@ import CancelIcon from '@mui/icons-material/Cancel';
 import { setTicketModalIsActive } from '../../redux/TicketModal';
 import { setBasket } from '../../redux/BasketSlice';
 import { setLoginIsActive } from '../../redux/LoginActiveBtnSlice';
+import { useNavigate } from 'react-router-dom';
+import { useGetTicketsQuery } from '../../redux/TicketsSlice';
 const TicketModall = () => {
     const dispatch = useDispatch();
     const selectedTickets = useSelector((state) => state.selectedTickets);
     const ticketModal = useSelector((state) => state.ticketModal);
     const user = useSelector((state) => state.user);
+    const navigate = useNavigate("")
+    const { data: tickets } = useGetTicketsQuery();
 
     const [selectedSeats, setSelectedSeats] = useState([]);
 
@@ -21,7 +25,6 @@ const TicketModall = () => {
         }
     };
     const myBasket = useSelector((state) => state.basket);
-    // console.log('b', myBasket);
     const handleCheckout = () => {
         if (user.id != null) {
             const basketItems = {
@@ -30,11 +33,17 @@ const TicketModall = () => {
                 'time': selectedTickets.time.formattedTime,
                 'movie': selectedTickets.movie.name,
                 "location": selectedTickets.cinema.cinemaName,
-                "price":5
+                "cinemaId": selectedTickets.cinema.cinemaId,
+                "movieId": selectedTickets.movie.movieId,
+                "price": 5 * selectedSeats.length
             };
             const updatedBasket = Array.isArray(myBasket.basket) ? [...myBasket.basket, basketItems] : [basketItems];
             dispatch(setBasket(updatedBasket));
             localStorage.setItem("basket", JSON.stringify(updatedBasket));
+            navigate('/tickets')
+            dispatch(setTicketModalIsActive(false));
+
+
         } else {
             dispatch(setTicketModalIsActive(false));
             dispatch(setLoginIsActive(true));
@@ -58,8 +67,15 @@ const TicketModall = () => {
     };
 
     const seats = generateSeats(10, 15);
+    console.log(selectedTickets);
+    const reserved = tickets && tickets.data.filter((x) => x.cinemaId == selectedTickets.cinema.cinemaId && x.movie == selectedTickets.movie.name && x.tag == selectedTickets.time.tag && x.time == selectedTickets.time.formattedTime)
+    console.log(reserved);
+    let reservedSeats = [];
+    reserved && reserved.forEach(reserved => {
+        reservedSeats = reservedSeats.concat(reserved.seats);
+    });
 
-
+    console.log(reservedSeats);
     return (
         <div>
             <div className={ticketModal.ticketModalIsActive ? styles.ticketingIsActive : styles.isnotopen}>
@@ -122,8 +138,8 @@ const TicketModall = () => {
                                             {seats.map(seat => (
                                                 <div
                                                     key={seat.id}
-                                                    className={`${styles.seat} ${seat.isReserved ? styles.reserved : ''} ${selectedSeats.includes(seat.id) ? styles.selected : ''}`}
-                                                    onClick={() => handleSeatClick(seat.id)}
+                                                    className={`${styles.seat} ${reservedSeats.includes(seat.id) ? styles.reserved : ''} ${selectedSeats.includes(seat.id) ? styles.selected : ''}`}
+                                                    onClick={() => { !reservedSeats.includes(seat.id) && handleSeatClick(seat.id) }}
                                                     style={{
                                                         gridColumn: `${seat.number}`,
                                                         gridRow: seat.row

@@ -10,16 +10,12 @@ import { login } from "../../redux/UserSlice.jsx";
 import { useEffect } from "react";
 import Cookies from "js-cookie";
 import styles from "./index.module.scss"
+import { setLoginIsActive } from "../../redux/LoginActiveBtnSlice.jsx";
 
 const Login = ({ setLogin }) => {
   const user = useSelector((state) => state.user);
   const navigate= useNavigate("")
   const dispatch = useDispatch();
-  useEffect(()=>{
-    if(user.id){
-      navigate('/');
-    }
-  },[navigate,user]);
 
   const handleRegister = () => {
     setLogin(false)
@@ -48,6 +44,7 @@ const Login = ({ setLogin }) => {
           showConfirmButton: false,
           timer: 1000,
         }).then(() => {
+          dispatch(setLoginIsActive(false));
           navigate("/");
         });
       }else{

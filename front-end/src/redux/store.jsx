@@ -15,6 +15,7 @@ import { setupListeners } from "@reduxjs/toolkit/query";
 import userReducer from "./UserSlice";
 import basketSlice from "./BasketSlice";
 import { timeAPI } from "./TimesSlice";
+import { ticketAPI } from "./TicketsSlice";
 
 const store = configureStore({
   reducer: {
@@ -30,6 +31,7 @@ const store = configureStore({
     [cinemaAPI.reducerPath]: cinemaAPI.reducer,
     [genreAPI.reducerPath]: genreAPI.reducer,
     [timeAPI.reducerPath]: timeAPI.reducer,
+    [ticketAPI.reducerPath]: ticketAPI.reducer,
     [tagAPI.reducerPath]: tagAPI.reducer,
   },
   middleware: (getDefaultMiddleware) =>
@@ -40,6 +42,7 @@ const store = configureStore({
       genreAPI.middleware,
       tagAPI.middleware,
       timeAPI.middleware,
+      ticketAPI.middleware,
 
     ),
 });

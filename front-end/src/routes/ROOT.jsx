@@ -16,6 +16,7 @@ import Events from "../pages/client/Events";
 import FoodsDrinks from "../pages/client/FoodsDrinks";
 import Home from "../pages/client/Home";
 import Movies from "../pages/client/Movies";
+import Orders from "../pages/client/Orders";
 import RootPage from "../pages/client/RootPage";
 import SessionTimes from "../pages/client/SessionTimes";
 import Success from "../pages/client/Success";
@@ -26,7 +27,10 @@ export const ROOT = [
         path: "/",
         element: <RootPage />,
         children: [
-            { index: true, element: <Home /> },
+            {
+                index: true,
+                element: <Home />
+            },
             {
                 path: "movies",
                 element: <Movies />,
@@ -66,6 +70,10 @@ export const ROOT = [
             {
                 path: "success",
                 element: <Success />
+            },
+            {
+                path: "orders",
+                element: <Orders />
             },
 
         ],

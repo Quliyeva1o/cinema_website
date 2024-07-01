@@ -1,9 +1,8 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-
+import styles from './index.module.scss'
 const Tickets = () => {
     const myBasket = useSelector((state) => state.basket);
-    console.log(myBasket);
 
     const handleCheckout = async () => {
         try {
@@ -13,9 +12,10 @@ const Tickets = () => {
                 time: item.time,
                 movie: item.movie,
                 location: item.location,
-                price: item.price 
+                cinemaId: item.cinemaId,
+                price: item.price,
+                movieId: item.movieId
             }));
-            console.log(basketItems);
 
             const response = await fetch('http://localhost:5050/api/payment', {
                 method: 'POST',
@@ -30,7 +30,6 @@ const Tickets = () => {
             }
 
             const session = await response.json();
-            console.log(session.url);
             window.location = `${session.url}`;
         } catch (error) {
             console.error('Error during checkout:', error);
@@ -38,9 +37,9 @@ const Tickets = () => {
     };
 
     return (
-        <div>
+        <div className={styles.tickets}>
             {
-                myBasket.basket.map((item, index) => (
+                myBasket.basket.length > 0 && myBasket.basket.map((item, index) => (
                     <div key={index}>
                         <p>
                             <span>Hall:</span>
@@ -58,11 +57,22 @@ const Tickets = () => {
                             <span>Session Time:</span>
                             <span>{item.time}</span>
                         </p>
+                        <p>
+                            <span>Price:</span>
+                            <span>{item.price}</span>
+                        </p>
+                        <p>
+                            tickets:{
+                                item.tickets.map((t) => {
+                                  return(  <span className={styles.seat}>{t}</span>)
+                                })
+                            }
+                    </p>
                     </div>
-                ))
-            }
-            <button onClick={handleCheckout}>Proceed to Checkout</button>
-        </div>
+    ))
+}
+{ myBasket.basket.length > 0 && <button onClick={handleCheckout}>Proceed to Checkout</button> }
+        </div >
     );
 };
 

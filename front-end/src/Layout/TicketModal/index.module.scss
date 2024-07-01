@@ -412,13 +412,20 @@
             }
         }
     }
-}
-.selected span {
-    background-color: #cd242c !important;
-}
-
-.reserved span {
-    background-color: #000;
+    .selected span {
+        background-color: #cd242c !important;
+    }
+    
+    .reserved span {
+        background-color: #000!important;
+    }
+    
+    
+    .reserved{
+        &:hover span {
+            background-color: #000 !important;
+        }
+    }
 }
 
 .footer {
