@@ -46,9 +46,7 @@ const MovieCards = () => {
                     <li>
                         <button type="button" className={`${styles.first} ${styles.isSelected}`}><span >Now Showing</span></button>
                     </li>
-                    <li>
-                        <button type="button"><span>Coming Soon</span></button>
-                    </li>
+                
                 </ul></div>
                 <div>
                     <div className={styles.filters}>

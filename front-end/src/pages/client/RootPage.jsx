@@ -7,7 +7,6 @@ import LoginRegister from '../../Layout/LoginRegister';
 import styles from "./index.module.scss"
 import { useSelector } from 'react-redux';
 import Chat from '../../Layout/Chat';
-import MobileAppBar from '../../Layout/MobileAppBar';
 const RootPage = () => {
     const loginIsActive = useSelector(selectLoginIsActive);
     const [menu, setMenu] = useState(false)

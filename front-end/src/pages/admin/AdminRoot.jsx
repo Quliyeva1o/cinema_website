@@ -18,7 +18,7 @@ const AdminRoot = () => {
     <>
      <div style={user.role === "admin" ? {display:"flex"}:{}}>
      {user.role === "admin" && <AdminAppBar className={styles.appbar} />}
-      <div style={user.role === "admin" ? { width: "calc(100% - 272px)" } : {}}>
+      <div className={user.role === "admin" ? styles.aa : {}}>
         {/* <Header /> */}
         <Outlet />
       </div>

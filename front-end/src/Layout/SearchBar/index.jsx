@@ -100,7 +100,7 @@ const Header = ({ menu, setMenu }) => {
               </ul>
             </div>
           )}
-        </div>
+        </div> 
         <div className={styles.mobile}>
           <div className={styles.mobilemenu}>
             <div className={styles.burger}>

@@ -76,6 +76,16 @@
     }
   .gap{
     width: 25%;
+    @media(max-width:1200px){
+        margin-top: 10px;
+        width: 33%;
+    }
+    @media(max-width:800px){
+        width: 50%;
+    }
+    @media(max-width:600px){
+        width: 100%;
+    }
   }
   .content{
     height: 100px;

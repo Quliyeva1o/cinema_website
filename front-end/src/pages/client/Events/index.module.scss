@@ -5,11 +5,35 @@
     padding-left: 0;
     padding-right: 30px;
     width: 100%;
+    @media(max-width:1000px){
+       padding-left: 20px ;
+    }
+    @media(max-width:800px){
+        padding-left: 10px;
+       padding-right: 10px;
+    }
     a{
         text-decoration: none;
     }
   .gap{
     width: 25%;
+    @media(max-width:1200px){
+        margin-top: 10px;
+        width: 33%;
+    }
+    @media(max-width:800px){
+        width: 50%;
+    }
+    @media(max-width:600px){
+        width: 100%;
+    }
+    a{
+        div{
+            @media(max-width:600px){
+                max-width: 100%;
+            }
+        }
+    }
   }
     .card {
         margin: 8px;
