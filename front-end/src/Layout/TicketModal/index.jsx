@@ -26,7 +26,7 @@ const TicketModall = () => {
     };
     const myBasket = useSelector((state) => state.basket);
     const handleCheckout = () => {
-        if (user.id != null) {
+        if (user.id != null && user.role=='client') {
             const basketItems = {
                 "tickets": selectedSeats,
                 "hall": selectedTickets.time.tag,

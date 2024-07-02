@@ -21,7 +21,7 @@ const AddCinema = () => {
     { value: "VIC", label: "VIC" },
     { value: "WA", label: "WA" },
   ];
- 
+
   const user = useSelector((state) => state.user);
   const [cinemas, setCinemas] = useState([]);
   const token = Cookies.get("token");
@@ -59,6 +59,7 @@ const AddCinema = () => {
       name: "",
       location: null,
       img: null,
+      coverImg: null,
       address: "",
       parking: "",
       tags: [],
@@ -66,31 +67,34 @@ const AddCinema = () => {
     },
     validationSchema: Yup.object().shape({
       name: Yup.string()
-          .required('Name is required'),
+        .required('Name is required'),
       address: Yup.string()
-          .required('Address is required'),
+        .required('Address is required'),
       parking: Yup.string()
-          .required('Parking information is required'),
+        .required('Parking information is required'),
       img: Yup.mixed()
-          .required('Image is required'),
+        .required('Image is required'),
+      coverImg: Yup.mixed()
+        .required('Image is required'),
       location: Yup.object()
-          .shape({
-              value: Yup.string().required('Location is required'),
-              label: Yup.string().required('Location is required'),
-          }),
+        .shape({
+          value: Yup.string().required('Location is required'),
+          label: Yup.string().required('Location is required'),
+        }),
       tags: Yup.array()
-          .min(1, 'Select at least one tag')
-          .required('Tags are required'),
+        .min(1, 'Select at least one tag')
+        .required('Tags are required'),
       map: Yup.string()
-          .required('Map information is required'),
+        .required('Map information is required'),
       phone: Yup.string()
-          .matches(/^\d+$/, 'Invalid phone number')
-          .required('Phone number is required'),
-  }),
+        .matches(/^\d+$/, 'Invalid phone number')
+        .required('Phone number is required'),
+    }),
     onSubmit: async (values, actions) => {
       const formData = new FormData();
       formData.append("name", values.name);
       formData.append("img", values.img);
+      formData.append("coverImg", values.coverImg);
       formData.append("address", values.address);
       formData.append("parking", values.parking);
       formData.append("location", values.location.value);
@@ -121,6 +125,10 @@ const AddCinema = () => {
 
   const handleImageChange = (event) => {
     formik.setFieldValue("img", event.currentTarget.files[0]);
+  };
+
+  const handlecovImageChange = (event) => {
+    formik.setFieldValue("coverImg", event.currentTarget.files[0]);
   };
 
   return (
@@ -176,6 +184,18 @@ const AddCinema = () => {
           accept="image/*"
           error={formik.touched.img && Boolean(formik.errors.img)}
           helperText={formik.touched.img && formik.errors.img}
+        />
+         <TextField
+          name="coverImg"
+          onChange={handlecovImageChange}
+          onBlur={formik.handleBlur}
+          id="coverImg"
+          type="file"
+          label="Image"
+          variant="outlined"
+          accept="image/*"
+          error={formik.touched.coverImg && Boolean(formik.errors.coverImg)}
+          helperText={formik.touched.coverImg && formik.errors.coverImg}
         />
         <Select
           name="location"

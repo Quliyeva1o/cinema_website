@@ -386,3 +386,13 @@
         }
     }
 }
+
+
+.dess{
+    max-height: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    @media(max-width:800px){
+        max-height: 67px;
+    }
+}

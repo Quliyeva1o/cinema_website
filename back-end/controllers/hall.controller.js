@@ -63,8 +63,9 @@ const hall_controller = {
   post: async (req, res) => {
     try {
       const hall = new HallModel(req.body);
-      if (req.file) {
-        hall.img = "http://localhost:5050/uploads/" + req.file.filename;
+      if (req.files &&req.files.img && req.files.coverImg) {
+        hall.img = "http://localhost:5050/uploads/" +  req.files.img[0].filename;
+        hall.coverImg = "http://localhost:5050/uploads/" +  req.files.coverImg[0].filename;
       }
       await hall.save();
       res.status(201).json({
@@ -73,7 +74,7 @@ const hall_controller = {
       });
     } catch (error) {
       console.log(error);
-      res.status(500).json({
+      res.status(500).json( {
         error: error.message,
       });
     }

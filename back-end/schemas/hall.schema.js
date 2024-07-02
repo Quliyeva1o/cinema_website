@@ -4,6 +4,7 @@ const HallSchema = new mongoose.Schema(
         name: String,
         location:String,
         img: String,
+        coverImg: String,
         address: String,
         parking: String,
         map: String,

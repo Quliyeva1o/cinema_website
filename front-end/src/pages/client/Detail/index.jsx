@@ -44,7 +44,7 @@ const MovieDetail = () => {
     useEffect(() => {
         if (movie) {
             setMyMovie(movie.data);
-            setGenres(JSON.parse(movie.data.genre));
+            setGenres(movie.data.genres ? JSON.parse(movie.data.genres) : movie.data.genre);
             times && setMyTimes(times.data.find((x) => x.movieId === movie.data._id)?.showTimes);
         }
     }, [movie, times]);
@@ -141,7 +141,7 @@ const MovieDetail = () => {
         setTrailerModal(true);
     };
 
-    
+
 
     const CustomTabPanel = (props) => {
         const { children, value, index } = props;
@@ -170,7 +170,7 @@ const MovieDetail = () => {
             'aria-controls': `simple-tabpanel-${index}`,
         };
     };
-  return (
+    return (
         <>
             <div className={styles.movieHero}>
                 <div className={styles.bgi}>

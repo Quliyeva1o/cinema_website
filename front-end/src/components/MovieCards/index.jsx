@@ -82,7 +82,7 @@ const MovieCards = () => {
                                         <span>|</span>
                                         <span>{movie.releaseDate}</span>
                                     </span>
-                                    <span>
+                                    <span className={styles.dess}>
                                         {movie.description}
                                     </span>
                                 </div>

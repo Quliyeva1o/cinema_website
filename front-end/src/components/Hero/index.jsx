@@ -17,19 +17,19 @@ const Hero = () => {
   useEffect(() => {
     movies && setMyMovies(movies.data)
   }, [movies]);
-  
- 
+
+
   return (
     <>
       <div className={styles.hero}>
-        <div className={styles.paginationContainer}> 
+        <div className={styles.paginationContainer}>
 
           <Swiper
             slidesPerView={'auto'}
             spaceBetween={20}
             pagination={{
               clickable: true,
-              el: '.swiper-pagination-custom', 
+              el: '.swiper-pagination-custom',
             }}
 
             modules={[Navigation, Pagination]}
@@ -37,7 +37,7 @@ const Hero = () => {
             className={`mySwiper ${styles.swiper}`}
             navigation={true}
           >
-            {myMovies && myMovies.map((movie) => (
+            {myMovies && myMovies.filter((x) => (x._id != "6683315e1a2c7772e29fe059" && x._id != '668330191a2c7772e29fe044')).map((movie) => (
               <SwiperSlide className={styles.swiperSlide} key={movie._id}>
                 <Link to={`/movies/${movie._id}`}>
                   <div >
@@ -58,7 +58,7 @@ const Hero = () => {
             ))}
           </Swiper>
         </div>
-        <div className="swiper-pagination-custom"></div> 
+        <div className="swiper-pagination-custom"></div>
       </div>
     </>
   )

@@ -184,7 +184,8 @@
         position: relative;
         transition-property: transform;
         flex-shrink: 0;
-        @media (min-width: 641px) {
+        max-width: 1000px;
+        @media (max-width: 641px) {
             width: 368px !important;
         }
         a {
