@@ -25,7 +25,7 @@ const AppBar = ({ menu, setMenu }) => {
 
                 <div style={{ position: "fixed" }}>
                     <div className={styles.logo}>
-                        <Link>
+                        <Link onClick={() => setMenu(false)}>
                             <img src="http://localhost:5050/uploads/code.png" alt="" />
                         </Link>
                     </div>
@@ -34,28 +34,28 @@ const AppBar = ({ menu, setMenu }) => {
                     </div>
                     <ul >
                         <li>
-                            <Link to="movies">
+                            <Link onClick={() => setMenu(false)} to="movies">
                                 <TbMovie />
 
                                 <span >MOVIES</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to="session-times">
+                            <Link onClick={() => setMenu(false)} to="session-times">
                                 <IoTicketOutline />
 
                                 <span >SESSION TIMES</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to="cinemas">
+                            <Link onClick={() => setMenu(false)} to="cinemas">
                                 <BiCameraMovie />
 
                                 <span >CINEMAS</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to="events">
+                            <Link onClick={() => setMenu(false)} to="events">
                                 <IoCalendarOutline />
 
                                 <span >EVENTS & FESTIVALS</span>
@@ -63,7 +63,7 @@ const AppBar = ({ menu, setMenu }) => {
                         </li>
 
                         {user.id != null && <li>
-                            <Link to="info">
+                            <Link onClick={() => setMenu(false)} to="info">
                                 <PermIdentityIcon />
                                 <span >PROFILE</span>
                             </Link>
@@ -74,7 +74,7 @@ const AppBar = ({ menu, setMenu }) => {
                     </ul>
                     <ul className={styles.secondUl}>
                         {user.id != null ? <li>
-                            <Link to="tickets">
+                            <Link onClick={() => setMenu(false)} to="tickets">
 
                                 <span >Tickets</span>
                             </Link>
@@ -88,12 +88,12 @@ const AppBar = ({ menu, setMenu }) => {
                         }
 
                         <li>
-                            <Link to="food-and-drinks">
+                            <Link  onClick={() => setMenu(false)} to="food-and-drinks">
                                 <span >Food & Drink</span>
                             </Link>
                         </li>
                         <li>
-                            <Link to="events">
+                            <Link  onClick={() => setMenu(false)} to="events">
                                 <span >Functions & Parties</span>
                             </Link>
                         </li>
