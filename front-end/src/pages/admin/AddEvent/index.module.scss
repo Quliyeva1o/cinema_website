@@ -1,12 +1,12 @@
 .add {
     margin-top: 20px;
-    >h3{
+    > h3 {
         font-family: "Poppins";
         color: #582eff;
         font-size: 20px;
         transition: color 0.4s;
         cursor: pointer;
-        text-decoration: none;;
+        text-decoration: none;
     }
     form {
         display: flex;
@@ -18,12 +18,17 @@
     div {
         border-radius: 10px;
         border: 1px solid #dedede;
-
     }
-    input{
+    input {
         color: #dedede;
     }
     label {
         color: #dedede;
+    }
+}
+
+.desc {
+    textarea {
+        color: #fff !important;
     }
 }

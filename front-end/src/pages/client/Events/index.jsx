@@ -25,7 +25,7 @@ const Events = () => {
                 <Card sx={{ maxWidth: 345 }} key={idx} className={styles.card}>
                   <CardMedia
                     sx={{ height: 150 }}
-                    image={event.img}
+                    image={event.coverImg}
                     title={event.title}
                   />
                   <CardContent>

@@ -135,6 +135,7 @@ const AddEvent = () => {
                 )}
 
                 <TextField
+                    className={styles.desc}
                     name="description"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
@@ -165,7 +166,7 @@ const AddEvent = () => {
                     error={formik.touched.img && Boolean(formik.errors.img)}
                     helperText={formik.touched.img && formik.errors.img}
                 />
-                    <TextField
+                <TextField
                     name="coverImg"
                     onChange={handlecoverImageChange}
                     onBlur={formik.handleBlur}

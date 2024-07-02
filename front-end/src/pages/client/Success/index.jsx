@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { setBasket } from "../../../redux/BasketSlice";
 import { useEffect, useState } from "react";
 import controller from "../../../API/requests";
-
+import styles from './index.module.scss'
 const Success = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -57,7 +57,7 @@ const Success = () => {
   }, [myBasket.basket]);
 
   return (
-    <div className="success-page">
+    <div className={styles.sc}>
       <div className="container">
         <Result
           status="success"

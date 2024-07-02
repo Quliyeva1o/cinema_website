@@ -8,7 +8,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectLoginIsActive, setLoginIsActive } from "../../redux/LoginActiveBtnSlice";
 import MenuIcon from '@mui/icons-material/Menu';
 import { logout } from '../../redux/UserSlice';
+import { Link } from 'react-router-dom';
 const Header = ({ menu, setMenu }) => {
+
   const [isActive, setIsActive] = useState(false);
   const [searchItems, setSearchItems] = useState([]);
   const { data: cinemas } = useGetCinemasQuery();
@@ -47,9 +49,7 @@ const Header = ({ menu, setMenu }) => {
     setIsActive(true);
   };
 
-  const handleInputBlur = () => {
-    setIsActive(false);
-  };
+
 
   const handleSearch = (value) => {
     const filteredMovies = myMovies.filter(movie =>
@@ -75,13 +75,13 @@ const Header = ({ menu, setMenu }) => {
         <div className={styles.search}>
           <div>
             <button className={styles.sear}><SearchIcon /></button>
-            <button type='button' className={styles.clear}>Clear</button>
+            <button type='button' className={styles.clear} onClick={() => { setIsActive(false) }}>Clear</button>
             <label>Enter search terms</label>
             <input
               placeholder="Search movies and more..."
               autoComplete="off"
               onFocus={handleInputFocus}
-              onBlur={handleInputBlur}
+              // onBlur={handleInputBlur}
               onChange={(e) => handleSearch(e.target.value)}
             />
           </div>
@@ -89,18 +89,21 @@ const Header = ({ menu, setMenu }) => {
             <div className={styles.results}>
               <ul>
                 {searchItems.map(item => (
-                  <li key={item.id}>
-                    <a href="">{item.coverImg && <img src={item.coverImg} alt={item.name} />}</a>
-                    <div>
-                      <a href="#">{item.name}</a>
-                      <span>{item.description}</span>
-                    </div>
-                  </li>
+                  <Link to={`/movies/${item._id}`} onClick={() => {
+                    setIsActive(false);
+                  }}>
+                    <li key={item.id}>
+                      <a href="">{item.coverImg && <img src={item.coverImg} alt={item.name} />}</a>
+                      <div>
+                        <a href="#">{item.name}</a>
+                        <span>{item.description}</span>
+                      </div>
+                    </li></Link>
                 ))}
               </ul>
             </div>
           )}
-        </div> 
+        </div>
         <div className={styles.mobile}>
           <div className={styles.mobilemenu}>
             <div className={styles.burger}>

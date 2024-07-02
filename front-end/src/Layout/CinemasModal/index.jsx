@@ -113,7 +113,7 @@ const CinemasModal = () => {
 
                 </div>
                 <div className={styles.modalFooter}>
-                    <button type="button" onClick={handleLogCheckedCinemas}>Log Checked Cinemas</button>
+                    <button type="button" onClick={handleLogCheckedCinemas}>Check Cinemas</button>
                 </div>
             </div>
             <span></span>

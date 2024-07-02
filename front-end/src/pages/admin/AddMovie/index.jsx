@@ -193,6 +193,7 @@ const AddMovie = () => {
                     helperText={formik.touched.rating && formik.errors.rating}
                 />
                 <TextField
+                className={styles.desc}
                     name="description"
                     onChange={formik.handleChange}
                     onBlur={formik.handleBlur}
