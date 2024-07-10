@@ -17,7 +17,7 @@ const Tickets = () => {
                 movieId: item.movieId
             }));
 
-            const response = await fetch('http://localhost:5050/api/payment', {
+            const response = await fetch('https://back-end-steel-pi.vercel.app/api/payment', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
