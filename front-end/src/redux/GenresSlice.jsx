@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-const BASE_URL = "http://localhost:5050/api/"
+const BASE_URL = "https://back-end-steel-pi.vercel.app/api/"
 export const genreAPI = createApi({
     reducerPath: "genreAPI",
     baseQuery: fetchBaseQuery({ baseUrl: BASE_URL }),
