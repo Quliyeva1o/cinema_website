@@ -66,7 +66,7 @@ const AdminLogin = () => {
 
   return (
     <div className={styles.login}>
-      <h2>Sign in Hoyts Admin</h2>
+      <h2>Sign in Codescreen Admin</h2>
       <div className={styles.form}>
         <form
           onSubmit={formik.handleSubmit}
@@ -74,7 +74,8 @@ const AdminLogin = () => {
             display: "flex",
             gap: "10px",
             flexDirection: "column",
-            width: "100%",
+            width: "80%",
+            margin:"0 auto"
           }}>
           <TextField
             id="email"
