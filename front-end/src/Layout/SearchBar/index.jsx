@@ -111,7 +111,7 @@ const Header = ({ menu, setMenu }) => {
             </div>
           </div>
           <div className={styles.mobilelogo}>
-            <img src='http://localhost:5050/uploads/codemobile.png' alt="" />
+            <img src='https://back-end-steel-pi.vercel.app/uploads/codemobile.png' alt="" />
           </div>
           <div className={styles.login}>
             {user.id == null ? <button onClick={handleLogin}>

@@ -96,7 +96,7 @@
                         </div>
                     </div>
                     <div className={styles.mobilelogo}>
-                        <img src='http://localhost:5050/uploads/codemobile.png' alt="" />
+                        <img src='https://back-end-steel-pi.vercel.app/uploads/codemobile.png' alt="" />
                     </div>
                     <div className={styles.login}>
                         <button onClick={handleLogOut}>

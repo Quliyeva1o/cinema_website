@@ -26,7 +26,7 @@ const AppBar = ({ menu, setMenu }) => {
                 <div style={{ position: "fixed" }}>
                     <div className={styles.logo}>
                         <Link onClick={() => setMenu(false)}>
-                            <img src="http://localhost:5050/uploads/code.png" alt="" />
+                            <img src="https://back-end-steel-pi.vercel.app/uploads/code.png" alt="" />
                         </Link>
                     </div>
                     <div className={styles.close}>
