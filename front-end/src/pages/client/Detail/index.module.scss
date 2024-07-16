@@ -35,6 +35,10 @@
         font-weight: 500;
         color: #fff;
         font-family: "poppins";
+        @media (max-width: 600px) {
+            font-size: 25px;
+            line-height: 1.2;
+        }
     }
     span {
         margin-left: 8px;
@@ -77,6 +81,10 @@
     }
     .icons:last-child {
         margin-left: 20px;
+
+        @media (max-width: 408px) {
+            margin-left: 0px;
+        }
     }
     .icon {
         position: absolute;
@@ -261,6 +269,12 @@
         }
         @media (min-width: 1025px) {
             padding: 45px 65px;
+            box-sizing: border-box;
+        }
+        @media (max-width: 1025px) {
+            padding: 10px!important;
+            width: 100%!important;
+            height: 100%!important;
             box-sizing: border-box;
         }
     }
