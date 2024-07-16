@@ -62,6 +62,13 @@ const AppBar = ({ menu, setMenu }) => {
                             </Link>
                         </li>
 
+                        <li>
+                            <Link onClick={() => setMenu(false)} to="admin">
+                                <IoCalendarOutline />
+
+                                <span >admin</span>
+                            </Link>
+                        </li>
                         {user.id != null && <li>
                             <Link onClick={() => setMenu(false)} to="info">
                                 <PermIdentityIcon />

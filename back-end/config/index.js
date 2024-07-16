@@ -14,8 +14,6 @@ mongoose.connect(
     .catch((err) => {
         console.log(err);
     });
-
-
 app.listen(PORT, () => {
     console.log(`Example app listening on port ${PORT}`);
 })
